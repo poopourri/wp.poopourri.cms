@@ -1,0 +1,61 @@
+#menu {
+	background-color: #222222;
+	box-shadow: -6px 9px 14px #000 inset;
+	float: left;
+	min-height: 900px;
+	height: 100%;
+	position: absolute;
+	padding-bottom: 115px;
+	width: 400px;
+}
+#menu h3 {
+	font-family: arial;
+	font-size: 24px;
+	color: #999;
+	margin: 0;
+	padding: 5px 0 5px 10px;
+	background: #222;
+	border-top: solid #4e4e4e 2px;
+	border-bottom: solid #111 2px;
+	font-weight: normal;
+}
+#menu ul {
+	margin: 0;
+	padding: 0;
+	width: inherit;
+}
+#menu ul li {
+	background: #041e41;
+}
+#menu ul li a {
+border-bottom: 2px solid #000000 !important;
+border-top: 2px solid #013278 !important;
+color: #0a9dc3;
+display: block;
+font-family: arial;
+font-size: 30px;
+padding: 35px 0 35px 75px;
+text-decoration: none;
+width: 325px;
+}
+#menu ul li.current-menu-item{
+	background: #00122a;
+}
+#menu ul li.current-menu-item a{
+	border-top: 4px solid #000;
+	border-bottom: 2px solid #000;
+	color: #fff;
+}
+#menu ul li a:hover,
+#menu ul li a:active {
+/*	background-color: #716f6f;*/
+}
+.ui-body-c {
+	background-color: #fff;
+	line-height: 18px;
+}
+.active {
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(30,29,29,1)),color-stop(21%,rgba(56,55,55,1)));
+	color: #fff;
+	text-shadow: 0 1px 1px #000;
+}
