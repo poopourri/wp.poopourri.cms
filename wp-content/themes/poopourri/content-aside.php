@@ -1,28 +1,31 @@
 <?php
 /**
- * The template for displaying posts in the Aside post format
+ * The template for displaying posts in the Aside post format.
  *
  * @package WordPress
- * @subpackage Twenty_Twelve
- * @since Twenty Twelve 1.0
+ * @subpackage Twenty_Thirteen
+ * @since Twenty Thirteen 1.0
  */
 ?>
 
-	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-		<div class="aside">
-			<h1 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
-			<div class="entry-content">
-				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentytwelve' ) ); ?>
-			</div><!-- .entry-content -->
-		</div><!-- .aside -->
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<div class="entry-content">
+		<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentythirteen' ) ); ?>
+		<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentythirteen' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
+	</div><!-- .entry-content -->
 
-		<footer class="entry-meta">
-			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'twentytwelve' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php echo get_the_date(); ?></a>
-			<?php if ( comments_open() ) : ?>
-			<div class="comments-link">
-				<?php comments_popup_link( '<span class="leave-reply">' . __( 'Leave a reply', 'twentytwelve' ) . '</span>', __( '1 Reply', 'twentytwelve' ), __( '% Replies', 'twentytwelve' ) ); ?>
-			</div><!-- .comments-link -->
-			<?php endif; // comments_open() ?>
-			<?php edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
-		</footer><!-- .entry-meta -->
-	</article><!-- #post -->
+	<footer class="entry-meta">
+		<?php if ( is_single() ) : ?>
+			<?php twentythirteen_entry_meta(); ?>
+			<?php edit_post_link( __( 'Edit', 'twentythirteen' ), '<span class="edit-link">', '</span>' ); ?>
+
+			<?php if ( get_the_author_meta( 'description' ) && is_multi_author() ) : ?>
+				<?php get_template_part( 'author-bio' ); ?>
+			<?php endif; ?>
+
+		<?php else : ?>
+			<?php twentythirteen_entry_date(); ?>
+			<?php edit_post_link( __( 'Edit', 'twentythirteen' ), '<span class="edit-link">', '</span>' ); ?>
+		<?php endif; // is_single() ?>
+	</footer><!-- .entry-meta -->
+</article><!-- #post -->

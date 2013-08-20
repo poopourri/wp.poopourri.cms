@@ -3,25 +3,27 @@
  * The template for displaying 404 pages (Not Found).
  *
  * @package WordPress
- * @subpackage Twenty_Twelve
- * @since Twenty Twelve 1.0
+ * @subpackage Twenty_Thirteen
+ * @since Twenty Thirteen 1.0
  */
 
 get_header(); ?>
 
-	<div id="primary" class="site-content">
-		<div id="content" role="main">
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
 
-			<article id="post-0" class="post error404 no-results not-found">
-				<header class="entry-header">
-					<h1 class="entry-title"><?php _e( 'This is somewhat embarrassing, isn&rsquo;t it?', 'twentytwelve' ); ?></h1>
-				</header>
+			<header class="page-header">
+				<h1 class="page-title"><?php _e( 'Not found', 'twentythirteen' ); ?></h1>
+			</header>
 
-				<div class="entry-content">
-					<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'twentytwelve' ); ?></p>
+			<div class="page-wrapper">
+				<div class="page-content">
+					<h2><?php _e( 'This is somewhat embarrassing, isn&rsquo;t it?', 'twentythirteen' ); ?></h2>
+					<p><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'twentythirteen' ); ?></p>
+
 					<?php get_search_form(); ?>
-				</div><!-- .entry-content -->
-			</article><!-- #post-0 -->
+				</div><!-- .page-content -->
+			</div><!-- .page-wrapper -->
 
 		</div><!-- #content -->
 	</div><!-- #primary -->
