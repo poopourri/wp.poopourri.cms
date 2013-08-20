@@ -2518,9 +2518,10 @@ footer.entry-meta {
 .news_logos:hover{ width:960px; height:400px; background-position:-10px -420px; }
 
 /* hightlight widget */
-div#widget_hightlight{
+div#widget_highlight{
     background-image: url(images/canvas_pattern.gif);
     height: 510px;
+    width: 100%;
 }
 
 div#widget_highlight .content-inner{
