@@ -803,15 +803,7 @@ img.wp-smiley,
  */
 
 .site-header {
-<<<<<<< HEAD
 	position: relative;
-=======
-	position: fixed;
-	top: 0px;
-	background: #ffffff;
-	width:100%;
-	z-index:1111;
->>>>>>> parent of f84aa0b... Tweaks to header and highlight
 }
 
 .site-header .home-link {
@@ -822,7 +814,6 @@ img.wp-smiley,
 	min-height: 230px;
 	padding: 0 20px;
 	text-decoration: none;
-	width: 100%;
 }
 
 .site-header .site-title:hover {
