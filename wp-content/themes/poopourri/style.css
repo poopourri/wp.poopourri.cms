@@ -43,6 +43,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
  * 7.0 - Footer
  * 8.0 - Media Queries
  * 9.0 - Print
+ * 10.0 - Ecommerce
  * ----------------------------------------------------------------------------
  */
 
@@ -103,7 +104,7 @@ button,
 input,
 select,
 textarea {
-	font-family: "Source Sans Pro", Helvetica, sans-serif;
+	font-family: Georgia, serif;
 }
 
 body {
@@ -142,7 +143,7 @@ h4,
 h5,
 h6 {
 	clear: both;
-	font-family: Bitter, Georgia, serif;
+	font-family: Georgia, serif;
 	line-height: 1.3;
 }
 
@@ -838,6 +839,27 @@ img.wp-smiley,
  * 4.2 Navigation
  * ----------------------------------------------------------------------------
  */
+
+/* Poopourri specific */
+.poopourri_logo_btn{ background:url("images/poopourri_logo_btn.png") top left no-repeat; }
+.poopourri_logo_btn{ width:320px; height:93px; background-position:-10px -10px; }
+.poopourri_logo_btn:hover{ width:320px; height:93px; background-position:-10px -113px; }
+
+.shop_header_btn{ background:url("images/shop_header_btn.png") top left no-repeat; }
+.shop_header_btn{ width:214px; height:99px; background-position:-10px -10px; }
+.shop_header_btn:hover{ width:214px; height:99px; background-position:-10px -119px; }
+.shop_header_btn:active{ width:214px; height:99px; background-position:-10px -228px; }
+
+.search_btn{ background:url("images/search_btn.png") top left no-repeat; }
+.search_btn{ width:27px; height:25px; background-position:-10px -10px; }
+.search_btn:hover{ width:27px; height:25px; background-position:-47px -10px; }
+
+.follow_header_btn{ background:url("images/follow_header_btn.png") top left no-repeat; }
+.follow_header_btn{ width:258px; height:99px; background-position:-10px -10px; }
+.follow_header_btn:hover{ width:258px; height:99px; background-position:-10px -119px; }
+.follow_header_btn:active{ width:258px; height:99px; background-position:-10px -228px; }
+
+
 
 .main-navigation {
 	clear: both;
@@ -2490,6 +2512,38 @@ footer.entry-meta {
 	background-color: transparent;
 }
 
+/* news widget */
+.news_logos{ background:url("images/news_logos.png") top left no-repeat; }
+.news_logos{ width:960px; height:400px; background-position:-10px -10px; }
+.news_logos:hover{ width:960px; height:400px; background-position:-10px -420px; }
+
+/* hightlight widget */
+div#widget_hightlight{
+    background-image: url(images/canvas_pattern.gif);
+    height: 510px;
+}
+
+div#widget_highlight .content-inner{
+    max-width: 1043px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#widget_highlight .shadow_left{
+    background-image: url(images/left_backdrop_vingette.png);
+    background-repeat: repeat-y;
+    width: 335px;  height: 510px;  position: absolute;  top: 0;  z-index: 90;  
+    left: 0px;
+}
+
+div#widget_highlight .shadow_right{
+    background-image: url(images/right_backdrop_vingette.png);
+    background-repeat: repeat-y;
+    width: 335px;  height: 510px;  position: absolute;  top: 0;  z-index: 90;  
+    right: 0px;
+}
+
+
 
 /**
  * 7.0 Footer
@@ -3120,3 +3174,23 @@ footer.entry-meta {
 		color: #333;
 	}
 }
+
+
+/**
+ * 10.0 Ecommerce
+ * ----------------------------------------------------------------------------
+ */
+
+.order_now_btn{ background:url("images/order_now_btn.png") top left no-repeat; }
+.order_now_btn{ width:386px; height:74px; background-position:-10px -10px; }
+.order_now_btn:hover{ width:386px; height:74px; background-position:-10px -94px; }
+
+.order_now_small_btn{ background:url("images/order_now_small_btn.png") top left no-repeat; }
+.order_now_small_btn{ width:140px; height:42px; background-position:-10px -10px; }
+.order_now_small_btn:hover{ width:140px; height:42px; background-position:-10px -62px; }
+
+.cart_btn{ background:url("images/cart_btn.png") top left no-repeat; }
+.cart_btn{ width:206px; height:42px; background-position:-10px -10px; }
+.cart_btn:hover{ width:206px; height:42px; background-position:-10px -62px; }
+.cart_btn:active{ width:206px; height:42px; background-position:-10px -114px; }
+.cart_btn_1{ width:206px; height:42px; background-position:-10px -166px; }
