@@ -2528,6 +2528,9 @@ div#widget_highlight .content-inner{
     max-width: 978px;
     margin-left: auto;
     margin-right: auto;
+    background-image: url(images/flowery_background.gif);
+    background-repeat: no-repeat;
+    background-position:center;
 }
 
 div#widget_highlight .shadow_left{
