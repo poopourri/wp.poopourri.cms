@@ -776,7 +776,6 @@ img.wp-smiley,
 
 .site-main {
 	position: relative;
-	padding-top:238px;
 }
 
 .site-main .sidebar-container {
@@ -807,8 +806,6 @@ img.wp-smiley,
 	position: fixed;
 	top: 0px;
 	background: #ffffff;
-	width:100%;
-	z-index:1111;
 }
 
 .site-header .home-link {
@@ -955,6 +952,8 @@ ul.nav-menu li:hover > ul,
 	margin: 0 auto;
 	max-width: 1600px;
 	width: 100%;
+	position: fixed;
+	top: 230px;
 }
 
 .site-header .search-form {
