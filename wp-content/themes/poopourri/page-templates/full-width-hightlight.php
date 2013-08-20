@@ -15,9 +15,26 @@
  */
 
 get_header(); ?>
-	<div id="widget_highlight">
-		<div class="content-inner">
-			<?php the_field('highlight'); ?>
+<div id="widget_highlight">
+		<div class="content-inner" style="
+    padding-top: 35px;position:relative;
+">
+			<p><img class="alignleft" alt="Spritz the bowl before-you-go &amp; no one else will ever know" src="/wp-content/themes/poopourri/images/spritz_the_bowl_header.png" width="916" height="88"></p>
+  <iframe title="YouTube video player" class="youtube-player" type="text/html" width="502" height="340" src="http://www.youtube.com/embed/bvcLWKMa_Ls?rel=0&amp;hd=1&amp;wmode=transparent&amp;autoplay=0&amp;showinfo=0&amp;color=white&amp;autohide=1&amp;rel=0&amp;modestbranding=1&amp;origin=https%3A%2F%2Forapup.com" frameborder="0" style="
+    position: absolute;
+    left: 0px;
+    top: 175px;
+"></iframe>
+  
+  <img src="/wp-content/themes/poopourri/images/leave_toilet_smelling_better.png" style="position:absolute;right:25px;top: 175px;">
+  <p style="position:absolute;right:28px;top:235px;width:380px;font-size:14pt">Poo~Pourri is the award-winning before-you-go toilet spray.</p><img src="/wp-content/themes/poopourri/images/good_housekeeping_seal.png" style="position:absolute;top: 285px;right:110px;">
+  <p style="position:absolute;right:28px;top: 420px;width:380px;text-align:center;font-size:14pt;font-weight:bold;color:red;">Over 4 million sold!</p>
+  <a href="#" class="order_now_btn" style="
+    position: absolute;
+    right: 30px;
+    top: 450px;
+"></a>
+  
 		</div>
 		<div class="shadow_left"></div>
 		<div class="shadow_right"></div>
