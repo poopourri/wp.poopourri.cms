@@ -17,7 +17,7 @@
 get_header(); ?>
 	<div id="widget_highlight">
 		<div class="content-inner">
-			Highlight content
+			<?php the_field('highlight'); ?>
 		</div>
 		<div class="shadow_left"></div>
 		<div class="shadow_right"></div>
