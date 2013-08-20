@@ -2531,6 +2531,7 @@ div#widget_highlight .content-inner{
     background-image: url(images/flowery_background.gif);
     background-repeat: no-repeat;
     background-position:center;
+    height: 510px;
 }
 
 div#widget_highlight .shadow_left{
