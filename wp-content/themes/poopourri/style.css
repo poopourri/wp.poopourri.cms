@@ -804,12 +804,7 @@ img.wp-smiley,
  */
 
 .site-header {
-	position: fixed;
-	top: 0px;
-	background: #ffffff;
-	width:100%;
-	z-index:1111;
-	min-height: 238px;
+	position: relative;
 }
 
 .site-header .home-link {
@@ -2536,7 +2531,7 @@ div#widget_highlight .content-inner{
     max-width: 978px;
     margin-left: auto;
     margin-right: auto;
-    background-image: url(images/flowery_background.gif);
+    background-image: url(images/flowery_background.png);
     background-repeat: no-repeat;
     background-position:center;
     height: 510px;
