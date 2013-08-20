@@ -1,14 +1,14 @@
 /*
 Theme Name: Twenty Thirteen
-Theme URI: http://wordpress.org/themes/poopourri
-Author: Poo~Pourri
-Author URI: http://www.poopourri.com/
+Theme URI: http://wordpress.org/themes/twentythirteen
+Author: the WordPress team
+Author URI: http://wordpress.org/
 Description: The 2013 theme for WordPress takes us back to the blog, featuring a full range of post formats, each displayed beautifully in their own unique way. Design details abound, starting with a vibrant color scheme and matching header images, beautiful typography and icons, and a flexible layout that looks great on any device, big or small.
 Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: black, brown, orange, tan, white, yellow, light, one-column, two-columns, right-sidebar, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
-Text Domain: poopourri
+Text Domain: twentythirteen
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -104,7 +104,7 @@ button,
 input,
 select,
 textarea {
-	font-family: Georgia, serif;
+	font-family: "Source Sans Pro", Helvetica, sans-serif;
 }
 
 body {
@@ -143,7 +143,7 @@ h4,
 h5,
 h6 {
 	clear: both;
-	font-family: Georgia, serif;
+	font-family: Bitter, Georgia, serif;
 	line-height: 1.3;
 }
 
@@ -830,7 +830,7 @@ img.wp-smiley,
 }
 
 .site-description {
-	font: 300 italic 24px Georgia, serif;
+	font: 300 italic 24px "Source Sans Pro", Helvetica, sans-serif;
 	margin: 0;
 }
 
@@ -858,8 +858,6 @@ img.wp-smiley,
 .follow_header_btn{ width:258px; height:99px; background-position:-10px -10px; }
 .follow_header_btn:hover{ width:258px; height:99px; background-position:-10px -119px; }
 .follow_header_btn:active{ width:258px; height:99px; background-position:-10px -228px; }
-
-
 
 .main-navigation {
 	clear: both;
@@ -997,7 +995,7 @@ ul.nav-menu li:hover > ul,
 .entry-summary,
 .entry-meta {
 	margin: 0 auto;
-	max-width: 978px;
+	max-width: 604px;
 	width: 100%;
 }
 
@@ -1752,7 +1750,7 @@ footer.entry-meta {
 	clear: none;
 	color: inherit;
 	float: right;
-	max-width: 978px;
+	max-width: 604px;
 	padding: 9px 0 0;
 	text-align: right;
 }
@@ -1837,7 +1835,7 @@ footer.entry-meta {
 
 .attachment .entry-description {
 	margin: 20px auto 0;
-	max-width: 978px;
+	max-width: 604px;
 }
 
 .attachment .entry-caption p:last-child,
@@ -1875,7 +1873,7 @@ footer.entry-meta {
 
 .paging-navigation .nav-links {
 	margin: 0 auto;
-	max-width: 978px;
+	max-width: 604px;
 	width: 100%;
 }
 
@@ -1951,7 +1949,7 @@ footer.entry-meta {
 
 .author-info {
 	margin: 0 auto;
-	max-width: 978px;
+	max-width: 604px;
 	padding: 30px 0 10px;
 	text-align: left; /* gallery & video post formats */
 	width: 100%;
@@ -2041,7 +2039,7 @@ footer.entry-meta {
 
 .page-content {
 	margin: 0 auto;
-	max-width: 978px;
+	max-width: 604px;
 	padding: 40px 0;
 	width: 100%;
 }
@@ -2109,7 +2107,7 @@ footer.entry-meta {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 978px;
+	max-width: 604px;
 	width: 100%;
 }
 
@@ -2347,7 +2345,7 @@ footer.entry-meta {
 	font-style: italic;
 	font-weight: 300;
 	margin: 0 auto;
-	max-width: 978px;
+	max-width: 604px;
 	padding: 20px 0 30px;
 	width: 100%;
 }
@@ -2375,7 +2373,7 @@ footer.entry-meta {
 
 .site-main .mu_register {
 	margin: 0 auto;
-	max-width: 978px;
+	max-width: 604px;
 	width: 100%;
 }
 
@@ -2512,6 +2510,7 @@ footer.entry-meta {
 	background-color: transparent;
 }
 
+
 /* news widget */
 .news_logos{ background:url("images/news_logos.png") top left no-repeat; }
 .news_logos{ width:960px; height:400px; background-position:-10px -10px; }
@@ -2547,7 +2546,6 @@ div#widget_highlight .shadow_right{
     width: 335px;  height: 510px;  position: absolute;  top: 0;  z-index: 90;  
     right: 0px;
 }
-
 
 
 /**
@@ -2652,7 +2650,7 @@ div#widget_highlight .shadow_right{
 
 	.error404 .page-header {
 		margin-left: auto;
-		max-width: 978px;
+		max-width: 604px;
 		width: 100%;
 	}
 
@@ -2707,7 +2705,7 @@ div#widget_highlight .shadow_right{
 	.sidebar .featured-gallery,
 	.sidebar .post-navigation .nav-links,
 	.author.sidebar .author-info {
-		max-width: 978px;
+		max-width: 604px;
 		padding-left: 0;
 		padding-right: 0;
 	}
@@ -2717,7 +2715,7 @@ div#widget_highlight .shadow_right{
 	.blog.sidebar .page-content,
 	.attachment .entry-header,
 	.sidebar .comments-title {
-		max-width: 978px;
+		max-width: 604px;
 	}
 
 	.sidebar .archive-meta,
@@ -2771,7 +2769,7 @@ div#widget_highlight .shadow_right{
 	.site-main .sidebar-container {
 		height: auto;
 		margin: 0 auto;
-		max-width: 978px;
+		max-width: 604px;
 		position: relative;
 		top: 20px;
 	}
@@ -2802,7 +2800,7 @@ div#widget_highlight .shadow_right{
 
 	.attachment .image-navigation,
 	.attachment .entry-attachment .attachment {
-		max-width: 978px;
+		max-width: 604px;
 		padding: 0;
 		width: 100%;
 	}
@@ -3179,6 +3177,7 @@ div#widget_highlight .shadow_right{
 		color: #333;
 	}
 }
+
 
 
 /**
