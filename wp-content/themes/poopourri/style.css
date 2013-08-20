@@ -809,7 +809,6 @@ img.wp-smiley,
 	background: #ffffff;
 	width:100%;
 	z-index:1111;
-	min-height: 238px;
 }
 
 .site-header .home-link {
@@ -2529,7 +2528,6 @@ div#widget_highlight{
     background-image: url(images/canvas_pattern.gif);
     height: 510px;
     width: 100%;
-    position: relative;
 }
 
 div#widget_highlight .content-inner{
