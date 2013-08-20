@@ -803,7 +803,15 @@ img.wp-smiley,
  */
 
 .site-header {
+<<<<<<< HEAD
 	position: relative;
+=======
+	position: fixed;
+	top: 0px;
+	background: #ffffff;
+	width:100%;
+	z-index:1111;
+>>>>>>> parent of f84aa0b... Tweaks to header and highlight
 }
 
 .site-header .home-link {
@@ -997,7 +1005,7 @@ ul.nav-menu li:hover > ul,
 .entry-summary,
 .entry-meta {
 	margin: 0 auto;
-	max-width: 604px;
+	max-width: 978px;
 	width: 100%;
 }
 
@@ -1752,7 +1760,7 @@ footer.entry-meta {
 	clear: none;
 	color: inherit;
 	float: right;
-	max-width: 604px;
+	max-width: 978px;
 	padding: 9px 0 0;
 	text-align: right;
 }
@@ -1837,7 +1845,7 @@ footer.entry-meta {
 
 .attachment .entry-description {
 	margin: 20px auto 0;
-	max-width: 604px;
+	max-width: 978px;
 }
 
 .attachment .entry-caption p:last-child,
@@ -1875,7 +1883,7 @@ footer.entry-meta {
 
 .paging-navigation .nav-links {
 	margin: 0 auto;
-	max-width: 604px;
+	max-width: 978px;
 	width: 100%;
 }
 
@@ -1951,7 +1959,7 @@ footer.entry-meta {
 
 .author-info {
 	margin: 0 auto;
-	max-width: 604px;
+	max-width: 978px;
 	padding: 30px 0 10px;
 	text-align: left; /* gallery & video post formats */
 	width: 100%;
@@ -2041,7 +2049,7 @@ footer.entry-meta {
 
 .page-content {
 	margin: 0 auto;
-	max-width: 604px;
+	max-width: 978px;
 	padding: 40px 0;
 	width: 100%;
 }
@@ -2109,7 +2117,7 @@ footer.entry-meta {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 604px;
+	max-width: 978px;
 	width: 100%;
 }
 
@@ -2347,7 +2355,7 @@ footer.entry-meta {
 	font-style: italic;
 	font-weight: 300;
 	margin: 0 auto;
-	max-width: 604px;
+	max-width: 978px;
 	padding: 20px 0 30px;
 	width: 100%;
 }
@@ -2375,7 +2383,7 @@ footer.entry-meta {
 
 .site-main .mu_register {
 	margin: 0 auto;
-	max-width: 604px;
+	max-width: 978px;
 	width: 100%;
 }
 
@@ -2525,9 +2533,13 @@ div#widget_highlight{
 }
 
 div#widget_highlight .content-inner{
-    max-width: 1043px;
+    max-width: 978px;
     margin-left: auto;
     margin-right: auto;
+    background-image: url(images/flowery_background.gif);
+    background-repeat: no-repeat;
+    background-position:center;
+    height: 510px;
 }
 
 div#widget_highlight .shadow_left{
@@ -2648,7 +2660,7 @@ div#widget_highlight .shadow_right{
 
 	.error404 .page-header {
 		margin-left: auto;
-		max-width: 604px;
+		max-width: 978px;
 		width: 100%;
 	}
 
@@ -2703,7 +2715,7 @@ div#widget_highlight .shadow_right{
 	.sidebar .featured-gallery,
 	.sidebar .post-navigation .nav-links,
 	.author.sidebar .author-info {
-		max-width: 604px;
+		max-width: 978px;
 		padding-left: 0;
 		padding-right: 0;
 	}
@@ -2713,7 +2725,7 @@ div#widget_highlight .shadow_right{
 	.blog.sidebar .page-content,
 	.attachment .entry-header,
 	.sidebar .comments-title {
-		max-width: 604px;
+		max-width: 978px;
 	}
 
 	.sidebar .archive-meta,
@@ -2767,7 +2779,7 @@ div#widget_highlight .shadow_right{
 	.site-main .sidebar-container {
 		height: auto;
 		margin: 0 auto;
-		max-width: 604px;
+		max-width: 978px;
 		position: relative;
 		top: 20px;
 	}
@@ -2798,7 +2810,7 @@ div#widget_highlight .shadow_right{
 
 	.attachment .image-navigation,
 	.attachment .entry-attachment .attachment {
-		max-width: 604px;
+		max-width: 978px;
 		padding: 0;
 		width: 100%;
 	}
