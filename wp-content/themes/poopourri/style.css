@@ -803,7 +803,9 @@ img.wp-smiley,
  */
 
 .site-header {
-	position: relative;
+	position: fixed;
+	top: 0px;
+	background: #ffffff;
 }
 
 .site-header .home-link {
@@ -830,7 +832,7 @@ img.wp-smiley,
 }
 
 .site-description {
-	font: 300 italic 24px "Source Sans Pro", Helvetica, sans-serif;
+	font: 300 italic 24px Georgia, serif;
 	margin: 0;
 }
 
@@ -945,10 +947,13 @@ ul.nav-menu li:hover > ul,
 
 /* Navbar */
 .navbar {
-	background-color: #f7f5e7;
+	background-image: url(images/white_header_bar_translucent.png);
+	background-repeat: repeat-x;
 	margin: 0 auto;
 	max-width: 1600px;
 	width: 100%;
+	position: fixed;
+	top: 230px;
 }
 
 .site-header .search-form {
