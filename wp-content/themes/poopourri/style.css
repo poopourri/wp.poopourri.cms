@@ -803,7 +803,15 @@ img.wp-smiley,
  */
 
 .site-header {
+<<<<<<< HEAD
 	position: relative;
+=======
+	position: fixed;
+	top: 0px;
+	background: #ffffff;
+	width:100%;
+	z-index:1111;
+>>>>>>> parent of f84aa0b... Tweaks to header and highlight
 }
 
 .site-header .home-link {
@@ -2531,6 +2539,7 @@ div#widget_highlight .content-inner{
     background-image: url(images/flowery_background.gif);
     background-repeat: no-repeat;
     background-position:center;
+    height: 510px;
 }
 
 div#widget_highlight .shadow_left{
