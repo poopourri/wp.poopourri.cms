@@ -36,7 +36,7 @@ get_header(); ?>
 		</div>
 		<div class="shadow_left"></div>
 		<div class="shadow_right"></div>
-		<div style="background-image:url(/wp-content/themes/poopourri/images/bottom_background_shadow.png);width:100%;height:5px;"></div>
+		<div style="background-image:url(/wp-content/themes/poopourri/images/bottom_background_shadow.png);width:100%;height:5px;margin-top: -5px;"></div>
 	</div>
 
 	<div id="primary" class="site-content">
