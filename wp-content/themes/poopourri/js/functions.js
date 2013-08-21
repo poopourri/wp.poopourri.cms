@@ -65,6 +65,14 @@
 		}
 	} );
 
+    // Detect scroll position and change header class
+	_window.scroll(function() {
+	    var minimize = 300, top = _window.scrollTop(),
+	        _header = $('.site_header');
+	    if (top >= minimize) { _header.addClass('is-minimized'); }
+	    else { _header.removeClass('is-minimized'); }
+	} );
+
 	/**
 	 * Arranges footer widgets vertically.
 	 */
