@@ -65,6 +65,58 @@
 		}
 	} );
 
+	// Header content classes
+	var contentClasses = 'follow-content-open shop-content-open',
+	    expandedClass = 'is-expanded',
+	    _header = $('.site_header');
+
+    // Detect scroll position and change header class
+	_window.scroll(function() {
+	    var minimize = 300, top = _window.scrollTop();
+	    if (top >= minimize) {
+	        if (!_header.hasClass('is-minimized')) {
+	            _header.removeClass(contentClasses + ' ' + expandedClass);
+	            setTimeout(function() {
+	                if (_header.hasClass('is-minimized')) {
+	                    $('.header-content-link').hide();
+	                }
+	            }, 300);
+	        }
+	        _header.addClass('is-minimized');
+	    }
+	    else {
+	        if (_header.hasClass('is-minimized')) {
+	            $('.header-content-link').show();
+	        }
+	        setTimeout(function() {
+	            _header.removeClass('is-minimized');
+	        }, 0);
+	    }
+	} );
+
+	// Toggles for header content
+	$('.header-content-link').click(function() {
+	    var _link = $(this),
+	        _content = _link.attr('data-content'),
+	        openClass = _content + '-open';
+	    if (_header.hasClass(openClass)) {
+	        _header.removeClass(expandedClass + ' ' + openClass);
+	        return false;
+	    }
+	    if (_header.hasClass(expandedClass)) {
+	        _header.removeClass(contentClasses);
+	        _header.addClass(openClass);
+	        return false;
+	    }
+	    _header.addClass(expandedClass + ' ' + openClass);
+	});
+
+	// Toggle cart content
+	$('.cart-link').click(function() {
+	    var openClass = 'cart-is-open';
+	    _header.toggleClass(openClass);
+	});
+
 	/**
 	 * Arranges footer widgets vertically.
 	 */
