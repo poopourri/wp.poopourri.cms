@@ -976,6 +976,11 @@ a.cart-link:hover {
     top: -20px;
 }
 
+.cart-is-open .cart-link:hover,
+.cart-is-open .cart-link {
+    background-position:-10px -114px;
+}
+
 #cart-container {
     height: 0;
     overflow: hidden;
