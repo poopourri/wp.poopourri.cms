@@ -3199,3 +3199,10 @@ div#widget_highlight .shadow_right{
 .cart_btn:hover{ width:206px; height:42px; background-position:-10px -62px; }
 .cart_btn:active{ width:206px; height:42px; background-position:-10px -114px; }
 .cart_btn_1{ width:206px; height:42px; background-position:-10px -166px; }
+
+
+#landing-page #howitworks{ background:url(images/how_poopourri_works_header.png); width:1064px; height:64px;}
+#landing-page #poonews{ background:url(images/poo_news_header.png); width:1064px; height:64px;}
+#landing-page #provenodorbarrier{ background:url(images/proven_odor_barrier_header.png); width:1064px; height:64px;}
+#landing-page #nochemicalcoverups{ background:url(images/no_chemical_coverups_header.png); width:1064px; height:64px;}
+#landing-page #satisfiedpooers{ background:url(images/satisfied_pooers_header.png); width:1064px; height:64px;}
