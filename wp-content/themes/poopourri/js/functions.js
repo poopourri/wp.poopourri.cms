@@ -65,13 +65,52 @@
 		}
 	} );
 
+	// Header content classes
+	var contentClasses = 'follow-content-open shop-content-open',
+	    expandedClass = 'is-expanded';
+
     // Detect scroll position and change header class
 	_window.scroll(function() {
 	    var minimize = 300, top = _window.scrollTop(),
 	        _header = $('.site_header');
-	    if (top >= minimize) { _header.addClass('is-minimized'); }
-	    else { _header.removeClass('is-minimized'); }
+	    if (top >= minimize) {
+	        if (!_header.hasClass('is-minimized')) {
+	            _header.removeClass(contentClasses + ' ' + expandedClass);
+	            setTimeout(function() {
+	                if (_header.hasClass('is-minimized')) {
+	                    $('.header-content-link').hide();
+	                }
+	            }, 300);
+	        }
+	        _header.addClass('is-minimized');
+	    }
+	    else {
+	        if (_header.hasClass('is-minimized')) {
+	            $('.header-content-link').show();
+	        }
+	        setTimeout(function() {
+	            _header.removeClass('is-minimized');
+	        }, 0);
+	    }
 	} );
+
+	// Toggles for header content
+	$('.header-content-link').click(function(a) {
+	    var _link = $(this),
+	        _content = _link.attr('data-content'),
+	        openClass = _content + '-open',
+	        _header = $('.site_header');
+	    if (_header.hasClass(openClass)) {
+	        _header.removeClass(expandedClass + ' ' + openClass);
+	        return false;
+	    }
+	    if (_header.hasClass(expandedClass)) {
+	        _header.removeClass(contentClasses);
+	        _header.addClass(openClass);
+	        return false;
+	    }
+	    _header.addClass(expandedClass + ' ' + openClass);
+	});
 
 	/**
 	 * Arranges footer widgets vertically.

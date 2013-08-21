@@ -468,6 +468,15 @@ hr {
  * ----------------------------------------------------------------------------
  */
 
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+}
+
 .genericon:before,
 .menu-toggle:after,
 .featured-post:before,
@@ -810,19 +819,22 @@ img.wp-smiley,
     right: 0;
     z-index: 1000;
     min-width: 960px;
+}
+
+#header-container {
     background: transparent url('./images/header_bar_pattern.png') 0 0 repeat-x;
+    height: 147px;
 }
 
 #header-links {
     position: relative;
     margin: 0 auto;
-    height: 147px;
     width: 960px;
     -webkit-transition: height 0.3s ease-out;
     transition: height 0.3s ease-out;
 }
 
-.is-minimized #header-links {
+.is-minimized #header-container {
     height: 70px;
 }
 
@@ -893,14 +905,21 @@ a.follow-link:hover {
 
 .shop-link,
 .follow-link {
-    overflow: hidden;
-    -webkit-transition: height 0.3s ease-out;
-    transition: height 0.3s ease-out;
+    opacity: 1;
+    -webkit-transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
 }
 
 .is-minimized .shop-link,
 .is-minimized .follow-link {
-    height: 0;
+    opacity: 0;
+}
+
+.follow-content-open .follow-link,
+.shop-content-open .shop-link,
+.follow-content-open .follow-link:hover,
+.shop-content-open .shop-link:hover {
+    background-position:-10px -228px;
 }
 
 .follow-link .following {
@@ -920,13 +939,13 @@ a.cart-link {
     display: block;
     color: #fff;
     text-align: center;
-    position: absolute;
-    top: 158px;
-    left: 50%;
-    margin-left: -103px;
+    position: relative;
+    top: -26px;
+    margin: 0 auto;
     font-style: italic;
     -webkit-transition: top 0.3s ease-out;
     transition: top 0.3s ease-out;
+    z-index: 2;
 }
 
 a.cart-link .cart-items {
@@ -944,8 +963,12 @@ a.cart-link:hover {
     color: #fff;
 }
 
+.is-expanded .cart-link {
+    top: -37px;
+}
+
 .is-minimized .cart-link {
-    top: 70px;
+    top: 0;
 }
 
 /**
@@ -1021,7 +1044,6 @@ div.nav-menu > ul {
 .nav-menu .sub-menu,
 .nav-menu .children {
 	background-color: #000;
-	border: 2px solid #f7f5e7;
 	border-top: 0;
 	display: none;
 	padding: 0;
@@ -1063,6 +1085,91 @@ ul.nav-menu li:hover > ul,
 
 .menu-toggle {
 	display: none;
+}
+
+/* Header Content */
+
+#header-content {
+    background-color: rgba(0,0,0,0.9);
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: height 0.3s ease-out;
+    transition: height 0.3s ease-out;
+}
+
+.is-expanded #header-content {
+    height: 200px;
+}
+
+.header-content {
+    opacity: 0;
+    position: absolute;
+    width: 960px;
+    left: 50%;
+    margin: 0 0 0 -480px;
+    -webkit-transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
+}
+
+.follow-content-open #follow-content,
+.shop-content-open #shop-content {
+    opacity: 1;
+}
+
+/* Shop Content */
+
+.menu-shop-menu-container {
+    padding: 30px 0;
+}
+
+#menu-shop-menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#menu-shop-menu:before,
+#menu-shop-menu:after {
+    content:"";
+    display:table;
+}
+#menu-shop-menu:after {
+    clear:both;
+}
+
+#menu-shop-menu > li {
+    float: left;
+    width: 180px;
+}
+
+#menu-shop-menu > li > a {
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 0 0 8px 0;
+    display: block;
+}
+
+#menu-shop-menu > li > a:hover,
+#menu-shop-menu li li > a:hover {
+    color: #888;
+    text-decoration: none;
+}
+
+#menu-shop-menu li ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu-shop-menu li li {
+    line-height: 1;
+}
+
+#menu-shop-menu li li > a {
+    color: #fff;
+    padding: 0 0 5px 0;
+    display: block;
 }
 
 /* Navbar */
