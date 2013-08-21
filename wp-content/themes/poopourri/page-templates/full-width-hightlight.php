@@ -28,7 +28,7 @@ get_header(); ?>
 			Poo~Pourri is the award-winning before-you-go toilet spray.
 		</p>
 		<img src="/wp-content/themes/poopourri/images/good_housekeeping_seal.png" style="position:absolute;top: 270px;right:110px;">
-  		<p style="position:absolute;right:28px;top: 410px;width:380px;text-align:center;font-size:14pt;font-weight:bold;color:red;">
+  		<p style="position:absolute;right:28px;top: 410px;width:380px;text-align:center;font-size:14pt;font-weight:bold;color:#0088B0;">
 			Over 4 million sold!
 		</p>
   		<a href="#" class="order_now_btn" style=" position: absolute;right: 30px;top: 440px;"></a>
