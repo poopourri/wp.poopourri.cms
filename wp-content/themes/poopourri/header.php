@@ -49,6 +49,9 @@
 					<?php get_search_form(); ?>
 				</nav><!-- #site-navigation -->
 			</div><!-- #navbar -->
+
+			<a class="cart-link cart_btn" href="#"><span class="cart-items"><span class="count">0</span> item(s)</span></a>
+
 		</header><!-- #masthead -->
 
 		<div id="main" class="site-main">

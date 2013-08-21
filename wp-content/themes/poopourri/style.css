@@ -875,6 +875,32 @@ a.follow-link:hover {
     top: -1px;
 }
 
+a.cart-link {
+    display: block;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    top: 158px;
+    left: 50%;
+    margin-left: -103px;
+    font-style: italic;
+}
+
+a.cart-link .cart-items {
+    padding-top: 1px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+a.cart-link .cart-items .count {
+    font-size: 24px;
+}
+
+a.cart-link:hover {
+    color: #fff;
+}
+
 /**
  * 4.2 Navigation
  * ----------------------------------------------------------------------------
