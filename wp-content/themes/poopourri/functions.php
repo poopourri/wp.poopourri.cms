@@ -90,7 +90,8 @@ function twentythirteen_setup() {
 	) );
 
 	// This theme uses wp_nav_menu() in one location.
-	register_nav_menu( 'primary', __( 'Navigation Menu', 'twentythirteen' ) );
+	register_nav_menu( 'customer', __( 'Navigation Menu', 'twentythirteen' ) );
+	register_nav_menu( 'shop', __( 'Shop Nav Menu', 'twentythirteen' ) );
 
 	/*
 	 * This theme uses a custom image size for featured images, displayed on
@@ -101,6 +102,9 @@ function twentythirteen_setup() {
 
 	// This theme uses its own gallery styles.
 	add_filter( 'use_default_gallery_style', '__return_false' );
+
+	// Hide admin bar
+	add_filter( 'show_admin_bar', '__return_false');
 }
 add_action( 'after_setup_theme', 'twentythirteen_setup' );
 

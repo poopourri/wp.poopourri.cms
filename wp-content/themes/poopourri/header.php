@@ -32,20 +32,39 @@
 
 <body <?php body_class(); ?>>
 	<div id="page" class="hfeed site">
-		<header id="masthead" class="site-header" role="banner">
-			<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-				<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
-				<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-			</a>
-
+		<header id="masthead" class="site_header" role="banner">
+		    <div id="header-container">
+		        <div id="header-links">
+    		        <a class="shop-link shop_header_btn header-content-link" data-content="shop-content"><span class="screen-reader-text">Shop over 20 scents</span></a>
+    		        <div class="logo-container">
+    			        <a class="home-link poopourri_logo_btn" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span class="screen-reader-text"><?php bloginfo( 'name' ); ?>: <?php bloginfo( 'description' ); ?></span></a>
+    			    </div>
+    			    <a class="follow-link follow_header_btn header-content-link" data-content="follow-content"><span class="screen-reader-text">Follow:</span><span class="following"><span class="counter">1,230,000</span> Followers</span></a>
+    			</div>
+		    </div>
+		    <div id="header-content">
+                <div id="shop-content" class="header-content clearfix">
+                    <?php wp_nav_menu( array( 'theme_location' => 'shop', 'menu_class' => 'shop-menu' ) ); ?>
+                </div>
+                <div id="follow-content" class="header-content clearfix">
+                    <div class="temp-rip-me-out" style="width: 500px; margin: 0 auto; padding: 30px 0; color: #fff;">Hamburger chuck bacon, tenderloin beef salami tail ball tip venison pork belly brisket swine. Leberkas beef ribs turducken tail tongue kielbasa. Fatback t-bone corned beef chicken bresaola. Jerky biltong sausage fatback flank leberkas swine capicola meatball pork loin bresaola shank.</div>
+                </div>
+            </div>
 			<div id="navbar" class="navbar">
-				<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+				<nav id="site-navigation" class="main-navigation" role="navigation">
 					<h3 class="menu-toggle"><?php _e( 'Menu', 'twentythirteen' ); ?></h3>
 					<a class="screen-reader-text skip-link" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentythirteen' ); ?>"><?php _e( 'Skip to content', 'twentythirteen' ); ?></a>
-					<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?>
+					<?php wp_nav_menu( array( 'theme_location' => 'customer', 'menu_class' => 'nav-menu' ) ); ?>
 					<?php get_search_form(); ?>
 				</nav><!-- #site-navigation -->
 			</div><!-- #navbar -->
+            <div id="cart-container">
+                <div id="cart-content">
+                    <div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Your Cart Is Empty</div>
+                </div>
+            </div>
+			<a class="cart-link cart_btn"><span class="cart-items"><span class="count">0</span> item(s)</span></a>
+
 		</header><!-- #masthead -->
 
 		<div id="main" class="site-main">
