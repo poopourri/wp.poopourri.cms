@@ -2519,7 +2519,7 @@ footer.entry-meta {
 /* hightlight widget */
 div#widget_highlight{
     background-image: url(images/canvas_pattern.gif);
-    height: 540px;
+    height: 545px;
     width: 100%;
     position: relative;
 }
@@ -2531,20 +2531,20 @@ div#widget_highlight .content-inner{
     background-image: url(images/flowery_background.png);
     background-repeat: no-repeat;
     background-position:center;
-    height: 540px;
+    height: 545px;
 }
 
 div#widget_highlight .shadow_left{
     background-image: url(images/left_backdrop_vingette.png);
     background-repeat: repeat-y;
-    width: 335px;  height: 540px;  position: absolute;  top: 0;  z-index: 90;  
+    width: 335px;  height: 545px;  position: absolute;  top: 0;  z-index: 90;  
     left: 0px;
 }
 
 div#widget_highlight .shadow_right{
     background-image: url(images/right_backdrop_vingette.png);
     background-repeat: repeat-y;
-    width: 335px;  height: 540px;  position: absolute;  top: 0;  z-index: 90;  
+    width: 335px;  height: 545px;  position: absolute;  top: 0;  z-index: 90;  
     right: 0px;
 }
 
