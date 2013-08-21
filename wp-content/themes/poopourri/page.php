@@ -27,7 +27,8 @@ get_header(); ?>
 						</div>
 						<?php endif; ?>
 
-						<?php if ( !is_front_page() ) { ?>
+						<?php if ( is_front_page() ) { ?>
+						<?php }else{ ?>
 							<h1 class="entry-title"><?php the_title(); ?></h1>
 						<?php } ?>
 	
