@@ -102,6 +102,9 @@ function twentythirteen_setup() {
 
 	// This theme uses its own gallery styles.
 	add_filter( 'use_default_gallery_style', '__return_false' );
+
+	// Hide admin bar
+	add_filter( 'show_admin_bar', '__return_false');
 }
 add_action( 'after_setup_theme', 'twentythirteen_setup' );
 
