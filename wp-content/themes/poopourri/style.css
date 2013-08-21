@@ -850,7 +850,7 @@ img.wp-smiley,
     margin-left: -203px;
     height: 166px;
     width: 406px;
-    z-index: 1;
+    z-index: 2;
 }
 
 .logo-container:after {
@@ -940,12 +940,12 @@ a.cart-link {
     color: #fff;
     text-align: center;
     position: relative;
-    top: -26px;
+    top: 16px;
     margin: 0 auto;
     font-style: italic;
     -webkit-transition: top 0.3s ease-out;
     transition: top 0.3s ease-out;
-    z-index: 2;
+    z-index: 3;
 }
 
 a.cart-link .cart-items {
@@ -964,12 +964,49 @@ a.cart-link:hover {
 }
 
 .is-expanded .cart-link {
-    top: -37px;
+    top: 5px;
 }
 
 .is-minimized .cart-link {
     top: 0;
 }
+
+.cart-is-open .cart-link,
+.is-minimized.cart-is-open .cart-link {
+    top: -20px;
+}
+
+#cart-container {
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: height 0.3s ease-out;
+    transition: height 0.3s ease-out;
+    position: relative;
+    z-index: 1;
+    margin-top: -42px;
+}
+
+.is-minimized #cart-container {
+    margin-top: 0;
+}
+
+.cart-is-open #cart-container {
+    height: 428px;
+}
+
+#cart-content {
+    border: 10px solid rgba(0,0,0,0.9);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border-top: none;
+    width: 658px;
+    height: 408px;
+    padding: 5px;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+
 
 /**
  * 4.2 Navigation

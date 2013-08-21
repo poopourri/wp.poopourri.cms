@@ -58,8 +58,12 @@
 					<?php get_search_form(); ?>
 				</nav><!-- #site-navigation -->
 			</div><!-- #navbar -->
-
-			<a class="cart-link cart_btn" href="#"><span class="cart-items"><span class="count">0</span> item(s)</span></a>
+            <div id="cart-container">
+                <div id="cart-content">
+                    <div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Your Cart Is Empty</div>
+                </div>
+            </div>
+			<a class="cart-link cart_btn"><span class="cart-items"><span class="count">0</span> item(s)</span></a>
 
 		</header><!-- #masthead -->
 
