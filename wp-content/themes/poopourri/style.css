@@ -3200,7 +3200,7 @@ div#widget_highlight .shadow_right{
 .cart_btn:active{ width:206px; height:42px; background-position:-10px -114px; }
 .cart_btn_1{ width:206px; height:42px; background-position:-10px -166px; }
 
-#landing-page h2{ padding-top:25px; padding-bottom:10px; }
+#landing-page h2{ margin-top:100px; margin-bottom:50px; }
 #landing-page #howitworks{ background:url(images/how_poopourri_works_header.png); width:1064px; height:64px;}
 #landing-page #poonews{ background:url(images/poo_news_header.png); width:1064px; height:64px;}
 #landing-page #provenodorbarrier{ background:url(images/proven_odor_barrier_header.png); width:1064px; height:64px;}
