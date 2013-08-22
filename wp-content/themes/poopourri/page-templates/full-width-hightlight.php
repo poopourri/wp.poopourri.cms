@@ -21,7 +21,7 @@ get_header(); ?>
 		<p>
 			<img class="alignleft" alt="Spritz the bowl before-you-go &amp; no one else will ever know" src="/wp-content/themes/poopourri/images/spritz_the_bowl_header.png" width="916" height="88">
 		</p>
-  		<iframe title="YouTube video player" class="youtube-player" type="text/html" width="502" height="355" src="http://www.youtube.com/embed/bvcLWKMa_Ls?rel=0&amp;hd=1&amp;wmode=transparent&amp;autoplay=0&amp;showinfo=0&amp;color=white&amp;autohide=1&amp;rel=0&amp;modestbranding=1&amp;origin=https%3A%2F%2Forapup.com" frameborder="0" style="position: absolute;left: 0px;top: 155px;box-shadow: 1px 2px 4px;"></iframe>
+  		<iframe title="YouTube video player" class="youtube-player" type="text/html" width="630" height="355" src="http://www.youtube.com/embed/bvcLWKMa_Ls?rel=0&amp;hd=1&amp;wmode=transparent&amp;autoplay=0&amp;showinfo=0&amp;color=white&amp;autohide=1&amp;rel=0&amp;modestbranding=1&amp;origin=https%3A%2F%2Forapup.com" frameborder="0" style="position: absolute;left: 0px;top: 155px;box-shadow: 1px 2px 4px;"></iframe>
   
   		<img src="/wp-content/themes/poopourri/images/leave_toilet_smelling_better.png" style="position:absolute;right:25px;top: 155px;">
   		<p style="position:absolute;right:28px;top: 220px;width:380px;font-size:14pt">
