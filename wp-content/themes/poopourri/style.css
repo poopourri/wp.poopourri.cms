@@ -3479,10 +3479,10 @@ div#widget_highlight .shadow_right{
 .order_now_small_btn:hover{ width:140px; height:43px; background-position:-10px -63px; }
 
 .cart_btn{ background:url("images/cart_btn.png") top left no-repeat; }
-.cart_btn{ width:206px; height:42px; background-position:-10px -10px; }
-.cart_btn:hover{ width:206px; height:42px; background-position:-10px -62px; }
-.cart_btn:active{ width:206px; height:42px; background-position:-10px -114px; }
-.cart_btn_1{ width:206px; height:42px; background-position:-10px -166px; }
+.cart_btn{ width:206px; height:42px; background-position:-10px -12px; }
+.cart_btn:hover{ width:206px; height:42px; background-position:-10px -64px; }
+.cart_btn:active{ width:206px; height:42px; background-position:-10px -116px; }
+.cart_btn_1{ width:206px; height:42px; background-position:-10px -168px; }
 
 #landing-page h2{ margin-top:80px; margin-bottom:40px; }
 #landing-page #howitworks{ background:url(images/how_poopourri_works_header.png); width:1064px; height:64px; margin-top:0px; }
