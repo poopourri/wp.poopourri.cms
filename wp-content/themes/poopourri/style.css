@@ -1156,6 +1156,7 @@ ul.nav-menu li:hover > ul,
 .follow-content-open #follow-content,
 .shop-content-open #shop-content {
     opacity: 1;
+    z-index: 1;
 }
 
 /* Shop Content */
