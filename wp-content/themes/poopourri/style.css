@@ -1156,7 +1156,6 @@ ul.nav-menu li:hover > ul,
 .follow-content-open #follow-content,
 .shop-content-open #shop-content {
     opacity: 1;
-    z-index: 1;
 }
 
 /* Shop Content */
@@ -2799,7 +2798,7 @@ footer.entry-meta {
 /* news widget */
 .news_logos{ background:url("images/news_logos.png") top left no-repeat; }
 .news_logos{ width:960px; height:400px; background-position:-10px -10px; }
-.news_logos:hover{ width:960px; height:400px; background-position:-10px -420px; }
+/* .news_logos:hover{ width:960px; height:400px; background-position:-10px -420px; } */
 
 /* hightlight widget */
 div#widget_highlight{
