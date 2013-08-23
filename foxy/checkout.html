@@ -1,0 +1,1843 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ store_name|raw }} Checkout</title>
+    {# if you plan to customize your template, use the "text" theme instead of the "standard" one. #}
+    {# <link rel="stylesheet" href="https://{{ store_domain }}/themes/text/styles.css" type="text/css" media="screen" charset="utf-8" /> #}
+    <link rel="stylesheet" href="https://{{ store_domain }}/themes/standard/styles.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="fancybox/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="../foxy_css/foxy.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script src="fancybox/jquery.fancybox.js"></script>
+    
+	<script type="text/javascript" charset="utf-8">
+		if (window.location.hash.search(/utma/) == -1 && typeof(fc_json.custom_fields['ga']) != "undefined") {
+			if (fc_json.custom_fields['ga'].length > 0) {
+				window.location.hash = fc_json.custom_fields['ga'].replace( /\&amp;/g, '&' );
+			}
+		}
+	</script>
+ 
+<script type="text/javascript">
+{% set pp_payment_method = '' %}
+{% for custom_field in custom_fields %}
+   {% if 'paypal' in custom_field.value %}
+          {% set pp_payment_method = 'paypal' %}
+   {% endif %} 
+   {% if 'amazon_fps' in custom_field.value %}
+          {% set pp_payment_method = 'amazon_fps' %}
+   {% endif %} 
+{% endfor %}
+ 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17466510-1']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_setAllowAnchor', true]);
+  _gaq.push(['_trackPageview', '/checkout']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript" charset="utf-8">
+	function ga_tracker() {
+		if (typeof(fc_json.custom_fields['ga']) != "undefined" && jQuery('#fc_payment_method_paypal').attr("checked") == true) {
+			_gaq.push(['_trackPageview', '/paypal_payment']);
+			// setTimeout('return true;', 250); // TODO
+		}
+	}
+	FC.checkout.overload('validateAndSubmit', 'ga_tracker', null);
+</script>
+<script type="text/javascript" charset="utf-8">
+var foxyCartBaseURL = "https://poopourri.foxycart.com/";
+var appBaseURL = "http://www2.poopourri.com/";
+
+var cartUrl = foxyCartBaseURL + 'cart?cart=view&output=json';
+
+
+function isScheduledDelivery(){
+	needle = "Code: club";
+	//needle = "Codigo: club";
+	isClub = false;
+	$('.fc_cart_item_code').each(function(){
+		haystack = $(this).text();
+		if(haystack.indexOf(needle)>-1){
+			isClub = true;
+		}
+	});
+	return isClub;
+}
+
+function ppPresentationChanges(){
+    if(isOraclub()){
+        $('table#fc_cart_table').addClass('fc_cart_table_club');
+        $("span.fc_cart_item_option_value:contains('t have a ')").parent().hide();
+        $('#li_save_cc').addClass('li_save_cc_club');
+        $('span.nonpp_each').hide();
+        $('span.pp_each').show();
+    }else{
+        $('span.nonpp_each').show();
+        $('span.pp_each').hide();
+    }
+    $('table#fc_cart_table').show();
+}
+
+
+function pp_autoset_password() {
+	$('#customer_password').focus(function(){
+
+		// if resetting password, we want to add to the current message string
+		var newString = FC.checkout.config.lang.checkout_found_customer_info_logged_in + ' Please create a new password below. Your new password will be saved when you click confirm at the bottom of the page.';
+
+if(jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_found_customer_info_logged_in && jQuery('#fc_account_message_status').text()!=newString){
+                	jQuery('#fc_account_message_status').text(newString);
+		}
+
+		var is_resetting_password = (jQuery('#fc_account_message_status').text()==newString || (jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_password_sent_to + $('#customer_email').val() + FC.checkout.config.lang.checkout_password_sent_check_spam) || jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_sending_login_info);
+		
+		// this is showing a way to create an account without guest option
+		if(!$('#is_anonymous_0').is(':visible') && $('#li_customer_password').is(':visible') && $('#li_customer_password2').is(':visible') && !is_resetting_password){
+var unix = Math.round(+new Date()/1000);
+			var auto_password = $('#customer_email').val().split('@')[0] + $('#order_total').val();
+			jQuery('#fc_account_message_status').show().html('Your confirmation will be sent to <b>'+$('#customer_email').val()+'</b> after you complete your order below.');
+			$('#li_customer_password').hide();
+			$('#li_customer_password2').hide();
+			$('#customer_password').val(auto_password);
+			$('#customer_password2').val(auto_password);
+		}else{
+			$('#fc_account_message_status').show();
+		}
+		handleEmailType();
+	});
+}
+var mustShowEmail = false;
+function handleEmailType(){
+	if(jQuery("label.fc_error[for='customer_email']").is(':visible')){ // invalid email
+	mustShowEmail = true;  
+	}else if(jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_instructions_email){ // now email entered
+	mustShowEmail = true; 
+}
+// are we resetting the password?
+		var newString = FC.checkout.config.lang.checkout_found_customer_info_logged_in + ' Please create a new password below. Your new password will be saved when you click confirm at the bottom of the page.';
+
+		var is_resetting_password = (jQuery('#fc_account_message_status').text()==newString || (jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_password_sent_to + $('#customer_email').val() + FC.checkout.config.lang.checkout_password_sent_check_spam) || jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_sending_login_info);
+		
+if(mustShowEmail==false && jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_found_customer_info_account_only){
+$('.email-info').hide();
+                 $('#fc_login_register_container').show();
+        }else if(is_resetting_password==true){
+$('.email-info').hide();
+                 $('#fc_login_register_container').show();
+        }else if(typeof $('.email-info').val()!='undefined'){
+                 $('.email-info .user-email').text($('#customer_email').val());
+                 $('.email-info').show();
+                $('#fc_login_register_container').hide();
+		$('#customer_password').blur();
+		$('#shipping_first_name').focus();
+        }
+}
+function prePopulateBilling(){
+var fields = new Array('first_name','last_name','address1','address2','city','state_name','postal_code','country');
+var sourcePrefix = '#fc_address_shipping_list #shipping_';
+var targetPrefix = '#fc_customer_billing_list #customer_';
+for(var i=0;i<fields.length;i++){
+	if(typeof $(sourcePrefix+fields[i]).val()!='undefined' && $(targetPrefix+fields[i]).val()=='' ||
+	   typeof $(sourcePrefix+fields[i]).val()!='undefined' && $('#use_different_addresses').is(':checked')==false){
+		$(targetPrefix+fields[i]).val($(sourcePrefix+fields[i]).val());
+	}
+}
+}
+
+function prepPlaceholders(){ // this function is for IE placeholders on drbob variation
+if(navigator.userAgent.indexOf('MSIE')!=-1 && navigator.userAgent.indexOf('MSIE 10') == -1){
+$('#drbob [placeholder]').focus(function() {
+  var input = $(this);
+  if (input.val() == input.attr('placeholder')) {
+    input.val('');
+    input.removeClass('placeholder');
+  }
+}).blur(function() {
+  var input = $(this);
+  if (input.val() == '' || input.val() == input.attr('placeholder')) {
+    input.addClass('placeholder');
+    input.val(input.attr('placeholder'));
+  }
+}).blur();
+}
+}
+
+function undoPlaceholders(){ 
+if(navigator.userAgent.indexOf('MSIE')!==-1 && navigator.userAgent.indexOf('MSIE 10') == -1){
+  $('#drbob [placeholder]').each(function() {
+    var field = $(this);
+    if (field.val() == field.attr('placeholder')) {
+      field.val('');
+    }
+   });
+  }
+}
+
+function showErrors(){
+var fields = Array('first_name','last_name','address1','address2','city','state_name','postal_code','country');
+var sourcePrefix = '#fc_address_shipping_list #shipping_';
+     for(var i=0;i<fields.length;i++){
+        if($(sourcePrefix+fields[i]).val()==''){
+            $("label.fc_error[for='shipping_"+fields[i]+"']").show();
+        }
+        if($(sourcePrefix +fields[i]).val().length==1){
+            $(sourcePrefix +fields[i]).val('');
+            $("label.fc_error[for='shipping_"+fields[i]+"']").show();
+        }
+        if($('#customer_'+fields[i]).val().length==1){
+            $('#customer_'+fields[i]).val('');
+            $("label.fc_error[for='customer_"+fields[i]+"']").show();
+        }
+     }
+     $('.fc_error_invalid_postal_code').hide();
+}
+
+function beforeValidation(){
+     undoPlaceholders();
+     showErrors();
+}
+
+function afterValidation(){
+     undoPlaceholders();
+     showErrors();
+}
+
+FC.checkout.overload('validateAndSubmit','beforeValidation','afterValidation');
+$(document).ready(function(){
+        setHeader();
+        hideBilling();
+        showBilling();
+        inputChange();
+        inputPlaceHolder();
+        prePopulateBilling();
+        changePaymentLayout();
+        removeRequiredClass();
+        printUserEmail();
+        openDrbobForms();
+        productdesc();
+	$('<div class = "payment-info-bob-img"></div>').insertAfter('#drbob #fc_shipping_container');
+        $("<div class='secure-payment-label'></div>").insertBefore('#drbob .payment-info-bob-img');
+        $('#drbob #fc_payment_container').appendTo('.payment-info-bob-img');
+        $('#drbob .bob-image-div').appendTo('.payment-info-bob-img');
+	// show the shipping options after shipping address
+	FC.checkout.overload('updateShipping',null,function(){$('#drbob #fc_shipping_container fieldset').show();prePopulateBilling();});
+	// put the package on the right
+	$('<div class = "shipping_package_div" style="width:900px;"></div>').insertBefore('#drbob .rightpackage #fc_shipping_container');
+	$('#drbob .rightpackage #fc_address_shipping_container').appendTo('#drbob .rightpackage .shipping_package_div');
+	$('<div style="float:right;width:400px;" id="right-package"></div>').insertBefore('#drbob .rightpackage #fc_address_shipping_container');
+	$('#drbob .rightpackage .product-img').appendTo('#drbob .rightpackage #right-package');
+	$('#drbob .rightpackage .product-details').appendTo('#drbob .rightpackage #right-package');
+	$('#drbob .rightpackage #fc_use_different_address').appendTo('#drbob .rightpackage .shipping_package_div');
+	$('#drbob .rightpackage .product-desc-label-img').hide();
+	// save cc by default
+	$('#save_cc').attr('checked',true);
+	pp_autoset_password();
+	FC.checkout.overload("updateMessaging",null,function(){pp_autoset_password();});
+	ppPresentationChanges();
+	var cartUrl = foxyCartBaseURL + 'cart?cart=view&output=json';
+	prepPlaceholders();
+	$.getJSON(cartUrl, function(data) { 
+	if(isOraclub()){
+		$('#storename').val('pp.com');
+		$('#storeNamePlaceHolder').text('Oraclub');		
+	}else{
+		var pageReferrer = data.page_referrer;
+		if(pageReferrer.indexOf("orabrush") >= 0){
+			$('#storename').val('orabrush.com');
+			$('#storeNamePlaceHolder').text('Orabrush');	
+		}
+		else{
+			$('#storename').val('orapup.com');
+			$('#storeNamePlaceHolder').text('Orapup');	
+		}
+	}
+	});
+	$('#just_ship_once').click(function(){
+            if ($('#just_ship_once').is(":checked")) {
+		$.fancybox({
+		       'content' : $("#delivery-popup-content").html(),
+                        'afterClose': function(){check_set_sub(); }
+	        });
+            }
+	});
+        if ($('#just_ship_once').is(":visible")) {
+		jQuery("#fc_shipping_container > h2").html(jQuery("#fc_shipping_container > h2").text()+' <span style="color:red;font-size:8pt;">(FREE shipping to US with <a href="#scheduled" style="text-decoration:underline;color:red;">scheduled delivery*</a>)</span>');
+        }
+	//Move Custom Fields Container After Payment List
+	jQuery("#fc_custom_fields_container").insertAfter("#fc_payment_list");
+	editColorhandler();
+	$('<div style="clear:both;"></div><center><small style="color:grey;">(by purchasing you agree to our <a href="http://www.pp.com/legal/privacy" target="_blank" style="color:grey;text-decoration:underline;">privacy policy</a> and <a href="http://www.pp.com/legal/terms" target="_blank" style="color:grey;text-decoration:underline;">terms of service</a>)</small><br/><span style="font-family:Arial, San-serif;">Copyright &copy 2013 Orabrush Inc.</span></center>').insertAfter('#drbob #pageContainer');
+	$('<small style="color:grey;">(by purchasing you agree to our <a href="http://www.pp.com/legal/privacy" target="_blank" style="color:grey;text-decoration:underline;">privacy policy</a> and <a href="http://www.pp.com/legal/terms" target="_blank" style="color:grey;text-decoration:underline;">terms of service</a>)</small>').insertAfter('#drbob .drbobbybutton #fc_payment_list');
+	$('<div style="clear:both;"></div><br/><br/><br/><small style="color:grey;">(by purchasing your transaction is protected by our <a href="http://www.pp.com/legal/privacy" target="_blank" style="color:grey;text-decoration:underline;">privacy policy</a> and <a href="http://www.pp.com/legal/terms" target="_blank" style="color:grey;text-decoration:underline;">terms of service</a>)</small>').insertAfter('#drbob .protected #fc_complete_order_processing');
+});
+var package_link = appBaseURL+"packages/";
+function editColorhandler(){
+ var emptyCartUrlVal = foxyCartBaseURL + 'cart?empty=true&output=json&callback=?';
+
+ $('.edit-color, .edit-cart-btn').click(function(){
+	jQuery.getJSON(emptyCartUrlVal, function(data){
+			 document.location = fc_json.page_referrer;
+              });
+        });
+ $('.edit-package').click(function(){
+        jQuery.getJSON(emptyCartUrlVal, function(data){
+        	var packge_link_url = fc_json.custom_fields.prev_page_referer;
+        	if(packge_link_url){
+                	document.location = packge_link_url;
+            	}else
+                {
+                       document.location = package_link;
+                }
+        });
+ });
+ $('#drbob .edit-email').click(function(){
+	jQuery.getJSON(emptyCartUrlVal, function(data){
+			 document.location = fc_json.page_referrer + '#customer_email';
+              });
+ });
+}
+
+function quantityBaseOnColor(colorStr){
+	var quantity = 1;
+	if(colorStr.indexOf("/")>0){
+		quantity = quantity + (colorStr.match(/\//g)).length;
+	}
+	return quantity;
+}
+function productdesc(){
+if(fc_json.products[0] && fc_json.products[0].options){
+                            var color1 = fc_json.products[0].options['Orapup 1'];
+                            var color2 = fc_json.products[0].options['Orapup 2'];
+			    var hoodieColor = fc_json.products[0].options['Hoodie Color'];
+			    var hoodieSize = fc_json.products[0].options['Hoodie Size'];
+                            var image_path = "";
+			    if(fc_json.custom_fields.imagePath){
+                            	image_path = fc_json.custom_fields.imagePath;
+				image_path = image_path.replace('http','https');
+			    }
+                            $('<div class = "product-desc-div"></div>').insertBefore('#drbob #fc_login_register_container');
+                            $('<div class = "checkout-header-div"></div>').insertAfter('#drbob .product-desc-div');
+			    $('<div class = "product-details"><div class = "product-color-name"><div id="product-description-value"></div></div><div class = "product-img"><img src="#"><span class = "edit-package">change package</span></div></div>').appendTo('.product-desc-div');
+var descriptionStr = "";
+
+				if(color1){
+					var quantityVal = quantityBaseOnColor(color1);
+					var showOrapup = (quantityVal == 1)? 'Orapup' : 'Orapups';
+				    descriptionStr = descriptionStr + quantityVal + ' '+ color1 + ' ' + showOrapup +' <a class = "edit-color">Change color</a><br/>';
+				}
+				if(color2){
+					var quantityVal = quantityBaseOnColor(color1);
+					var showOrapup = (quantityVal == 1)? 'Orapup' : 'Orapups';
+				    descriptionStr = descriptionStr + quantityVal + ' '+ color2 + ' ' + showOrapup +' <a class = "edit-color">Change color</a><br/>';
+				}
+ if(fc_json.products[0].code.substring(0,8) == "pupstart"){
+       descriptionStr = descriptionStr + "<span class='orapup-random-color'>1 Orapup (random color)</span><br/>";
+       descriptionStr = descriptionStr + "<span class='orapup-flavor-bottle'>1 20-Use Flavor Bottle</span><br/>";
+}else if(fc_json.products[0].code.substring(0,9) == "2pupstart"){
+       descriptionStr = descriptionStr + "<span class='orapup-flavor-bottle'>2 20-Use Flavor Bottles</span><br/>";
+}else if(fc_json.products[0].code.substring(0,7) == "puphood"){
+       descriptionStr = descriptionStr + "<span class='orapup-flavor-bottle'>1 20-Use Flavor Bottle</span><br/>";
+}
+
+			    if(fc_json.products[1] && fc_json.products[1].name){
+			       descriptionStr = descriptionStr +  fc_json.products[1].name + "<br/>";
+			    }
+if(hoodieColor){
+                               descriptionStr = descriptionStr + '1 '+ hoodieSize + ' ' + hoodieColor + ' Hoodie <a class = "edit-color">Change color/size</a><br/>';
+                            }
+
+
+if(fc_json.products[0].code != "pupstart" && FC.checkout.config.orderFlatRateShipping==0){
+       descriptionStr = descriptionStr + "<span class='free-shipping-custom'>FREE Shipping in USA</span><br/>";
+}
+
+				descriptionStr = descriptionStr + "<span class='made-in-usa-custom'>Made in the USA</span><br/>";
+if(fc_json.products[0].code == "pupsmdist" && fc_json.products[0].options['Flavor']){
+	descriptionStr = descriptionStr +  "<span class='orapup-flavor-bottle'>25 Orapup Dog Breath Starter Kits</span><br/>Extra 25 20-use Flavor Bottles (+$7 each)";
+}else if(fc_json.products[0].code == "pupdist" && fc_json.products[0].options['Flavor']){
+	descriptionStr = descriptionStr +  "<span class='orapup-flavor-bottle'>250 Orapup Dog Breath Starter Kits</span><br/>Extra 250 20-use Flavor Bottles (+$7 each)";
+}else if(fc_json.products[0].options['Flavor']){
+				descriptionStr = descriptionStr +  "Extra 20-use Flavor Bottles (+$8)";
+}
+
+			    $('#product-description-value').html(descriptionStr);
+			    if(image_path != ""){
+                            	$('.product-img img').attr('src',image_path);
+			    }
+                            $('<div class = "product-desc-label-img"></div>').insertBefore('#drbob .product-desc-div');
+}
+                        }
+function openDrbobForms(){
+            $('#drbob .edit-country').click(function(){
+                $('#drbob .fc_shipping_country_name').show();
+                $('#drbob .country-name').hide();
+            });
+}
+function printUserEmail(){
+                            var email_val = $('#drbob #customer_email').val();
+                            var country_val = $('#drbob #country-name').val();
+                            if(country_val == 'Other countries (+$10)'){
+                                $('#drbob .fc_shipping_country_name').show();    
+                            }
+                            if(country_val == 'United States (FREE shipping)'){
+                                $('#drbob li.fc_shipping_country_name .fc_location option').removeAttr('selected');
+                                $('#drbob li.fc_shipping_country_name .fc_location option[value="US"]').prop('selected', true);
+                                $('#drbob li.fc_shipping_country_name .fc_location').trigger('change');
+                            }
+                            if(country_val == 'Canada (+$5)'){
+                                 $('#drbob li.fc_shipping_country_name .fc_location option').removeAttr('selected');
+                                 $('#drbob li.fc_shipping_country_name .fc_location option[value="CA"]').prop('selected', true);
+                                 $('#drbob li.fc_shipping_country_name .fc_location').trigger('change');
+                            }
+                            if(country_val == 'United Kingdom (+$5)'){
+                                 $('#drbob li.fc_shipping_country_name .fc_location option').removeAttr('selected');
+                                 $('#drbob li.fc_shipping_country_name .fc_location option[value="GB"]').prop('selected', true);
+                                 $('#drbob li.fc_shipping_country_name .fc_location').trigger('change');
+                            }
+                            if(country_val){
+                                $('<div class = "country-name"><label class = "user-country-label">*'+ country_val +'</label><a class = "edit-country" href="#fc_shipping_address"> edit country</a></div>').appendTo('#drbob #fc_address_shipping_list');
+                            }else{
+                                $('<div class = "country-name"><label class = "user-country-label">No country selected</label><a class = "edit-country" href="#fc_shipping_address"> edit country</a></div>').appendTo('#drbob #fc_address_shipping_list');
+                            }
+                            if(email_val){
+                                $('<div class = "email-info"><label class = "user-email-label">We will send a receipt to</label> <label class = "user-email">'+ email_val +'</label><a class = "edit-email" href="#fc_login_register_container"> edit email</a></div>').appendTo('#drbob #fc_address_shipping_list');
+                            }else{
+                                $('<div class = "email-info"><label class = "user-email-label">Enter email address</label><a class = "edit-email"> edit email</a></div>').appendTo('#drbob #fc_address_shipping_list');
+                            }
+}
+function changePaymentLayout(){
+                            $('#fc_payment_list #fc_payment_method_plastic_container').insertAfter('#fc_payment_list #li_cc_number input');
+                            $('#fc_payment_list #li_cc_cvv2').insertAfter('#fc_payment_list #li_cc_exp_month');
+$('<div class = "security-code-img"></div>').insertBefore('#drbob #fc_payment_list #li_cc_cvv2 .security-code');
+}
+function removeRequiredClass(){
+                            $('#drbob .fc_shipping_country_name select').removeClass('fc_required');
+                            $('#drbob .fc_shipping_country_name input').removeClass('fc_required');
+                            $('#drbob .fc_customer_country_name select').removeClass('fc_required');
+                            $('#drbob .fc_customer_country_name input').removeClass('fc_required');
+                            $('#drbob .fc_customer_state_name select').removeClass('fc_required');
+                            $('#drbob .fc_customer_state_name input').removeClass('fc_required');
+}
+                        
+function inputPlaceHolder(){
+                            $('li.fc_shipping_first_name input').attr('placeholder','*First Name');
+                            $('li.fc_customer_first_name input').attr('placeholder','*First Name');
+                            $('li.fc_shipping_last_name input').attr('placeholder','*Last Name');
+                            $('li.fc_customer_last_name input').attr('placeholder','*Last Name');
+                            $('li.fc_shipping_address1 input').attr('placeholder','*Address 1');
+                            $('li.fc_customer_address1 input').attr('placeholder','*Address 1');
+                            $('li.fc_shipping_address2 input').attr('placeholder','Address 2');
+                            $('li.fc_customer_address2 input').attr('placeholder','Address 2');
+                            $('li.fc_shipping_city input').attr('placeholder','*City');
+                            $('li.fc_customer_city input').attr('placeholder','*City');
+                            $('li.fc_shipping_state_name input').attr('placeholder','*State');
+                            $('li.fc_customer_state_name input').attr('placeholder','*State');
+                            $('li.fc_shipping_postal_code input').attr('placeholder','*ZIP Code');
+                            $('li.fc_customer_postal_code input').attr('placeholder','*ZIP Code');
+}    
+function inputChange(){
+	                            $('li.fc_shipping_first_name input').on('keydown',function() { 
+	                                var inputVal = $('li.fc_shipping_first_name input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_first_name input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_first_name input').keyup(function() { 
+	                                var inputVal = $('li.fc_shipping_first_name input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_first_name input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_last_name input').keyup(function() { 
+	                                var inputVal = $('li.fc_shipping_last_name input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_last_name input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_last_name input').on('keydown',function() { 
+	                                var inputVal = $('li.fc_shipping_last_name input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_last_name input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_address1 input').keyup(function() { 
+	                                var inputVal = $('li.fc_shipping_address1 input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_address1 input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_address1 input').on('keydown',function() { 
+	                                var inputVal = $('li.fc_shipping_address1 input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_address1 input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_address2 input').keyup(function() { 
+	                                var inputVal = $('li.fc_shipping_address2 input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_address2 input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_address2 input').on('keydown',function() { 
+	                                var inputVal = $('li.fc_shipping_address2 input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_address2 input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_city input').keyup(function() { 
+	                                var inputVal = $('li.fc_shipping_city input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_city input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_city input').on('keydown',function() { 
+	                                var inputVal = $('li.fc_shipping_city input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_city input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_postal_code input').keyup(function() { 
+	                                var inputVal = $('li.fc_shipping_postal_code input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_postal_code input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_postal_code input').on('keydown',function() { 
+	                                var inputVal = $('li.fc_shipping_postal_code input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_postal_code input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_state_name input').keyup(function() { 
+	                                var inputVal = $('li.fc_shipping_state_name input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_state_name input').val(inputVal);
+	                                }
+	                            });
+	                            $('li.fc_shipping_state_name input').on('keydown',function() { 
+	                                var inputVal = $('li.fc_shipping_state_name input').val();
+	                                if(inputVal){
+	                                    $('li.fc_customer_state_name input').val(inputVal);
+	                                }
+	                            });
+                            $('li.fc_shipping_state_name .fc_location').change(function() { 
+                                var inputVal = $('li.fc_shipping_state_name .fc_location').val();
+                                var input = $('li.fc_shipping_state_name .fc_location option[value='+inputVal+']').text();
+                                if(inputVal){
+                                    $('li.fc_customer_state_name .fc_location option').removeAttr('selected');
+                                    $('li.fc_customer_state_name .fc_location option[value='+inputVal+']').prop('selected', true);
+                                    $('li.fc_customer_state_name .fc_location').trigger('change');
+                                }
+                            });
+                            $('li.fc_shipping_country_name .fc_location').change(function() { 
+                                var inputVal = $('li.fc_shipping_country_name .fc_location').val();                                
+                                var input = $('li.fc_shipping_country_name .fc_location option[value='+inputVal+']').text();
+                                if(inputVal){
+                                    $('li.fc_customer_country_name .fc_location option').removeAttr('selected');
+                                    $('li.fc_customer_country_name .fc_location option[value='+inputVal+']').prop('selected', true);
+                                    $('li.fc_customer_country_name .fc_location').trigger('change');
+                                    $('.user-country-label').html('*'+input);
+                                }
+                            });
+}
+                        
+
+function showBilling(){
+                            $('.use_diffrent').unbind('click').click(function(){
+                                $('.use_diffrent_billing_address').removeClass('use_diffrent');
+                                $('.use_diffrent_billing_address').addClass('use_same_billing_address');
+                                $('#fc_customer_billing_container').show();
+/*                                $('li.fc_customer_first_name input').val('');
+                                $('li.fc_customer_last_name input').val('');
+                                $('li.fc_customer_address1 input').val('');
+                                $('li.fc_customer_address2 input').val('');
+                                $('li.fc_customer_city input').val('');
+                                $('li.fc_customer_state_name input').val('');
+                                $('li.fc_customer_postal_code input').val('');
+                                $('li.fc_customer_country_name .fc_location').val('');*/
+                                hideBilling();
+                            });
+}
+
+function hideBilling(){
+                            $('.use_same_billing_address').unbind('click').click(function(){
+                                $('.use_diffrent_billing_address').removeClass('use_same_billing_address');
+                                $('.use_diffrent_billing_address').addClass('use_diffrent');
+                                $('#fc_customer_billing_container').hide();   
+
+                                var first_name = $('li.fc_shipping_first_name input').val();
+                                if(first_name)
+                                $('li.fc_customer_first_name input').val(first_name);
+
+                                var last_name = $('li.fc_shipping_last_name input').val();
+                                if(last_name)
+                                $('li.fc_customer_last_name input').val(last_name);
+
+                                var address1 = $('li.fc_shipping_address1 input').val();
+                                if(address1)
+                                $('li.fc_customer_address1 input').val(address1);
+
+                                var address2 = $('li.fc_shipping_address2 input').val();
+                                if(address2)
+                                $('li.fc_customer_address2 input').val(address2);
+
+                                var city = $('li.fc_shipping_city input').val();
+                                if(city)
+                                $('li.fc_customer_city input').val(city);
+
+                                var state_name = $('li.fc_shipping_state_name input').val();
+                                if(state_name)
+                                $('li.fc_customer_state_name input').val(state_name);
+
+                                var postal_code = $('li.fc_shipping_postal_code input').val();
+                                if(postal_code)
+                                $('li.fc_customer_postal_code input').val(postal_code);
+
+                                var country_name = $('li.fc_shipping_country_name .fc_location').val();
+                                if(country_name){
+                                    $('li.fc_customer_country_name .fc_location option').removeAttr('selected');
+                                    $('li.fc_customer_country_name .fc_location option[value='+country_name+']').prop('selected', true);
+                                    $('li.fc_customer_country_name .fc_location').trigger('change');
+                                }
+                                showBilling();
+                            });
+}
+</script>
+</head>
+{% set header_name = ''%}
+{% for custom_field in custom_fields %}
+   {% if 'orapup' in custom_field.value %}
+          {% set header_name = 'orapup-header'%}
+   {% endif %}
+   {% if 'orabrush' in custom_field.value %}
+          {% set header_name = 'orabrush-header'%}
+   {% endif %} 
+   {% if 'checkoutVariation' in custom_field.name %}
+         {% set checkout_variation = custom_field.value %}
+   {% endif %}
+   {% if 'selectCountry' in custom_field.name %}
+          {% set country_name = custom_field.value %}
+   {% endif %}
+{% endfor %}
+{% set checkout_variation_val = '' %}
+{% for custom_field in custom_fields %}
+	{% set checkout_variation_val = checkout_variation_val ~ '___' ~ custom_field.value %}
+{% endfor %}
+{% if '__drbob' in checkout_variation_val %}
+	{% set checkout_variation = 'drbob' %}
+{% endif %}
+{% if '___mobile-checkout' in checkout_variation_val %}
+	{% set checkout_variation = 'mobile-checkout' %}
+{% endif %}
+{% set has_multiple_payment_options = false %}
+{% if checkout_variation == 'mobile-checkout' %}
+<body id = "mobile-checkout" class="mobile-checkout">
+	<div class="header-content">
+		<header role="banner" class="site-header orapup-nav" id="masthead">
+				<hgroup>
+					<h1 class="site-title"><a rel="home" title="" href="http://staging.orapup.com/">&nbsp;</a>
+					</h1>
+				</hgroup>
+			</header><!-- #masthead --> 
+	</div>
+<div id="pageContainer" class="{% if '-footerterms' in checkout_variation_val %}footerterms{% elseif '-whatisyourshippingaddress' in checkout_variation_val %}whatisyourshippingaddress{% elseif '-address' in checkout_variation_val %}address{% elseif '-addyourshippingaddress' in checkout_variation_val %}addyourshippingaddress{% elseif '-shippingaddress' in checkout_variation_val %}shippingaddress{% elseif '-whereshouldweshipyourpackage' in checkout_variation_val %}whereshouldweshipyourpackage{% elseif '-protected' in checkout_variation_val %}protected{% elseif '-rightpackage' in checkout_variation_val %}rightpackage{% else %}drbobbybutton{% endif %}" >
+	<div class="by-orabrush"></div>
+	{% block checkout2 %}
+            <div class ="checkout-container-labe-div"><span class ="pick-colors">PICK COLORS</span><span class ="place-order">PLACE ORDER</span><span class ="receipt">RECEIPT</span></div>
+            <div id="fc_checkout_container">{{ html_messages|raw }}
+                    <form id="fc_form_checkout" method="post" action="https://{{ store_domain }}{{ post_url }}" onsubmit="return false;">
+                        <input type="hidden" name="h:storename" value="orabrush" id='storename'/>
+                        <input type="hidden" name="h:countryName" value="{{country_name}}" id='country-name'/>
+                        
+                        
+                        {{ block('required_hidden_fields') }}
+                        {{ block('continue_shopping') }}
+                        {{ block('noscript_warning') }}
+                        <div class="checkout-title"><span>Secure Checkout</span></div>
+                        {{ block('login_register') }}
+
+                        {% if not is_subscription_cancel %}
+                        <div id="fc_data_entry_container">
+                            <div id="fc_customer_info_container">
+
+                                {% if not has_multiship %}
+                                {{ block('customer_shipping') }}
+                                <div class="fc_row fc_row_checkbox fc_use_different_billing_address" id="fc_use_different_address">
+                                    <label class="fc_checkbox" for="use_different_addresses">
+                                        <input type="checkbox" class="checkbox use_diffrent use_diffrent_billing_address" value="1" id="use_different_addresses" name="use_different_addresses">
+                                        <span>Use different billing address</span>
+                                    </label>
+                                </div>
+                                {% else %}
+                                {{ block('multiship_shipping') }}
+                                {% endif %}
+
+                                {{ block('customer_billing') }}
+                            </div><!-- #fc_customer_info_container -->
+
+                            {# This place holder is here for backward compatibility so that custom fields will be injected into the correct place. #}
+                            ^^custom_fields^^
+
+                            {% block checkout_shipping_and_summary2 %}
+                            <!--  *********** shipping : Delivery &amp; Subtotal ************* -->
+                            <div id="fc_shipping_container" class="fc_fieldset_container"{% if is_updateinfo %} style="display:none;"{% endif %}>
+                                 <h2>{{ lang.checkout_delivery_and_subtotal|raw }}</h2>
+                                <fieldset id="fc_shipping">
+                                    <legend>{{ lang.checkout_delivery_and_subtotal|raw }}</legend>
+                                    <div class="fc_inner">
+                                        {% if has_live_rate_shippable_products and not has_multiship %}
+                                        <div id="fc_shipping_methods_container" class="fc_row fc_shipping_methods_container">
+                                            <label for="fc_shipping_methods" class="fc_pre fc_shipping_methods">{{ lang.checkout_shipping_methods|raw }}</label>
+                                            <div id="fc_shipping_methods" class="fc_radio_group_container fc_row fc_shipping_methods">
+                                                <div id="fc_shipping_result" class="fc_shipping_result">{{ lang.checkout_update_shipping_message|raw }}</div>
+                                                <span id="shipping_ajax" class="fc_shipping_ajax" style="display:none">{{ lang.checkout_updating_shipping_options|raw }}<img src="//cdn.foxycart.com/static{{ base_directory }}/images/ajax-loader.gif?ver=1" alt="{{ lang.checkout_loading|raw }}" /></span>
+                                                <textarea rows="1" cols="1" name="shipping_options" id="shipping_options" style="display:none;">{{ shipping_options }}</textarea>
+                                                <input type="hidden" name="shipping_service_id" id="shipping_service_id" value="{{ shipping_service_id }}" />
+                                                <input type="hidden" name="shipping_service_description" id="shipping_service_description" value="{{ shipping_service_description }}" />
+                                                <div id="fc_shipping_methods_inner" class="fc_shipping_methods_inner">
+                                                    {{ shipping_options_html|raw }}
+                                                </div>
+                                                <label for="fc_shipping_methods" class="fc_error" style="display:none">{{ lang.checkout_select_shipping_option|raw }}</label>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% if has_downloadables %}
+                                        <div class="fc_downloadable_message_container">
+                                            <p class="fc_downloadable_message">{{ lang.checkout_downloadables_message|raw }}</p>
+                                        </div>
+                                        {% endif %}
+                                        <ol id="fc_shipping_list">
+                                            <li class="fc_row fc_subtotal">
+                                                <label for="subtotal" class="fc_pre">{{ lang.checkout_cart_subtotal|raw }}</label>
+                                                <span id="subtotal_formatted" class="fc_text">{{ checkout_subtotal|money_format }}</span>
+                                                <input value="{{ checkout_subtotal }}" type="hidden" name="subtotal" id="subtotal" />
+                                                {% if has_future_products %}
+                                                <input value="{{ checkout_future_subscriptions }}" type="hidden" name="future_subscriptions" id="future_subscriptions" />
+                                                {% endif %}
+                                            </li>
+
+                                            {% if has_shipping_or_handling_cost %}
+                                            <li class="fc_row fc_shipping_cost">
+                                                <label for="shipping_cost" class="fc_pre">{{ shipping_and_handling_label|raw }}</label>
+                                                <span id="shipping_cost_formatted" class="fc_text">{{ checkout_shipping_cost|money_format }}</span>
+                                                <input value="{{ checkout_shipping_cost }}" type="hidden" name="shipping_cost" id="shipping_cost" />
+                                                {% if has_future_products %}
+                                                <input value="{{ checkout_future_shipping_cost }}" type="hidden" name="future_shipping_cost" id="future_shipping_cost" />
+                                                {% endif %}                        	
+                                            </li>
+                                            {% endif %}
+                                            {% if has_discount %}
+                                            <li class="fc_row fc_discount">
+                                                <label for="discount" class="fc_pre">{{ lang.checkout_discount|raw }}</label>
+                                                <span id="discount_formatted" class="fc_text">{{ checkout_discount|money_format }}</span>
+                                                <input value="{{ checkout_discount }}" type="hidden" name="discount" id="discount" />
+                                            </li>
+                                            {% endif %}
+                                            {% if has_future_products %}
+                                            <li class="fc_row fc_tax" style="display:none;">
+                                                <label for="tax" class="fc_pre">{{ lang.checkout_tax|raw }}</label>
+                                                <span id="tax_formatted" class="fc_text">{{ checkout_tax|money_format }}</span>
+                                                <input value="{{ checkout_tax }}" type="hidden" name="tax" id="tax" />
+                                            </li>
+                                            <li class="fc_row fc_order_total">
+                                                <label for="order_total" class="fc_pre">{{ lang.checkout_order_total|raw }}</label>
+                                                <span id="order_future_total_formatted" class="fc_text">{{ (checkout_subtotal + checkout_shipping_cost)|money_format }}</span>
+                                                <input value="{{ checkout_order_total }}" type="hidden" name="order_total" id="order_total" />
+                                            </li>
+                                            <li class="fc_row fc_order_total"><b>Note:</b> Your card will not be charged until we pack your order.</li>
+                                            {% else %}
+                                            <li class="fc_row fc_tax">
+                                                <label for="tax" class="fc_pre">{{ lang.checkout_tax|raw }}</label>
+                                                <span id="tax_formatted" class="fc_text">{{ checkout_tax|money_format }}</span>
+                                                <input value="{{ checkout_tax }}" type="hidden" name="tax" id="tax" />
+                                            </li>
+                                            <li class="fc_row fc_order_total">
+                                                <label for="order_total" class="fc_pre">{{ lang.checkout_order_total|raw }}</label>
+                                                <span id="order_total_formatted" class="fc_text">{{ checkout_order_total|money_format }}</span>
+                                                <input value="{{ checkout_order_total }}" type="hidden" name="order_total" id="order_total" />
+                                            </li>
+                                            {% endif %}
+                                        </ol>
+                                        <span class="fc_clear">&nbsp;</span>
+                                    </div><!-- .fc_inner -->
+                                </fieldset><!-- #fc_shipping -->
+                                <span class="fc_clear">&nbsp;</span>
+                            </div><!-- #fc_shipping_container -->
+                            {% endblock checkout_shipping_and_summary2 %}
+                            
+
+    {% block checkout_payment1 %}
+        <!--  *********** payment : Payment Information ************* -->
+        <div id="fc_payment_container" class="fc_fieldset_container ">
+            <h2>{{ lang.checkout_payment_information|raw }}</h2>
+            <fieldset id="fc_payment">
+                <legend>{{ lang.checkout_payment_information|raw }}</legend>
+                <div class="fc_inner">
+                    <ol id="fc_payment_list">
+                    {% if supports_pay_with_plastic %}
+                        <li id="fc_payment_method_plastic_container" class="fc_row fc_row_payment_method">
+                            <label for="fc_payment_method_plastic" class="fc_radio">
+                                <input type="{{ payment_method_input_type }}"{% if payment_method_type == 'plastic' %} checked="checked"{% endif %} name="fc_payment_method" id="fc_payment_method_plastic" class="fc_radio" value="plastic" />
+                                <span>{{ lang.checkout_pay_with_credit_card|raw }}</span>
+                            </label>
+                        {% if has_multiple_payment_options %}
+                            <fieldset>
+                                <ol>
+                        {% else %}
+                            </li>
+                        {% endif %}{# has_multiple_payment_options #}
+                                    <li id="li_cc_saved" class="fc_row fc_row_radio">
+                                        <label for="c_card_saved" class="fc_radio">
+                                            <input{% if cc_card_is_saved %} checked="checked"{% endif %} type="radio" name="c_card" value="saved" id="c_card_saved" class="fc_radio" onclick="FC.checkout.displayNewCC(0)" />
+                                            <span>{{ lang.checkout_use_saved_payment_info|raw }}</span>
+                                            <span id="fc_c_card_saved_number">{{ checkout_cc_number_masked }}</span>
+                                        </label>
+                                    </li>
+                                    <li id="li_cc_new" class="fc_row fc_row_radio">
+                                        <label for="c_card_new" class="fc_radio">
+                                            <input{% if not cc_card_is_saved %} checked="checked"{% endif %} type="radio" name="c_card" value="new" id="c_card_new" class="fc_radio" onclick="FC.checkout.displayNewCC(1)" />
+                                            <span>{{ lang.checkout_enter_new_card|raw }}</span>
+                                        </label>
+                                    </li>
+                                    <li id="li_cc_number" class="fc_row li_cc_number">
+                                        <label for="cc_number" class="fc_pre">{{ lang.checkout_card_number|raw }}</label>
+                                        <input type="text" name="cc_number" id="cc_number" class="fc_text fc_text_long fc_required" autocomplete="off" value="{{ cc_number }}" />
+                                        <label for="cc_number" class="fc_error" style="display:none">{{ lang.checkout_error_card_number|raw }}</label>
+                                    </li>
+                                    <li id="li_cc_cvv2" class="fc_row li_cc_cvv2">
+                                        <label for="cc_cvv2" class="fc_pre">
+                                            {{ lang.checkout_verification_code|raw }}
+                                            <span id="fc_help_cvv2" class="fc_help">(<a id="fc_help_cvv2_link" class="fc_help fc_jTip" href="https://{{ store_domain }}{{ base_directory }}/checkout.help.php?topic=cvv2&amp;width=308">{{ lang.checkout_question_mark|raw }}</a>)</span>
+                                        </label>
+                                        <input value="{{ cc_cvv2 }}" type="text" name="cc_cvv2" id="cc_cvv2" class="fc_text fc_text_short fc_required" maxlength="4" />
+                                        <label for="cc_cvv2" class="fc_error" style="display:none">{{ lang.checkout_error_verification_code|raw }}</label>
+                                    </li>
+                                    <li id="li_cc_issue_number" class="fc_row">
+
+                                        <label for="cc_issue_number" class="fc_pre">
+                                            {{ lang.checkout_issue_number|raw }}
+                                        </label>
+                                        <input value="{{ cc_issue_number }}" type="text" name="cc_issue_number" id="cc_issue_number" class="fc_text fc_text_short fc_required" maxlength="2" />
+                                        <label for="cc_issue_number" class="fc_error" style="display:none">{{ lang.checkout_error_issue_number|raw }}</label>
+                                    </li>
+                                    <li id="li_cc_start_date_month" class="fc_row">
+                                        <label for="cc_start_date_month" class="fc_pre">{{ lang.checkout_start_date|raw }}</label>
+                                        <select id="cc_start_date_month" name="cc_start_date_month" class="inline select_mo">
+                                            <option value="">{{ lang.cart_month|raw }}</option>
+                                            {{ cc_start_date_month_options|raw }}
+                                        </select>
+                                        <select id="cc_start_date_year" name="cc_start_date_year" class="inline select_yr">
+                                            <option value="">{{ lang.cart_year|raw }}</option>
+                                            {{ cc_start_date_year_options|raw }}
+                                        </select>
+                                        <label for="cc_start_date_month" class="fc_error" style="display:none">{{ lang.checkout_error_start_date|raw }}</label>
+                                    </li>
+                                    <li id="li_cc_exp_month" class="fc_row">
+                                        <label for="cc_exp_month" class="fc_pre">{{ lang.checkout_expiration|raw }}</label>
+                                        <select id="cc_exp_month" name="cc_exp_month" class="inline select_mo">
+                                            <option value="">{{ lang.cart_month|raw }}</option>
+                                            {{ cc_expiration_month_options|raw }}
+                                        </select>
+                                        <select id="cc_exp_year" name="cc_exp_year" class="inline select_yr">
+                                            <option value="">{{ lang.cart_year|raw }}</option>
+                                            {{ cc_expiration_year_options|raw }}
+                                        </select>
+                                        <label for="cc_exp_month" class="fc_error" style="display:none">{{ lang.checkout_error_expiration|raw }}</label>
+                                    </li>
+
+                                    <li id="li_save_cc" class="fc_row fc_row_checkbox">
+                                        <label for="save_cc" class="fc_checkbox">
+                                            <input{% if save_cc_is_checked %} checked="checked"{% endif %} type="checkbox" name="save_cc" id="save_cc" value="1" class="fc_checkbox" />
+                                            <span>{{ save_cc_text }}</span>
+                                        </label>
+                                        <label for="save_cc" class="fc_error" style="display:none">{{ lang.checkout_error_subscription_permission|raw }}</label>
+                                        <input type="hidden" name="cc_number_masked" id="cc_number_masked" value="{{ checkout_cc_number_masked }}" />
+                                    </li>
+                        {% if has_multiple_payment_options %}
+                                </ol>
+                            </fieldset>
+                        </li>
+                        {% endif %}{# has_multiple_payment_options #}
+                    {% endif %}{# supports_pay_with_plastic #}
+
+                    {% if pp_payment_method=='paypal' and not is_updateinfo %}
+                        <li id="fc_payment_method_paypal_container" class="fc_row fc_row_payment_method">
+                        {% if has_multiple_payment_options %}
+                            <label for="fc_payment_method_paypal" class="fc_radio">
+                                <input type="{{ payment_method_input_type }}"{% if payment_method_type == 'paypal' %} checked="checked"{% endif %} name="fc_payment_method" id="fc_payment_method_paypal" class="fc_radio" value="paypal" />
+                                <span>{{ lang.checkout_pay_with_paypal|raw }}</span>
+                            </label>
+                        {% else %}
+                            <input type="hidden" name="fc_payment_method" id="fc_payment_method" value="paypal" />
+                            <span>{{ lang.checkout_pay_with_paypal|raw }}</span>
+                        {% endif %}
+                            <fieldset>
+                                <p>{{ paypal_description|raw }}</p>
+                            </fieldset>
+                        </li>
+                    {% endif %}{# supports_paypal_express and not is_updateinfo #}
+                    {% if pp_payment_method=='amazon_fps' and not is_updateinfo %}
+                    {% for hosted_gateway in hosted_payment_gateways %}
+                        <li id="fc_payment_method_{{ hosted_gateway.type }}_container" class="fc_row fc_row_payment_method fc_row_hosted_payment_method">
+                        {% if has_multiple_payment_options %}
+                            <label class="fc_radio">
+                                <input type="{{ payment_method_input_type }}"{% if payment_method_type == hosted_gateway.type %} checked="checked"{% endif %} name="fc_payment_method" id="fc_payment_method_{{ hosted_gateway.type }}" class="fc_radio" value="{{ hosted_gateway.type }}" />
+                                <span>{{ hosted_gateway.lang_pay_with|raw }}</span>
+                            </label>
+                        {% else %}
+                            <input type="hidden" name="fc_payment_method" id="fc_payment_method_{{ hosted_gateway.type }}" value="{{ hosted_gateway.type }}" />
+                            <span>{{ hosted_gateway.lang_pay_with|raw }}</span>
+                        {% endif %}
+                            <fieldset>
+                                <p>{{ hosted_gateway.lang_payment_method|raw }}</p>
+                            </fieldset>
+                        </li>
+                    {% endfor %}
+                    {% endif %}{# not is_updateinfo #}
+
+                    {% if supports_purchase_order and not is_updateinfo %}
+                        <li id="fc_payment_method_purchase_order_container" class="fc_row fc_row_payment_method">
+                            <label for="fc_payment_method_purchase_order" class="fc_radio">
+                                <input type="{{ payment_method_input_type }}"{% if payment_method_type == 'purchase_order' %} checked="checked"{% endif %} name="fc_payment_method" id="fc_payment_method_purchase_order" class="fc_radio" value="purchase_order" />
+                                <span>{{ lang.checkout_pay_with_purchase_order|raw }}</span>
+                            </label>
+                        {% if has_multiple_payment_options %}
+                            <fieldset>
+                                <ol>
+                        {% else %}
+                        </li>
+                        {% endif %}{# has_multiple_payment_options #}
+                                    <li id="li_purchase_order" class="fc_row li_purchase_order">
+                                        <label for="purchase_order" class="fc_pre">
+                                            {{ lang.checkout_purchase_order_number|raw }}
+                                        </label>
+                                        <input value="{{ purchase_order }}" type="text" name="purchase_order" id="purchase_order" class="fc_text fc_required" />
+                                        <label for="purchase_order" class="fc_error" style="display:none">{{ lang.checkout_error_purchase_order|raw }}</label>
+                                    </li>
+                        {% if has_multiple_payment_options %}
+                                </ol>
+                            </fieldset>
+                        </li>
+                        {% endif %}{# has_multiple_payment_options #}
+                    {% endif %}{# supports_purchase_order and not is_updateinfo #}
+
+                        <li id="li_nopayment" class="fc_row">
+                            {# This is used for $0 transactions and other situations where no payment info is collected #}
+                            {{ lang.checkout_no_payment_needed|raw }}
+                        </li>
+                    </ol>
+
+                    <div id="fc_complete_order_button_container" class="fc_row fc_row_actions">
+                        <button id="fc_complete_order_button" class="fc_button{{ submit_button_class }}" type="button" value="{{ submit_button_value }}" onclick="FC.checkout.validateAndSubmit()">{{ submit_button_value }}</button>
+                        <div id="fc_complete_order_processing" style="display:none;"><strong class="fc_error"></strong> <br /><img src="//cdn.foxycart.com/static{{ base_directory }}/images/ajax-loader.gif?ver=1" alt="{{ lang.checkout_loading|raw }}" width="220" height="19" /></div>
+                    </div><!-- #fc_complete_order_button_container -->
+					<div class="drbob-mobile-img">
+						<span>&nbsp;</span>
+					</div>
+                    <span class="fc_clear">&nbsp;</span>
+                </div><!-- .fc_inner -->
+            </fieldset><!-- #fc_payment -->
+            <span class="fc_clear">&nbsp;</span>
+        </div><!-- #fc_payment_container -->
+    {% endblock checkout_payment1 %}
+
+
+                        </div><!-- #fc_data_entry_container -->
+                        {% else %}
+                        {{ block('subscription_cancel') }}
+                        {% endif %}
+                    </form><!-- #fc_checkout_container -->
+                </div>
+                {% endblock checkout2%}
+            </div>
+    
+             ^^custom_begin^^
+
+            {% set show_subscription_option = false %}
+            {% for item in items %}
+            {% if item.category_code == 'checkout_delivery' %}
+            {% set show_subscription_option = true %}
+            {% endif %}
+            {% endfor %}
+            {% if submit_button_value != "Update My Scheduled Delivery" %}
+            {% if show_subscription_option %}
+
+            <h2 id="scheduled">*Scheduled Delivery</h2>
+            <ul id="sub_selection_container">
+                <li class="fc_row fc_sub_frequency">
+                    <label for="sub_frequency" class="fc_pre">How often to ship:<span class="fc_ast">*</span></label>
+                    <select name="sub_frequency" id="sub_frequency" class="fc_select fc_required">
+                        <option value="">- - Select How Often - -</option>
+                        <option value="1m">Every Month</option>
+                        <option value="2m">Every Two Months</option>
+                        <option value="3m">Every Three Months</option>
+                        <option value="4m">Every Four Months (Recommended)</option>
+                        <option value="5m">Every Five Months</option>
+                        <option value="6m">Every Six Months</option>
+                        <option value="X">Just Once (additional $5 shipping)</option>
+                    </select>
+                    <label class="fc_error" style="display: none;" for="sub_frequency">Please make a selection</label>
+                </li>
+                <li class="fc_row">
+                    <label for="just_ship_once" class="ship-once"><input type="checkbox" name="just_ship_once" id="just_ship_once" value="just_ship_once"> Just ship once</label>
+                </li>
+                <li class="fc_row">
+                    <p>You can easily edit, cancel or re-schedule shipments at any time, with no fees.</p>
+                    <p>We send a reminder 1 week before your delivery &amp; your credit card is only charged when the order is packed.</p>
+                </li>
+            </ul>
+            <!-- Delivery Pop-up Content --> 
+            <div id="delivery-popup-content" style="display: none;">
+                <div id="ship-content">
+                    <div class="ship-title"><p>Nah, just ship once</p></div>
+                    <div class="delivery-header">
+                        <h3>We are happy to ship your order once, however...</h3>
+                        <h1>THE REAL VALUE OF ORAPUP</h1>
+                        <h2>IS OUR AUTO-DELIVERY SCHEDULE!</h2>
+                    </div>
+                    <div class="delivery-desc">
+                        <p>
+                            <span class="free-shipping">&nbsp;</span>
+                            <span>Easily edit your upcoming shipments.</span>
+                            <span>Lock in your FREE shipping promotion for life!</span>
+                            <span class="email-week">You will receive an email 1 week before your order is scheduled to go out.</span>
+                            <span>You can change and cancel at any time�you are in control!</span>
+                            <span>Lock in your FREE Orapups for life!</span>
+                        </p>
+                    </div>
+                    <div class="bottom-content">
+                        <p class="left-content"><img src="https://{{ store_domain }}/cache.php?url=http://www2.orabrush.com/foxy_css/images/dog.png"></p>
+                        <p class="right-content">
+                            <span>You will not be charged until your order has shipped.</span>
+                            <a href="javascript:;" onclick="$.fancybox.close();$('#sub_frequency').val('4m');$('#sub_frequency').attr('size',6).attr('style','height:140px');check_set_sub();"><span class="schedule-btn">&nbsp;</span></a>							
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">                    
+                        jQuery("#just_ship_once").click(function() {
+                            if ($(this).is(":checked")) {
+                                jQuery("#sub_frequency").val("X");
+                            } else {
+                                jQuery("#sub_frequency").val("4m");
+                            }
+                            set_storename_scheduled_delivery();
+                        });
+
+                        function check_set_sub() {
+                            var sub_frequency = jQuery("#sub_frequency").val();
+
+                            if (sub_frequency == "X") {
+                                var total_shipping = 5;
+                                jQuery("#just_ship_once").prop("checked", true);
+                            } else  if (!sub_frequency) {
+                                var total_shipping = 5;
+                                jQuery("#just_ship_once").prop("checked", false);
+                            } else{
+                                var total_shipping = 0;
+                                jQuery("#just_ship_once").prop("checked", false);
+                            }
+                            set_storename_scheduled_delivery();
+
+                            FC.checkout.config.orderFlatRateShipping = total_shipping;
+                            FC.checkout.updateShipping(-1);
+                        }
+
+                        jQuery("#sub_frequency").change(function() {
+                            if($('#sub_frequency').attr('size')==6){
+                                $('#sub_frequency').attr('size',1).attr('style','height:25px');
+                            }
+                            check_set_sub();
+                            set_storename_scheduled_delivery();
+                        });
+
+                        function set_storename_scheduled_delivery(){
+                            var sub_frequency = jQuery("#sub_frequency").val();
+
+                            if (sub_frequency == "X" || !sub_frequency) {
+                                $('#storename').val($('#storeNamePlaceHolder').text().toLowerCase()+'.com');
+                            } else {
+                                $('#storename').val('pp.com/'+$('#storeNamePlaceHolder').text().toLowerCase());
+                            }	
+                        }
+                        check_set_sub();
+
+            </script>
+
+            {% endif %}
+            {% endif %}
+            ^^custom_end^^
+	
+	</div>
+</body>
+{% elseif checkout_variation == 'drbob' %}
+<!-- #begin drbob checkout variation -->
+<body id = "drbob">
+    <header role="banner" class="site-header {{header_name}}" id="masthead">
+                <div class="header-links">
+                    <span></span>
+                </div>
+                <hgroup>
+                    <h1 class="site-title"><a rel="home" title="Tongue Cleaner" href="http://{{ store_domain }}/"><span></span></a></h1>
+                </hgroup>
+            </header>
+            <div id="pageContainer" class="{% if '-footerterms' in checkout_variation_val %}footerterms{% elseif '-whatisyourshippingaddress' in checkout_variation_val %}whatisyourshippingaddress{% elseif '-address' in checkout_variation_val %}address{% elseif '-addyourshippingaddress' in checkout_variation_val %}addyourshippingaddress{% elseif '-shippingaddress' in checkout_variation_val %}shippingaddress{% elseif '-whereshouldweshipyourpackage' in checkout_variation_val %}whereshouldweshipyourpackage{% elseif '-protected' in checkout_variation_val %}protected{% elseif '-rightpackage' in checkout_variation_val %}rightpackage{% else %}whatisyourshippingaddress{% endif %}" style="width:830px; margin:0px auto;">
+            {% block checkout1 %}
+            <div class ="checkout-container-labe-div"><span class ="pick-colors">PICK COLORS</span><span class ="place-order">PLACE ORDER</span><span class ="receipt">RECEIPT</span></div>
+            <div id="fc_checkout_container">{{ html_messages|raw }}
+                    <form id="fc_form_checkout" method="post" action="https://{{ store_domain }}{{ post_url }}" onsubmit="return false;">
+                        <input type="hidden" name="h:storename" value="orabrush" id='storename'/>
+                        <input type="hidden" name="h:countryName" value="{{country_name}}" id='country-name'/>
+                        {{ block('required_hidden_fields') }}
+                        {{ block('continue_shopping') }}
+                        {{ block('noscript_warning') }}
+                        <div class="checkout-title"><span>Secure Checkout</span></div>
+                        {{ block('login_register') }}
+
+                        {% if not is_subscription_cancel %}
+                        <div id="fc_data_entry_container">
+                            <div id="fc_customer_info_container">
+
+                                {% if not has_multiship %}
+                                {{ block('customer_shipping') }}
+                                <div class="fc_row fc_row_checkbox fc_use_different_billing_address" id="fc_use_different_address">
+                                    <label class="fc_checkbox" for="use_different_addresses">
+                                        <input type="checkbox" class="checkbox use_diffrent use_diffrent_billing_address" value="1" id="use_different_addresses" name="use_different_addresses">
+                                        <span>Use different billing address</span>
+                                    </label>
+                                </div>
+                                {% else %}
+                                {{ block('multiship_shipping') }}
+                                {% endif %}
+
+                                {{ block('customer_billing') }}
+                            </div><!-- #fc_customer_info_container -->
+
+                            {# This place holder is here for backward compatibility so that custom fields will be injected into the correct place. #}
+                            ^^custom_fields^^
+
+                            {% block checkout_shipping_and_summary1 %}
+                            <!--  *********** shipping : Delivery &amp; Subtotal ************* -->
+                            <div id="fc_shipping_container" class="fc_fieldset_container"{% if is_updateinfo %} style="display:none;"{% endif %}>
+                                 <h2>{{ lang.checkout_delivery_and_subtotal|raw }}</h2>
+                                <fieldset id="fc_shipping">
+                                    <legend>{{ lang.checkout_delivery_and_subtotal|raw }}</legend>
+                                    <div class="fc_inner">
+                                        {% if has_live_rate_shippable_products and not has_multiship %}
+                                        <div id="fc_shipping_methods_container" class="fc_row fc_shipping_methods_container">
+                                            <label for="fc_shipping_methods" class="fc_pre fc_shipping_methods">{{ lang.checkout_shipping_methods|raw }}</label>
+                                            <div id="fc_shipping_methods" class="fc_radio_group_container fc_row fc_shipping_methods">
+                                                <div id="fc_shipping_result" class="fc_shipping_result">{{ lang.checkout_update_shipping_message|raw }}</div>
+                                                <span id="shipping_ajax" class="fc_shipping_ajax" style="display:none">{{ lang.checkout_updating_shipping_options|raw }}<img src="//cdn.foxycart.com/static{{ base_directory }}/images/ajax-loader.gif?ver=1" alt="{{ lang.checkout_loading|raw }}" /></span>
+                                                <textarea rows="1" cols="1" name="shipping_options" id="shipping_options" style="display:none;">{{ shipping_options }}</textarea>
+                                                <input type="hidden" name="shipping_service_id" id="shipping_service_id" value="{{ shipping_service_id }}" />
+                                                <input type="hidden" name="shipping_service_description" id="shipping_service_description" value="{{ shipping_service_description }}" />
+                                                <div id="fc_shipping_methods_inner" class="fc_shipping_methods_inner">
+                                                    {{ shipping_options_html|raw }}
+                                                </div>
+                                                <label for="fc_shipping_methods" class="fc_error" style="display:none">{{ lang.checkout_select_shipping_option|raw }}</label>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% if has_downloadables %}
+                                        <div class="fc_downloadable_message_container">
+                                            <p class="fc_downloadable_message">{{ lang.checkout_downloadables_message|raw }}</p>
+                                        </div>
+                                        {% endif %}
+                                        <ol id="fc_shipping_list">
+                                            <li class="fc_row fc_subtotal">
+                                                <label for="subtotal" class="fc_pre">{{ lang.checkout_cart_subtotal|raw }}</label>
+                                                <span id="subtotal_formatted" class="fc_text">{{ checkout_subtotal|money_format }}</span>
+                                                <input value="{{ checkout_subtotal }}" type="hidden" name="subtotal" id="subtotal" />
+                                                {% if has_future_products %}
+                                                <input value="{{ checkout_future_subscriptions }}" type="hidden" name="future_subscriptions" id="future_subscriptions" />
+                                                {% endif %}
+                                            </li>
+
+                                            {% if has_shipping_or_handling_cost %}
+                                            <li class="fc_row fc_shipping_cost">
+                                                <label for="shipping_cost" class="fc_pre">{{ shipping_and_handling_label|raw }}</label>
+                                                <span id="shipping_cost_formatted" class="fc_text">{{ checkout_shipping_cost|money_format }}</span>
+                                                <input value="{{ checkout_shipping_cost }}" type="hidden" name="shipping_cost" id="shipping_cost" />
+                                                {% if has_future_products %}
+                                                <input value="{{ checkout_future_shipping_cost }}" type="hidden" name="future_shipping_cost" id="future_shipping_cost" />
+                                                {% endif %}                        	
+                                            </li>
+                                            {% endif %}
+                                            {% if has_discount %}
+                                            <li class="fc_row fc_discount">
+                                                <label for="discount" class="fc_pre">{{ lang.checkout_discount|raw }}</label>
+                                                <span id="discount_formatted" class="fc_text">{{ checkout_discount|money_format }}</span>
+                                                <input value="{{ checkout_discount }}" type="hidden" name="discount" id="discount" />
+                                            </li>
+                                            {% endif %}
+                                            {% if has_future_products %}
+                                            <li class="fc_row fc_tax" style="display:none;">
+                                                <label for="tax" class="fc_pre">{{ lang.checkout_tax|raw }}</label>
+                                                <span id="tax_formatted" class="fc_text">{{ checkout_tax|money_format }}</span>
+                                                <input value="{{ checkout_tax }}" type="hidden" name="tax" id="tax" />
+                                            </li>
+                                            <li class="fc_row fc_order_total">
+                                                <label for="order_total" class="fc_pre">{{ lang.checkout_order_total|raw }}</label>
+                                                <span id="order_future_total_formatted" class="fc_text">{{ (checkout_subtotal + checkout_shipping_cost)|money_format }}</span>
+                                                <input value="{{ checkout_order_total }}" type="hidden" name="order_total" id="order_total" />
+                                            </li>
+                                            <li class="fc_row fc_order_total"><b>Note:</b> Your card will not be charged until we pack your order.</li>
+                                            {% else %}
+                                            <li class="fc_row fc_tax">
+                                                <label for="tax" class="fc_pre">{{ lang.checkout_tax|raw }}</label>
+                                                <span id="tax_formatted" class="fc_text">{{ checkout_tax|money_format }}</span>
+                                                <input value="{{ checkout_tax }}" type="hidden" name="tax" id="tax" />
+                                            </li>
+                                            <li class="fc_row fc_order_total">
+                                                <label for="order_total" class="fc_pre">{{ lang.checkout_order_total|raw }}</label>
+                                                <span id="order_total_formatted" class="fc_text">{{ checkout_order_total|money_format }}</span>
+                                                <input value="{{ checkout_order_total }}" type="hidden" name="order_total" id="order_total" />
+                                            </li>
+                                            {% endif %}
+                                        </ol>
+                                        <span class="fc_clear">&nbsp;</span>
+                                    </div><!-- .fc_inner -->
+                                </fieldset><!-- #fc_shipping -->
+                                <span class="fc_clear">&nbsp;</span>
+                            </div><!-- #fc_shipping_container -->
+                            {% endblock checkout_shipping_and_summary1 %}
+                            
+
+    {% block checkout_payment %}
+        <!--  *********** payment : Payment Information ************* -->
+        <div id="fc_payment_container" class="fc_fieldset_container ">
+            <h2>{{ lang.checkout_payment_information|raw }}</h2>
+            <fieldset id="fc_payment">
+                <legend>{{ lang.checkout_payment_information|raw }}</legend>
+                <div class="fc_inner">
+                    <ol id="fc_payment_list">
+                    {% if supports_pay_with_plastic %}
+                        <li id="fc_payment_method_plastic_container" class="fc_row fc_row_payment_method">
+                            <label for="fc_payment_method_plastic" class="fc_radio">
+                                <input type="{{ payment_method_input_type }}"{% if payment_method_type == 'plastic' %} checked="checked"{% endif %} name="fc_payment_method" id="fc_payment_method_plastic" class="fc_radio" value="plastic" />
+                                <span>{{ lang.checkout_pay_with_credit_card|raw }}</span>
+                            </label>
+                        {% if has_multiple_payment_options %}
+                            <fieldset>
+                                <ol>
+                        {% else %}
+                            </li>
+                        {% endif %}{# has_multiple_payment_options #}
+                                    <li id="li_cc_saved" class="fc_row fc_row_radio">
+                                        <label for="c_card_saved" class="fc_radio">
+                                            <input{% if cc_card_is_saved %} checked="checked"{% endif %} type="radio" name="c_card" value="saved" id="c_card_saved" class="fc_radio" onclick="FC.checkout.displayNewCC(0)" />
+                                            <span>{{ lang.checkout_use_saved_payment_info|raw }}</span>
+                                            <span id="fc_c_card_saved_number">{{ checkout_cc_number_masked }}</span>
+                                        </label>
+                                    </li>
+                                    <li id="li_cc_new" class="fc_row fc_row_radio">
+                                        <label for="c_card_new" class="fc_radio">
+                                            <input{% if not cc_card_is_saved %} checked="checked"{% endif %} type="radio" name="c_card" value="new" id="c_card_new" class="fc_radio" onclick="FC.checkout.displayNewCC(1)" />
+                                            <span>{{ lang.checkout_enter_new_card|raw }}</span>
+                                        </label>
+                                    </li>
+                                    <li id="li_cc_number" class="fc_row li_cc_number">
+                                        <label for="cc_number" class="fc_pre">{{ lang.checkout_card_number|raw }}</label>
+                                        <input type="text" name="cc_number" id="cc_number" class="fc_text fc_text_long fc_required" autocomplete="off" value="{{ cc_number }}" />
+                                        <label for="cc_number" class="fc_error" style="display:none">{{ lang.checkout_error_card_number|raw }}</label>
+                                    </li>
+                                    <li id="li_cc_cvv2" class="fc_row li_cc_cvv2">
+                                        <label for="cc_cvv2" class="fc_pre">
+                                            {{ lang.checkout_verification_code|raw }}
+                                            <span id="fc_help_cvv2" class="fc_help">(<a id="fc_help_cvv2_link" class="fc_help fc_jTip" href="https://{{ store_domain }}{{ base_directory }}/checkout.help.php?topic=cvv2&amp;width=308">{{ lang.checkout_question_mark|raw }}</a>)</span>
+                                        </label>
+                                        <input value="{{ cc_cvv2 }}" type="text" name="cc_cvv2" id="cc_cvv2" class="fc_text fc_text_short fc_required" maxlength="4" />
+                                        <label for="cc_cvv2" class="fc_error" style="display:none">{{ lang.checkout_error_verification_code|raw }}</label>
+                                    </li>
+                                    <li id="li_cc_issue_number" class="fc_row">
+
+                                        <label for="cc_issue_number" class="fc_pre">
+                                            {{ lang.checkout_issue_number|raw }}
+                                        </label>
+                                        <input value="{{ cc_issue_number }}" type="text" name="cc_issue_number" id="cc_issue_number" class="fc_text fc_text_short fc_required" maxlength="2" />
+                                        <label for="cc_issue_number" class="fc_error" style="display:none">{{ lang.checkout_error_issue_number|raw }}</label>
+                                    </li>
+                                    <li id="li_cc_start_date_month" class="fc_row">
+                                        <label for="cc_start_date_month" class="fc_pre">{{ lang.checkout_start_date|raw }}</label>
+                                        <select id="cc_start_date_month" name="cc_start_date_month" class="inline select_mo">
+                                            <option value="">{{ lang.cart_month|raw }}</option>
+                                            {{ cc_start_date_month_options|raw }}
+                                        </select>
+                                        <select id="cc_start_date_year" name="cc_start_date_year" class="inline select_yr">
+                                            <option value="">{{ lang.cart_year|raw }}</option>
+                                            {{ cc_start_date_year_options|raw }}
+                                        </select>
+                                        <label for="cc_start_date_month" class="fc_error" style="display:none">{{ lang.checkout_error_start_date|raw }}</label>
+                                    </li>
+                                    <li id="li_cc_exp_month" class="fc_row">
+                                        <label for="cc_exp_month" class="fc_pre">{{ lang.checkout_expiration|raw }}</label>
+                                        <select id="cc_exp_month" name="cc_exp_month" class="inline select_mo">
+                                            <option value="">{{ lang.cart_month|raw }}</option>
+                                            {{ cc_expiration_month_options|raw }}
+                                        </select>
+                                        <select id="cc_exp_year" name="cc_exp_year" class="inline select_yr">
+                                            <option value="">{{ lang.cart_year|raw }}</option>
+                                            {{ cc_expiration_year_options|raw }}
+                                        </select>
+                                        <label for="cc_exp_month" class="fc_error" style="display:none">{{ lang.checkout_error_expiration|raw }}</label>
+                                    </li>
+
+                                    <li id="li_save_cc" class="fc_row fc_row_checkbox">
+                                        <label for="save_cc" class="fc_checkbox">
+                                            <input{% if save_cc_is_checked %} checked="checked"{% endif %} type="checkbox" name="save_cc" id="save_cc" value="1" class="fc_checkbox" />
+                                            <span>{{ save_cc_text }}</span>
+                                        </label>
+                                        <label for="save_cc" class="fc_error" style="display:none">{{ lang.checkout_error_subscription_permission|raw }}</label>
+                                        <input type="hidden" name="cc_number_masked" id="cc_number_masked" value="{{ checkout_cc_number_masked }}" />
+                                    </li>
+                        {% if has_multiple_payment_options %}
+                                </ol>
+                            </fieldset>
+                        </li>
+                        {% endif %}{# has_multiple_payment_options #}
+                    {% endif %}{# supports_pay_with_plastic #}
+
+                    {% if pp_payment_method=='paypal' and not is_updateinfo %}
+                        <li id="fc_payment_method_paypal_container" class="fc_row fc_row_payment_method">
+                        {% if has_multiple_payment_options %}
+                            <label for="fc_payment_method_paypal" class="fc_radio">
+                                <input type="{{ payment_method_input_type }}"{% if payment_method_type == 'paypal' %} checked="checked"{% endif %} name="fc_payment_method" id="fc_payment_method_paypal" class="fc_radio" value="paypal" />
+                                <span>{{ lang.checkout_pay_with_paypal|raw }}</span>
+                            </label>
+                        {% else %}
+                            <input type="hidden" name="fc_payment_method" id="fc_payment_method" value="paypal" />
+                            <span>{{ lang.checkout_pay_with_paypal|raw }}</span>
+                        {% endif %}
+                            <fieldset>
+                                <p>{{ paypal_description|raw }}</p>
+                            </fieldset>
+                        </li>
+                    {% endif %}{# pp_payment_method and not is_updateinfo #}
+                    
+                    {% if not is_updateinfo %}
+                    {% for hosted_gateway in hosted_payment_gateways %}
+                        <li id="fc_payment_method_{{ hosted_gateway.type }}_container" class="fc_row fc_row_payment_method fc_row_hosted_payment_method">
+                        {% if has_multiple_payment_options %}
+                            <label class="fc_radio">
+                                <input type="{{ payment_method_input_type }}"{% if payment_method_type == hosted_gateway.type %} checked="checked"{% endif %} name="fc_payment_method" id="fc_payment_method_{{ hosted_gateway.type }}" class="fc_radio" value="{{ hosted_gateway.type }}" />
+                                <span>{{ hosted_gateway.lang_pay_with|raw }}</span>
+                            </label>
+                        {% else %}
+                            <input type="hidden" name="fc_payment_method" id="fc_payment_method_{{ hosted_gateway.type }}" value="{{ hosted_gateway.type }}" />
+                            <span>{{ hosted_gateway.lang_pay_with|raw }}</span>
+                        {% endif %}
+                            <fieldset>
+                                <p>{{ hosted_gateway.lang_payment_method|raw }}</p>
+                            </fieldset>
+                        </li>
+                    {% endfor %}
+                    {% endif %}{# not is_updateinfo #}
+
+                    {% if supports_purchase_order and not is_updateinfo %}
+                        <li id="fc_payment_method_purchase_order_container" class="fc_row fc_row_payment_method">
+                            <label for="fc_payment_method_purchase_order" class="fc_radio">
+                                <input type="{{ payment_method_input_type }}"{% if payment_method_type == 'purchase_order' %} checked="checked"{% endif %} name="fc_payment_method" id="fc_payment_method_purchase_order" class="fc_radio" value="purchase_order" />
+                                <span>{{ lang.checkout_pay_with_purchase_order|raw }}</span>
+                            </label>
+                        {% if has_multiple_payment_options %}
+                            <fieldset>
+                                <ol>
+                        {% else %}
+                        </li>
+                        {% endif %}{# has_multiple_payment_options #}
+                                    <li id="li_purchase_order" class="fc_row li_purchase_order">
+                                        <label for="purchase_order" class="fc_pre">
+                                            {{ lang.checkout_purchase_order_number|raw }}
+                                        </label>
+                                        <input value="{{ purchase_order }}" type="text" name="purchase_order" id="purchase_order" class="fc_text fc_required" />
+                                        <label for="purchase_order" class="fc_error" style="display:none">{{ lang.checkout_error_purchase_order|raw }}</label>
+                                    </li>
+                        {% if has_multiple_payment_options %}
+                                </ol>
+                            </fieldset>
+                        </li>
+                        {% endif %}{# has_multiple_payment_options #}
+                    {% endif %}{# supports_purchase_order and not is_updateinfo #}
+
+                        <li id="li_nopayment" class="fc_row">
+                            {# This is used for $0 transactions and other situations where no payment info is collected #}
+                            {{ lang.checkout_no_payment_needed|raw }}
+                        </li>
+                    </ol>
+
+                    <div id="fc_complete_order_button_container" class="fc_row fc_row_actions">
+                        <button id="fc_complete_order_button" class="fc_button{{ submit_button_class }}" type="button" value="{{ submit_button_value }}" onclick="FC.checkout.validateAndSubmit()">{{ submit_button_value }}</button>
+                        <div id="fc_complete_order_processing" style="display:none;"><strong class="fc_error"></strong> <br /><img src="//cdn.foxycart.com/static{{ base_directory }}/images/ajax-loader.gif?ver=1" alt="{{ lang.checkout_loading|raw }}" width="220" height="19" /></div>
+                    </div><!-- #fc_complete_order_button_container -->
+
+                    <span class="fc_clear">&nbsp;</span>
+                </div><!-- .fc_inner -->
+            </fieldset><!-- #fc_payment -->
+            <span class="fc_clear">&nbsp;</span>
+        </div><!-- #fc_payment_container -->
+    {% endblock checkout_payment %}
+
+
+                        </div><!-- #fc_data_entry_container -->
+                        {% else %}
+                        {{ block('subscription_cancel') }}
+                        {% endif %}
+                    </form><!-- #fc_checkout_container -->
+                </div>
+                <div class="cards-images"><span></span></div>
+                <div class="right-space"></div>
+                <div class="truste-info">
+                    <div class="truste-content">
+                        <h2>Your Information is Safe</h2>
+
+                        <span><span id='storeNamePlaceHolder' style="padding: 0 5px 0px 0px;"></span>  use SSL encryption to protect your data. We will never disclose your personal information for any reason whatsoever.</span>
+                        <span>Your contact information will only be used to process your order. We take your trust seriously.</span>
+                    </div>
+                    <div class="truste-img"></div>
+                </div>
+                <div class="truste-space"></div>
+                <div class="bob-image-div"></div>
+            {% endblock checkout1%}
+            </div>
+    
+             ^^custom_begin^^
+
+            {% set show_subscription_option = false %}
+            {% for item in items %}
+            {% if item.category_code == 'checkout_delivery' %}
+            {% set show_subscription_option = true %}
+            {% endif %}
+            {% endfor %}
+            
+            {% if submit_button_value != "Update My Scheduled Delivery" %}
+            {% if show_subscription_option %}
+
+            <h2 id="scheduled">*Scheduled Delivery</h2>
+            <br>
+            <ul id="sub_selection_container">
+                <li class="fc_row fc_sub_frequency">
+                    <label for="sub_frequency" class="fc_pre">How often to ship:<span class="fc_ast">*</span></label>
+                    <select name="sub_frequency" id="sub_frequency" class="fc_select fc_required">
+                        <option value="">- - Select How Often - -</option>
+                        <option value="1m">Every Month</option>
+                        <option value="2m">Every Two Months</option>
+                        <option value="3m">Every Three Months</option>
+                        <option value="4m">Every Four Months (Recommended)</option>
+                        <option value="5m">Every Five Months</option>
+                        <option value="6m">Every Six Months</option>
+                        <option value="X">Just Once (additional $5 shipping)</option>
+                    </select>
+                    <label class="fc_error" style="display: none;" for="sub_frequency">Please make a selection</label>
+                </li>
+                <li class="fc_row">
+                    <label for="just_ship_once"><input type="checkbox" name="just_ship_once" id="just_ship_once" value="just_ship_once"> Just ship once</label>
+                </li>
+                <li class="fc_row">
+                    <p>You can easily edit, cancel or re-schedule shipments at any time, with no fees.</p>
+                    <p>We send a reminder 1 week before your delivery &amp; your credit card is only charged when the order is packed.</p>
+                </li>
+            </ul>
+            <!-- Delivery Pop-up Content --> 
+            <div id="delivery-popup-content" style="display: none;">
+                <div id="ship-content">
+                    <div class="ship-title"><p>Nah, just ship once</p></div>
+                    <div class="delivery-header">
+                        <h3>We are happy to ship your order once, however...</h3>
+                        <h1>THE REAL VALUE OF ORAPUP</h1>
+                        <h2>IS OUR AUTO-DELIVERY SCHEDULE!</h2>
+                    </div>
+                    <div class="delivery-desc">
+                        <p>
+                            <span class="free-shipping">&nbsp;</span>
+                            <span>Easily edit your upcoming shipments.</span>
+                            <span>Lock in your FREE shipping promotion for life!</span>
+                            <span class="email-week">You will receive an email 1 week before your order is scheduled to go out.</span>
+                            <span>You can change and cancel at any time—you are in control!</span>
+                            <span>Lock in your FREE Orapups for life!</span>
+                        </p>
+                    </div>
+                    <div class="bottom-content">
+                        <p class="left-content"><img src="https://{{ store_domain }}/cache.php?url=http://www2.orabrush.com/foxy_css/images/dog.png"></p>
+                        <p class="right-content">
+                            <span>You will not be charged until your order has shipped.</span>
+                            <a href="javascript:;" onclick="$.fancybox.close();$('#sub_frequency').val('4m');$('#sub_frequency').attr('size',6).attr('style','height:140px');check_set_sub();"><span class="schedule-btn">&nbsp;</span></a>							
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">                    
+                        jQuery("#just_ship_once").click(function() {
+                            if ($(this).is(":checked")) {
+                                jQuery("#sub_frequency").val("X");
+                            } else {
+                                jQuery("#sub_frequency").val("4m");
+                            }
+                            set_storename_scheduled_delivery();
+                        });
+
+                        function check_set_sub() {
+                            var sub_frequency = jQuery("#sub_frequency").val();
+
+                            if (sub_frequency == "X") {
+                                var total_shipping = 5;
+                                jQuery("#just_ship_once").prop("checked", true);
+                            } else  if (!sub_frequency) {
+                                var total_shipping = 5;
+                                jQuery("#just_ship_once").prop("checked", false);
+                            } else{
+                                var total_shipping = 0;
+                                jQuery("#just_ship_once").prop("checked", false);
+                            }
+                            set_storename_scheduled_delivery();
+
+                            FC.checkout.config.orderFlatRateShipping = total_shipping;
+                            FC.checkout.updateShipping(-1);
+                        }
+
+                        jQuery("#sub_frequency").change(function() {
+                            if($('#sub_frequency').attr('size')==6){
+                                $('#sub_frequency').attr('size',1).attr('style','height:25px');
+                            }
+                            check_set_sub();
+                            set_storename_scheduled_delivery();
+                        });
+
+                        function set_storename_scheduled_delivery(){
+                            var sub_frequency = jQuery("#sub_frequency").val();
+
+                            if (sub_frequency == "X" || !sub_frequency) {
+                                $('#storename').val($('#storeNamePlaceHolder').text().toLowerCase()+'.com');
+                            } else {
+                                $('#storename').val('pp.com/'+$('#storeNamePlaceHolder').text().toLowerCase());
+                            }	
+                        }
+                        check_set_sub();
+
+            </script>
+
+            {% endif %}
+            {% endif %}
+            ^^custom_end^^
+     </body>
+<!-- #end drbob checkout variation -->	
+
+{% elseif checkout_variation == 'fancy' %}
+<!-- #begin fancy checkout variation -->
+<body>
+...drbob checkout variation example	
+</body>
+<!-- #end fancy checkout variation -->	
+
+{% else %}
+<!-- #begin standard checkout variation -->
+<body id="checkout">
+<header role="banner" class="site-header {{header_name}}" id="masthead">
+	<div class="header-links">
+            <span></span>
+	</div>
+	<hgroup>
+		<h1 class="site-title"><a rel="home" title="Tongue Cleaner" href="http://{{ store_domain }}/">
+		<span></span>
+		</a></h1>
+	</hgroup>
+</header>
+    <div id="pageContainer" style="width:830px; margin:0px auto;">
+    <div class ="fc_edit_cart"><a class ="edit-cart-btn">Change Order</a></div>
+{% if error_codes|length > 0 %}
+    {% include 'checkout_error.inc.twig' %}
+{% else %}
+    {% if not is_updateinfo %}
+    <div id="fc_checkout_cart">
+        {{ custom_cart }}
+    </div>
+    {% endif %}
+
+    {% use 'checkout.inc.twig' %}
+
+    {% block checkout %}
+    <div id="fc_checkout_container">{{ html_messages|raw }}
+    	
+        <form id="fc_form_checkout" method="post" action="https://{{ store_domain }}{{ post_url }}" onsubmit="return false;">
+            <input type="hidden" name="h:storename" value="orabrush" id='storename'/>
+            {{ block('checkout_error') }}
+            {{ block('required_hidden_fields') }}
+            {{ block('continue_shopping') }}
+            {{ block('noscript_warning') }}
+    <div class="checkout-title"><span>Secure Checkout</span></div>
+    <center><small style="color:grey;">(by purchasing you agree to our <a href="http://www.pp.com/legal/privacy" target="_blank" style="color:grey;text-decoration:underline;">privacy policy</a> and <a href="http://www.pp.com/legal/terms" target="_blank" style="color:grey;text-decoration:underline;">terms of service</a>)</small></center>    
+            {{ block('login_register') }}
+            {% if not is_subscription_cancel %}
+                <div id="fc_data_entry_container">
+                    <div id="fc_customer_info_container">
+
+                        {% if not has_multiship %}
+                            {{ block('customer_shipping') }}
+                            <div class="fc_row fc_row_checkbox fc_use_different_billing_address" id="fc_use_different_address">
+                                <label class="fc_checkbox" for="use_different_addresses">
+                                    <input type="checkbox" class="checkbox use_diffrent use_diffrent_billing_address" value="1" id="use_different_addresses" name="use_different_addresses">
+                                    <span>My billing address is different than my shipping address</span>
+                                </label>
+                            </div>
+                        {% else %}
+                            {{ block('multiship_shipping') }}
+                        {% endif %}
+                        
+                        {{ block('customer_billing') }}
+                    </div><!-- #fc_customer_info_container -->
+
+                    {# This place holder is here for backward compatibility so that custom fields will be injected into the correct place. #}
+                    ^^custom_fields^^
+
+     {% block checkout_shipping_and_summary %}
+        <!--  *********** shipping : Delivery &amp; Subtotal ************* -->
+        <div id="fc_shipping_container" class="fc_fieldset_container"{% if is_updateinfo %} style="display:none;"{% endif %}>
+            <h2>{{ lang.checkout_delivery_and_subtotal|raw }}</h2>
+            <fieldset id="fc_shipping">
+                <legend>{{ lang.checkout_delivery_and_subtotal|raw }}</legend>
+                <div class="fc_inner">
+                {% if has_live_rate_shippable_products and not has_multiship %}
+                    <div id="fc_shipping_methods_container" class="fc_row fc_shipping_methods_container">
+                        <label for="fc_shipping_methods" class="fc_pre fc_shipping_methods">{{ lang.checkout_shipping_methods|raw }}</label>
+                        <div id="fc_shipping_methods" class="fc_radio_group_container fc_row fc_shipping_methods">
+                            <div id="fc_shipping_result" class="fc_shipping_result">{{ lang.checkout_update_shipping_message|raw }}</div>
+                            <span id="shipping_ajax" class="fc_shipping_ajax" style="display:none">{{ lang.checkout_updating_shipping_options|raw }}<img src="//cdn.foxycart.com/static{{ base_directory }}/images/ajax-loader.gif?ver=1" alt="{{ lang.checkout_loading|raw }}" /></span>
+                            <textarea rows="1" cols="1" name="shipping_options" id="shipping_options" style="display:none;">{{ shipping_options }}</textarea>
+                            <input type="hidden" name="shipping_service_id" id="shipping_service_id" value="{{ shipping_service_id }}" />
+                            <input type="hidden" name="shipping_service_description" id="shipping_service_description" value="{{ shipping_service_description }}" />
+                            <div id="fc_shipping_methods_inner" class="fc_shipping_methods_inner">
+                                {{ shipping_options_html|raw }}
+                            </div>
+                            <label for="fc_shipping_methods" class="fc_error" style="display:none">{{ lang.checkout_select_shipping_option|raw }}</label>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if has_downloadables %}
+                    <div class="fc_downloadable_message_container">
+                        <p class="fc_downloadable_message">{{ lang.checkout_downloadables_message|raw }}</p>
+                    </div>
+                {% endif %}
+                    <ol id="fc_shipping_list">
+                        <li class="fc_row fc_subtotal">
+                            <label for="subtotal" class="fc_pre">{{ lang.checkout_cart_subtotal|raw }}</label>
+                            <span id="subtotal_formatted" class="fc_text">{{ checkout_subtotal|money_format }}</span>
+                            <input value="{{ checkout_subtotal }}" type="hidden" name="subtotal" id="subtotal" />
+                    {% if has_future_products %}
+                            <input value="{{ checkout_future_subscriptions }}" type="hidden" name="future_subscriptions" id="future_subscriptions" />
+                    {% endif %}
+			</li>
+
+                {% if has_shipping_or_handling_cost %}
+                        <li class="fc_row fc_shipping_cost">
+                            <label for="shipping_cost" class="fc_pre">{{ shipping_and_handling_label|raw }}</label>
+                            <span id="shipping_cost_formatted" class="fc_text">{{ checkout_shipping_cost|money_format }}</span>
+                            <input value="{{ checkout_shipping_cost }}" type="hidden" name="shipping_cost" id="shipping_cost" />
+                    {% if has_future_products %}
+                        <input value="{{ checkout_future_shipping_cost }}" type="hidden" name="future_shipping_cost" id="future_shipping_cost" />
+                    {% endif %}                        	
+                        </li>
+                {% endif %}
+                    {% if has_discount %}
+                        <li class="fc_row fc_discount">
+                            <label for="discount" class="fc_pre">{{ lang.checkout_discount|raw }}</label>
+                            <span id="discount_formatted" class="fc_text">{{ checkout_discount|money_format }}</span>
+                            <input value="{{ checkout_discount }}" type="hidden" name="discount" id="discount" />
+                        </li>
+                    {% endif %}
+			{% if has_future_products %}
+                        <li class="fc_row fc_tax" style="display:none;">
+                            <label for="tax" class="fc_pre">{{ lang.checkout_tax|raw }}</label>
+                            <span id="tax_formatted" class="fc_text">{{ checkout_tax|money_format }}</span>
+                            <input value="{{ checkout_tax }}" type="hidden" name="tax" id="tax" />
+                        </li>
+                        <li class="fc_row fc_order_total">
+                            <label for="order_total" class="fc_pre">{{ lang.checkout_order_total|raw }}</label>
+                            <span id="order_future_total_formatted" class="fc_text">{{ (checkout_subtotal + checkout_shipping_cost)|money_format }}</span>
+                            <input value="{{ checkout_order_total }}" type="hidden" name="order_total" id="order_total" />
+                        </li>
+                        <li class="fc_row fc_order_total"><b>Note:</b> Your card will not be charged until we pack your order.</li>
+			{% else %}
+                        <li class="fc_row fc_tax">
+                            <label for="tax" class="fc_pre">{{ lang.checkout_tax|raw }}</label>
+                            <span id="tax_formatted" class="fc_text">{{ checkout_tax|money_format }}</span>
+                            <input value="{{ checkout_tax }}" type="hidden" name="tax" id="tax" />
+                        </li>
+                        <li class="fc_row fc_order_total">
+                            <label for="order_total" class="fc_pre">{{ lang.checkout_order_total|raw }}</label>
+                            <span id="order_total_formatted" class="fc_text">{{ checkout_order_total|money_format }}</span>
+                            <input value="{{ checkout_order_total }}" type="hidden" name="order_total" id="order_total" />
+                        </li>
+			{% endif %}
+                    </ol>
+                    <span class="fc_clear">&nbsp;</span>
+                </div><!-- .fc_inner -->
+            </fieldset><!-- #fc_shipping -->
+            <span class="fc_clear">&nbsp;</span>
+        </div><!-- #fc_shipping_container --> 
+    {% endblock checkout_shipping_and_summary %}
+                    {{ block('checkout_payment') }}
+                </div><!-- #fc_data_entry_container -->
+<div class='safe-order'><span>Your Order is Safe &amp; Secure</span></div>
+            {% else %}
+                {{ block('subscription_cancel') }}
+            {% endif %}
+        </form><!-- #fc_checkout_container -->
+    </div>
+    <!-- #fc_checkout_container -->
+<div class="cards-images"><span></span></div>
+<div class="right-space"></div>
+<div class="truste-info">
+<div class="truste-content">
+<h2>Your Information is Safe</h2>
+
+<span><span id='storeNamePlaceHolder' style="padding: 0 5px 0px 0px;"></span>  use SSL encryption to protect your data. We will never disclose your personal information for any reason whatsoever.</span>
+<span>Your contact information will only be used to process your order. We take your trust seriously.</span>
+</div>
+<div class="truste-img"></div>
+</div>
+<div class="truste-space"></div>
+<div class="accredition-div"><div class="accredition-content">
+<h2>100% Satisfaction Guarantee</h2>
+<span>We will send you immediate order confiirmation, followed by tracking info for shipment.</span>
+<span></span></div>
+<div class="accrediton-img"></div>
+</div>
+    {% endblock checkout %}
+{% endif %}
+
+    </div>
+
+	
+
+^^custom_begin^^
+
+{% set show_subscription_option = false %}
+{% for item in items %}
+{% if item.category_code == 'checkout_delivery' %}
+{% set show_subscription_option = true %}
+{% endif %}
+{% endfor %}
+
+{% if submit_button_value != "Update My Scheduled Delivery" %}
+{% if show_subscription_option %}
+
+<h2 id="scheduled">*Scheduled Delivery</h2>
+<br>
+<ul id="sub_selection_container">
+	<li class="fc_row fc_sub_frequency">
+		<label for="sub_frequency" class="fc_pre">How often to ship:<span class="fc_ast">*</span></label>
+		<select name="sub_frequency" id="sub_frequency" class="fc_select fc_required">
+			<option value="">- - Select How Often - -</option>
+			<option value="1m">Every Month</option>
+			<option value="2m">Every Two Months</option>
+			<option value="3m">Every Three Months</option>
+			<option value="4m">Every Four Months (Recommended)</option>
+			<option value="5m">Every Five Months</option>
+			<option value="6m">Every Six Months</option>
+			<option value="X">Just Once (additional $5 shipping)</option>
+		</select>
+		<label class="fc_error" style="display: none;" for="sub_frequency">Please make a selection</label>
+	</li>
+	<li class="fc_row">
+		<label for="just_ship_once"><input type="checkbox" name="just_ship_once" id="just_ship_once" value="just_ship_once"> Just ship once</label>
+	</li>
+	<li class="fc_row">
+		<p>You can easily edit, cancel or re-schedule shipments at any time, with no fees.</p>
+		<p>We send a reminder 1 week before your delivery &amp; your credit card is only charged when the order is packed.</p>
+	</li>
+</ul>
+<!-- Delivery Pop-up Content --> 
+<div id="delivery-popup-content" style="display: none;">
+	<div id="ship-content">
+		<div class="ship-title"><p>Nah, just ship once</p></div>
+			<div class="delivery-header">
+				<h3>We are happy to ship your order once, however...</h3>
+				<h1>THE REAL VALUE OF ORAPUP</h1>
+				<h2>IS OUR AUTO-DELIVERY SCHEDULE!</h2>
+			</div>
+			<div class="delivery-desc">
+				<p>
+					<span class="free-shipping">&nbsp;</span>
+					<span>Easily edit your upcoming shipments.</span>
+					<span>Lock in your FREE shipping promotion for life!</span>
+					<span class="email-week">You will receive an email 1 week before your order is scheduled to go out.</span>
+					<span>You can change and cancel at any time—you are in control!</span>
+					<span>Lock in your FREE Orapups for life!</span>
+				</p>
+			</div>
+			<div class="bottom-content">
+				<p class="left-content"><img src="https://{{ store_domain }}/cache.php?url=http://www2.orabrush.com/foxy_css/images/dog.png"></p>
+				<p class="right-content">
+					<span>You will not be charged until your order has shipped.</span>
+					<a href="javascript:;" onclick="$.fancybox.close();$('#sub_frequency').val('4m');$('#sub_frequency').attr('size',6).attr('style','height:140px');check_set_sub();"><span class="schedule-btn">&nbsp;</span></a>							
+				</p>
+			</div>
+	</div>
+</div>
+<script type="text/javascript">
+jQuery("#just_ship_once").click(function() {
+	if ($(this).is(":checked")) {
+		jQuery("#sub_frequency").val("X");
+	} else {
+		jQuery("#sub_frequency").val("4m");
+	}
+	set_storename_scheduled_delivery();
+});
+
+function check_set_sub() {
+	var sub_frequency = jQuery("#sub_frequency").val();
+
+	if (sub_frequency == "X") {
+		var total_shipping = 5;
+		jQuery("#just_ship_once").prop("checked", true);
+	} else  if (!sub_frequency) {
+		var total_shipping = 5;
+		jQuery("#just_ship_once").prop("checked", false);
+	} else{
+		var total_shipping = 0;
+		jQuery("#just_ship_once").prop("checked", false);
+	}
+	set_storename_scheduled_delivery();
+
+	FC.checkout.config.orderFlatRateShipping = total_shipping;
+	FC.checkout.updateShipping(-1);
+}
+
+jQuery("#sub_frequency").change(function() {
+   if($('#sub_frequency').attr('size')==6){
+        $('#sub_frequency').attr('size',1).attr('style','height:25px');
+   }
+   check_set_sub();
+   set_storename_scheduled_delivery();
+});
+
+function set_storename_scheduled_delivery(){
+   	var sub_frequency = jQuery("#sub_frequency").val();
+
+	if (sub_frequency == "X" || !sub_frequency) {
+		$('#storename').val($('#storeNamePlaceHolder').text().toLowerCase()+'.com');
+	} else {
+		$('#storename').val('pp.com/'+$('#storeNamePlaceHolder').text().toLowerCase());
+	}	
+}
+check_set_sub();
+
+</script>
+
+{% endif %}
+
+^^custom_end^^
+
+	
+</body>
+</html>
+<!-- #end standard checkout variation -->
+{% endif %}

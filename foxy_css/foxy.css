@@ -1,0 +1,1565 @@
+body {
+    margin: -1px;
+    padding: 1px;
+    width: 99.9%;
+}
+.site-header {
+    background: url("/foxy_css/images/header-bg.png") repeat-x scroll 0 0 transparent;
+    height: 108px;
+    width: 100%;
+}
+.orapup-header{
+    background: url("/foxy_css/images/orapup-header.png") repeat-x scroll 0 0 transparent;
+}
+.header-links {
+    text-align: center;
+}
+.orapup-header .header-links {
+	display: none;
+}
+.orabrush-header .header-links{
+	display:block;
+}
+.orabrush-header .site-title span{
+	background: url("/foxy_css/images/orabrush-logo.png") no-repeat scroll 0 0 transparent;
+    display: block;
+	margin-top:25px;
+}
+.orabrush-header .header-links span{
+    background: url("/foxy_css/images/OrabrushStores2.png") no-repeat scroll center 0 transparent;
+
+}
+hgroup, #main {
+    margin: 0 auto;
+    padding: 0;
+    text-align: left;
+    width: 950px;
+}
+.site-header h1 {
+    float: left;
+    font-size: 1.85714rem;
+    line-height: 1.84615;
+    margin-bottom: 0;
+    margin-top: 11px;
+    width: 29%;
+}
+#fc_data_entry_container {
+       width: 451px;
+}
+.site-title span{
+	background: url("/foxy_css/images/orapup_logo_by_orabrush_gray.png") no-repeat scroll 0 0 transparent;
+	display: block;
+	height: 62px;
+}
+#fc_cart_container {
+	background: url("/foxy_css/images/yourcart.png") no-repeat left 10px;
+} 
+#fc_cart_container #fc_cart_controls_top a.fc_cart_update,
+#fc_cart_container #fc_cart_controls_bottom a.fc_cart_update {
+	background: url("/foxy_css/images/cart-update_btn.png") no-repeat scroll 0 0 transparent;
+}
+#fc_cart_container a.fc_cart_checkout {
+	background: url("/foxy_css/images/checkout_btns.png") no-repeat scroll 0 0 transparent;
+	text-indent: -999px;
+}
+#fc_cart_container a.fc_cart_checkout:hover {
+	background-position: 0 -39px;
+}
+#fc_checkout_container {
+	background: url("/foxy_css/images/oraclub-placeorder-header.png") no-repeat scroll center top transparent;
+	 background-color: #fff;
+}
+#fc_login_register_container h2 {
+	background: url("/foxy_css/images/checkout-step1.png") no-repeat scroll 0 0 transparent;
+	margin-left: 7px;
+    margin-top: 63px;
+    width: 95%;
+}
+div#fc_continue a.fc_link_nav, #fc_receipt_links a#fc_receipt_continue_link {
+	background: url("/foxy_css/images/continue_btns.png") no-repeat scroll 0 0 transparent;
+	height: 11px;
+	text-indent: -999px;
+	width: 138px;
+	margin: 0;
+}
+#fc_receipt_links {
+	clear: none;
+}
+div#fc_continue a.fc_link_nav:hover, #fc_receipt_links a#fc_receipt_continue_link:hover {
+	background-position: 0 -39px;
+}
+#fc_customer_billing_container h2 {
+	background: url("/foxy_css/images/checkout-step2.png") no-repeat scroll 0 0 transparent;
+}
+#fc_address_shipping_container h2 {
+	background: url("/foxy_css/images/checkout-step2a.png") no-repeat scroll 0 0 transparent;
+}
+#fc_shipping_container h2 {
+	background: url("/foxy_css/images/checkout-step3.png") no-repeat scroll 0 0 transparent;
+}
+
+#fc_payment_container h2 {
+	background: url("/foxy_css/images/checkout-step4.png") no-repeat scroll 0 0 transparent;
+}
+#fc_complete_order_button {
+	background: url("/foxy_css/images/place_your_order_btn.png") no-repeat scroll top left transparent;
+	height: 32px;
+	padding: 0;
+}
+#fc_complete_order_button:hover {
+	background-position: 0 -39px;
+}
+#fc_receipt_container {
+	background: url("/foxy_css/images/oraclub-receipt-header.png") no-repeat scroll top center transparent;
+	margin-top: 25px;
+}
+#fc_receipt_links a#fc_receipt_print_link {
+	background: url("/foxy_css/images/print_your_receipt_btn.png");
+	height: 11px;
+	margin: 0 10px 0 0;
+}
+#fc_receipt_links a#fc_receipt_print_link:hover {
+    background-position: 0 -39px;
+}
+#fc_login_register_container{
+	background: none repeat scroll 0 0 #FBFAF6;
+    margin-top: -30px;
+    padding: 0 3px 0 0 !important;
+}
+#fc_checkout_container div.fc_fieldset_container, #fc_receipt_container div.fc_fieldset_container {
+	 padding: 15px 8px;
+}
+#fc_data_entry_container{
+	background: none repeat scroll 0 0 #FBFAF6;
+    border-radius: 0px 0px 8px 8px;
+    float: left;
+}
+#fc_customer_billing_container, #fc_address_shipping_container, #fc_shipping_container{
+	 width: 94% !important;	
+}
+#fc_checkout_container input.fc_text {
+    background: none;
+    border: 1px solid #ABADB3 !important;
+    border-radius: 5px 5px 5px 5px;
+}
+#fc_shipping_container #fc_shipping_list span.fc_text {
+    background-color: #F2F2F2;
+    border-radius: 5px 5px 5px 5px;
+}
+.fc_foxycomplete_combobox{
+	border-radius: 0 5px 5px 0;
+	left: 316px !important;
+    top: 1px !important;
+    height: 20px !important;
+}
+.fc_foxycomplete_flag{
+	 left: 293px !important;
+}
+#fc_checkout_cart {
+    border: 1px solid #BBAFA0;
+    border-radius: 10px 10px 10px 10px;
+    float: right;
+    margin-bottom: 25px;
+    margin-top: 85px;
+    width: 42%;
+}
+#fc_checkout_cart #fc_cart_container{
+	border-radius: 10px 10px 10px 10px;
+    width: 349px;
+}
+#fc_cart_container {
+	margin: 0;
+}
+#fc_cart_container a.fc_cart_checkout {
+    height: auto;
+    padding-top: 24px;
+    text-indent: 99999px;
+    width: 137px;
+}
+#fc_checkout_container fieldset, #fc_receipt_container fieldset {
+    margin: 0;
+}
+div#fc_cancel_continue_shopping{
+	display: none;
+}
+#fc_use_different_address, #fc_copy_billing_address {
+    padding-left: 27%;
+    width: 72%;
+}
+
+#fc_cart_form #fc_cart_table{
+	 border: 1px solid #BEBCB7;
+	 border-radius: 6px 6px 6px 6px;
+}
+#fc_checkout_cart #fc_cart_table{
+	 border-radius: 6px 6px 6px 6px;
+}
+#fc_cart_table thead th{
+    background: none repeat scroll 0 0 #D9E5EE;
+    border-right: 1px solid #D9DDE3;
+    border-bottom: 1px solid #94AEC4;
+    color: #000000;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 5px;
+    text-transform: capitalize;
+}
+#fc_cart_table tfoot{
+	 box-shadow: 0 1px 2px inset;
+}
+#fc_cart_table tfoot td, #fc_cart_table tfoot #fc_cart_foot_total td{
+    background: none repeat scroll 0 0 #DEE5E8;
+    border: none;
+    color: #2A88AC !important;
+}
+#fc_cart_table tfoot #fc_cart_foot_total {
+	border: none !important;
+}
+#fc_cart_table tfoot #fc_cart_foot_total td.fc_col1, #fc_cart_table tfoot #fc_cart_foot_total td.fc_col2{
+    color: #2A88AC !important;
+    font-weight: bold;
+    font-size: 14px;
+}
+#fc_cart_table td, #fc_cart_table th {
+	border-right: 1px solid #D9DDE3;
+    font-size: 12px;
+}
+#fc_cart_table tbody td {
+    border-bottom: 1px solid #d9dde3;
+}
+#fc_cart_container li.fc_cart_item_option {
+    font-size: 11px;
+}
+.fc_cart_item_details .fc_cart_item_name{
+	 float: left;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 4px !important;
+    width: 100%;
+}
+#fc_cart_container span.fc_cart_item_price_each {
+    font-size: 11px;
+}
+#fc_cart_table .fc_cart_item_last td{
+	border-bottom: 0px ;
+}
+#fc_form_checkout .checkout-title{
+	background-color: #1C3667;
+	border-radius: 9px 9px 0 0;
+    padding: 10px 14px 10px 5px;
+    position: relative;
+    width: 96%;
+}
+#fc_form_checkout .checkout-title span{
+	background: url("/foxy_css/images/secure-lock.png") no-repeat scroll 0 0 transparent;
+	color:  #FFFFFF;
+    font-family: Arial;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 35px;
+}
+#fc_form_checkout{
+	background: none repeat scroll 0 0 #FBFAF6;
+	border: 1px solid #BBAFA0;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 0 0 10px #BBAFA0;
+	float: left;
+	margin-bottom: 20px;
+	width: 55%;
+	margin-top: -14px;
+	padding-bottom: 20px;
+}
+#fc_checkout_container div.fc_fieldset_container, #fc_receipt_container div.fc_fieldset_container {
+    width: 99%;
+}
+#fc_receipt_container #fc_receipt_custom_container{
+    width: 94%;
+}
+#fc_checkout_container a.fc_link_nav, #fc_cart_container a.fc_link_nav, #fc_receipt_links a.fc_link_nav {
+	margin-left: 0;
+}
+.image-container{
+	height: 90px;
+    margin: 7px 0;
+}
+.trust-images {
+	float: left;
+    margin-left: 110px;
+    width: 36%;
+}
+.trust-images span.secured-img{
+	background: url("/foxy_css/images/logo_rapidssl.gif") no-repeat scroll center center transparent;
+    border: 1px solid #D3D3D3;
+    border-radius: 5px 5px 5px 5px;
+    float: left;
+    height: 69px;
+    margin-right: 10px;
+    width: 120px;
+}
+.trust-images span.bbb-img{
+	background: url("/foxy_css/images/bbb.png") no-repeat scroll 0 center transparent;
+	float: left;
+	border: 1px solid #D3D3D3;
+    border-radius: 5px 5px 5px 5px;
+    height: 69px;
+    width: 60px;
+}
+.cards-images {
+	float: left;
+    width: 40%;
+}
+.cards-images span{
+	background: url("/foxy_css/images/creditcards.gif") no-repeat scroll right center transparent;
+	display: block;
+	height: 69px;
+}
+.right-space{
+	float: right;
+        height: 274px;
+        width: 35%;
+}
+.truste-info {
+	background: none repeat scroll 0 0 #FBFAF6;
+    border: 1px solid #BBAFA0;
+    border-radius: 10px 10px 10px 10px;
+    float: right;
+    min-height: 170px;
+    width: 42%;
+}
+.accredition-div {
+    border: 1px solid #BBAFA0;
+    border-radius: 10px 10px 10px 10px;
+    float: right;
+    min-height: 170px;
+    width: 42%;
+}
+.truste-content{
+	float: left;
+	font-family: arial;
+ 	padding: 15px 0 15px 15px;
+	width: 62%;
+}
+.truste-info h2, .accredition-div h2{
+	color: #727272;
+    font-size: 18px;
+    padding-bottom: 15px;
+    margin: 0;
+}
+.truste-info span, .accredition-div span{
+	color: #727272;
+    float: left;
+    font-size: 13px;
+    line-height: 19px;
+    padding-bottom: 7px;
+    padding-right: 7px;
+}
+.truste-img {
+    background: url("/foxy_css/images/logo_rapidssl.gif") no-repeat scroll left center transparent;
+    float: left;
+    height: 216px;
+    vertical-align: middle;
+    width: 113px;
+}
+.truste-space{
+	float: right;
+	height:243px;
+	width: 35%;
+}
+.accredition-div {
+	background: none repeat scroll 0 0 #FBFAF6;
+}
+.accredition-content{
+	float: left;
+	font-family: arial;
+	padding: 15px 0 15px 15px;
+	width: 75%;
+}
+#fc_checkout_container li#fc_payment_method_plastic_container li#li_cc_number label.fc_pre {
+    height: 22px;
+    text-align: left;
+    width: 92%;
+}
+#fc_checkout_container li#fc_payment_method_plastic_container li#li_cc_number input#cc_number{
+ 	margin-left: 19px;
+}
+#fc_payment_method_plastic_container label.fc_radio span{
+}
+.safe-order{
+    left: 54%;
+    position: relative;
+}
+.safe-order span{
+	background: url("/foxy_css/images/secure-lock.png") no-repeat scroll 0 0 / 7% auto transparent;
+	 height: 27px !important;
+	 float: left !important;
+    padding-left: 24px !important;
+	color: #727272 !important;
+	font-family: Arial !important;
+}
+#fc_checkout_container li fieldset {
+	background: none;
+}
+.accrediton-img{
+	background: url("/foxy_css/images/bbb.png") no-repeat scroll 0 center transparent;
+	float: left;
+    height: 216px;
+    vertical-align: middle;
+    width: 55px;
+}
+#fc_checkout_container *, #fc_receipt_container * , #fc_cart_container {
+    font-family: Arial;
+    outline: medium none;
+}
+#fc_cart_table td.fc_cart_item_price{
+	border: none;
+}
+#fc_checkout_container input.fc_radio, #fc_checkout_container input.fc_checkbox {
+    margin: 0 10px 5px 0;
+}
+#fc_cart_foot_subtotal td.fc_col1, #fc_cart_foot_subtotal td.fc_col2{
+	padding-top: 7px;
+}
+#fc_receipt_links a#fc_receipt_print_link {
+    width: 185px;
+    text-indent: -999px;
+}
+#fc_receipt_container {
+    padding: 85px 5px 0px;
+}
+#fc_receipt_container_inner{
+	background: none repeat scroll 0 0 #FBFAF6;
+	border: 1px solid #BBAFA0;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 10px #BBAFA0;
+    float: left;
+    margin-bottom: 20px;
+    width: 55%;
+}
+#fc_receipt_container_inner #fc_receipt_general_container, #fc_receipt_container_inner #fc_receipt_order_container,
+#fc_receipt_container_inner #fc_receipt_billing_container, #fc_receipt_container_inner #fc_receipt_shipping_container{
+	width: 94%;
+}
+#fc_receipt_container .receipt-title span{
+	display: block;
+	color: #FFFFFF;
+	font-size: 24px;
+	font-weight: bold;
+    padding-left: 10px;
+}
+.receipt-title{
+	background-color: #1C3667;
+    border-radius: 9px 9px 0 0;
+    padding: 10px !important;
+}
+#fc_receipt_general_container, #fc_receipt_container #fc_receipt_order_container{
+	padding-top: 30px !important;
+}
+#fc_receipt_container h2, #fc_receipt_container h2 span, #fc_form_checkout h2{
+	background: none;
+	color: #727272 !important;
+	height: 24px;
+	font-size: 16px;
+	text-transform: capitalize;
+}
+#fc_receipt_container h2 span{
+	 font-size: 16px;
+}
+#fc_checkout_container #fc_payment_container {
+    margin-right: 3%;
+    padding: 0;
+}
+.continue-link{
+	color: #F26423 !important;
+}
+#fc_checkout_container h2, #fc_receipt_container h2 {
+    padding-top: 0;
+}
+#fc_receipt_container fieldset {
+    padding: 10px 10px 0;
+}
+#fc_receipt_shipping_container{
+	padding: 15px 8px 20px;
+}
+#fc_checkout_container label.fc_radio {
+    width: 90%;
+}
+#fc_payment_method_plastic{
+	margin-top: 3px;
+}
+#fc_payment_method_plastic_container span.credit-title{
+	 padding-right: 10px;
+}
+#fc_checkout_container #fc_payment_method_plastic_container fieldset{
+	margin: 0px;
+}
+#fc_receipt_container .fc_inner ol{
+	padding: 0px !important;
+}
+#fc_receipt_container div.fc_fieldset_container {
+	padding-bottom: 0px !important;
+}
+#fc_receipt_container fieldset#fc_receipt_shipping {
+	padding-bottom: 15px !important;
+}
+.bottom-links{
+	 width: 47%;
+}
+#fc_cart_container tr.fc_cart_item td.fc_cart_item_price {
+    border-bottom: 1px solid #D9DDE3; 
+}
+#fc_cart_table tbody tr.odd td{
+	background: none repeat scroll 0 0 #FBFAF6;
+}
+#fc_cart_table tbody tr.even td{
+	 background: none repeat scroll 0 0 #EEEDED;
+}
+table.fc_cart_table_club th{display:none;}
+table.fc_cart_table_club td.fc_cart_item_image{display:none;}
+table.fc_cart_table_club td.fc_cart_item_quantity{display:none;}
+table.fc_cart_table_club li.fc_cart_item_code{display:none;}
+table.fc_cart_table_club li.fc_cart_category_code{display:none;}
+table.fc_cart_table_club li.fc_cart_item_subscription_details{display:none;}
+li.li_save_cc_club{display:none !important;}
+.fc_cart_table_club tr.fc_cart_item{
+	border-bottom: 1px solid #D9DDE3;
+	float: left;
+    	width: 350px;
+}
+.fc_cart_table_club .fc_cart_item_details{
+	float: left;
+	border-bottom: none !important;
+    	width: 75%;
+}
+.fc_cart_table_club .fc_cart_item_price{
+	position: relative;
+	float: left;
+	top: 9px;
+    	border: none !important;
+    	width: 60px;
+}
+.fc_cart_table_club tfoot{
+	background: none repeat scroll 0 0 #DEE5E8;
+}	
+#fc_cart_container_inner .fc_cart_table_club tfoot .fc_col1{
+	float: left;	
+	background: none repeat scroll 0 0 transparent !important;
+    	width: 279px !important;
+}
+#fc_cart_container_inner .fc_cart_table_club tfoot .fc_col2{
+	background: none repeat scroll 0 0 transparent;
+	float: left !important;	
+}
+.fc_cart_table_club #fc_cart_foot_total td.fc_col1 {
+    margin-left: 2px;
+    width: 278px !important;
+}
+/*Checkout Delivery Details*/
+#fc_complete_order_button_container {
+	clear: both;
+    border: none !important;
+    padding: 0;
+    float: left;
+	width: 95%;
+}
+#fc_checkout_container .fc_sub_frequency {
+    clear: none !important;
+    float: left !important;
+    margin-left: 10px !important;
+    margin-right: 10px;
+    width: 260px !important;
+}
+#fc_checkout_container #sub_selection_container li.fc_sub_frequency label.fc_pre{
+	color: #727272;
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    text-align: left;
+    width: 100%;
+}
+#fc_checkout_container #sub_selection_container .fc_sub_frequency #sub_frequency{
+	font-size: 14px;
+    height: 24px;
+    padding: 1px;
+}
+#fc_checkout_container #sub_selection_container li.fc_row + li.fc_row{
+	clear: none;
+    float: left;
+    line-height: 60px;
+    padding-top: 3px;
+    width: 105px;
+}
+#fc_checkout_container #sub_selection_container li.fc_row + li.fc_row + li.fc_row{
+	clear: both;
+    float: left;
+    padding-top: 3px;
+    width: 100%;
+}
+.fc_cart_table_chk_delivery .fc_cart_item_subscription_details, .fc_cart_table_chk_delivery .fc_cart_category_code{
+	display: none !important;
+}
+/*Delivery Pop-up css*/
+#delivery-popup-content{
+	display:none;
+}
+.fancybox-close {
+    right: 0px !important;
+    top: 13px !important;
+}
+#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
+    background: url("/foxy/fancybox/grey_close_btn.png") no-repeat scroll 0 0 transparent;
+}
+#ship-content{
+	float: left;
+	font-family: arial;
+    padding: 0 10px;
+	width: 500px;
+}
+.delivery-header h3{
+	font-size: 14px;
+	color: #4d4d4d;
+}
+.delivery-header h1{
+	font-size: 28px;
+	color: #041E41;
+}
+.delivery-header h2{
+	font-size: 18px;
+	color: #0B9EC4;
+}
+h1,h2,h3,h4{
+	margin: 0px 5px;
+}
+.delivery-desc{
+	float: left;
+	padding-left: 6px;
+}
+.delivery-desc span{
+	background: url('/foxy_css/images/teal_arrow_bullet.png')no-repeat scroll 0 3px transparent;
+	color: #4d4d4d;
+	font-size: 13px;
+	float: left;
+	padding-bottom: 13px;
+	padding-left: 20px;
+}
+span.free-shipping{
+	background: url('/foxy_css/images/van.png')no-repeat scroll 0 0 transparent;
+	float: right;
+	height: 72px;
+	padding: 0;
+    width: 170px;
+}
+.schedule-btn{
+	background: url('/foxy_css/images/schedule.png')no-repeat scroll 0 0 transparent;
+	float: left;
+	height: 30px;
+    width: 282px;
+}
+.schedule-btn:hover{
+	background-position: 0px -40px;
+}
+.bottom-content p{
+	float: left;
+	margin-bottom: 0;
+}
+.bottom-content p.left-content{
+	width: 200px;
+}
+.bottom-content p.right-content{
+	color: #4D4D4D;
+        font-size: 12px;
+        position: relative;
+        top: 48px;
+        width: 60%;
+}
+.bottom-content p.right-content span{
+	float: left;
+	line-height: 22px;
+}
+a{
+	text-decoration: none;
+}
+.email-week{
+	width: 300px;
+}
+.ship-title {
+        text-align: right;
+        padding-right: 20px;
+}
+.ship-title p{
+	font-size: 12px;
+	margin-top: 0px;
+	color: #0B9EC4;
+	font-weight: normal;
+}
+#fc_payment_list #li_save_cc, .fc_cart_item_subscription_details{
+	display: none !important;
+}
+#fc_checkout_container #fc_payment_container #fc_custom_fields_container{
+    width: 97%;
+	margin: 0;
+	padding: 0;
+}
+#fc_payment_container h2#scheduled {
+	padding: 10px 0 0 12px;
+	margin: 0;
+	height: 24px;
+}
+#fc_checkout_container #fc_payment_container p {
+    padding: 0 12px 10px;
+}
+li.fc_cart_item_code, li.fc_cart_category_code, li.fc_cart_item_weight{
+	display: none !important;
+}
+.bark-image img {
+        height: 50px;
+}
+.fc_edit_cart{
+	float: right;
+	position: relative;
+	left: 42%;
+	top: -22px;
+}
+li.fc_customer_company{
+        display: none;
+}
+li.fc_customer_phone{
+        display: none;
+}
+li.fc_shipping_company{
+        display: none;
+}
+#fc_checkout_container .fc_row_checkbox label.fc_checkbox{
+        width: 109%;
+        margin-left: -18px;
+}
+li.fc_customer_company{
+        display: none;
+}
+li.fc_customer_phone{
+        display: none;
+}
+li.fc_shipping_company{
+        display: none;
+}
+li.fc_shipping_phone{
+        display: none;
+}
+#fc_address_shipping_container{
+    display: block !important;
+}
+#fc_customer_billing_container{
+    display: none;
+}
+.fc_use_different_billing_address{
+    display: block !important;
+}
+#fc_use_different_address{
+    display: none;
+}
+#fc_payment_container h2{
+    height: 50px;
+    border: none;
+    background: #E5E5E5;
+    padding-top: 15px;
+	padding-left: 10px;
+	width: 98%;
+}
+.secure-logo-label{
+    font-size: 16px !important;
+    color: #4d4d4d !important;
+    line-height: 35px !important;
+}
+#fc_payment_list{
+    background: #E5E5E5;
+}
+#fc_payment_container #fc_payment{
+    padding: 0;
+}
+#fc_custom_fields_container h2{
+     background: none !important;
+}
+#fc_payment_list #li_cc_number .fc_pre,#fc_payment_list #li_cc_exp_month .fc_pre,#fc_payment_list #li_cc_cvv2 .fc_pre{
+    width: 100%;
+    text-align: left;
+}
+#fc_payment_list #li_cc_cvv2 .fc_pre{
+    height: 45px;
+}
+#fc_payment_list #li_cc_number .fc_pre,#fc_payment_list #li_cc_exp_month .fc_pre{
+    height: 32px;
+}
+span.cart-logo{
+    background: url("/foxy_css/images/logo_rapidssl.gif") no-repeat scroll left 10px transparent;
+    height: 100px;
+    float: right;
+    width: 120px;
+    margin-top: -19px !important;
+    display: block;
+}
+#mobile-checkout span.cart-logo{
+    background-size: 85%;
+    height: 120px;
+    width: 230px;
+}
+span.secure-logo{
+    background: url("/foxy_css/images/lock_icon_gray_gold.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    width: 37px;
+    height: 36px;
+}
+#fc_help_cvv2{
+    display: none;
+}
+#li_cc_cvv2 .security-code-img{
+    background: url("/foxy_css/images/cvv2.png") no-repeat scroll 0 0 transparent;
+    width: 100px;
+    float: right;
+    background-size: 89px;
+    height: 60px;
+}
+.security-code-label {
+	float: left;
+	padding-right: 20px !important;
+}
+#li_cc_cvv2 input{
+    float: left;
+    margin-right: 109px;
+}
+#fc_payment_list #li_cc_number input{
+    float: left;
+    width: 153px;
+    margin-right: 8px;
+    background: white;
+}
+#fc_payment_list #li_cc_number input#fc_payment_method_plastic{
+    width: auto !important;
+}
+#li_cc_cvv2 input{
+    background: white !important;
+}
+#fc_payment_method_plastic_container{
+    float: left !important;
+    width: 230px !important;
+    clear: none !important;
+}
+.card-number,.epiration-date,.security-code{
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+}
+.card-number-label,.epiration-date-label,.security-code-label{
+    font-size: 12px;
+    color: #4d4d4d;
+}
+#fc_payment_container{
+    width: 100% !important;
+    float: left !important;
+    overflow: hidden;
+}
+#fc_payment_list{
+    padding-left: 12px !important;
+}
+#fc_complete_order_button_container{
+    margin-bottom: 7px !important;
+}
+.fc_edit_cart a{
+    font-size: 14px !important;
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 2px solid;
+}
+/*dr bob checkout css*/
+#drbob .checkout-title,#drbob #fc_shipping_list,#drbob .cards-images, #drbob .truste-info, #mobile-checkout .checkout-title,#mobile-checkout #fc_shipping_list,#mobile-checkout .cards-images, #mobile-checkout .truste-info{
+    display: none;
+}
+#drbob #fc_form_checkout, #mobile-checkout #fc_form_checkout{
+    background: none !important;
+    border: 0px !important;
+    box-shadow: none !important;
+}
+#drbob #fc_login_register_container, #drbob #fc_data_entry_container, #mobile-checkout #fc_login_register_container, #mobile-checkout #fc_data_entry_container{
+    background: none !important;
+}
+#drbob #fc_customer_billing_container{
+    background: #e6e6e6;
+    width: 454px !important;
+}
+#drbob #fc_address_shipping_container {
+    background: #e6e6e6;
+    width: 453px !important;
+}
+#mobile-checkout #fc_address_shipping_container, #mobile-checkout #fc_customer_billing_container {
+    background: #e6e6e6;
+    width: 99.1% !important;
+}
+#drbob #fc_use_different_address, #mobile-checkout #fc_use_different_address{
+    border: none !important;
+}
+#drbob .truste-space, #mobile-checkout .truste-space{
+     height: 594px !important;
+}
+#drbob .bob-image-div, #mobile-checkout .bob-image-div{
+     background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://staging.orabrush.com/foxy_css/images/bob.png") no-repeat scroll 0 0 transparent;
+     float: right;
+     width: 367px;
+     height: 387px;
+     margin-top: 17px;
+}
+#drbob .fc_shipping_country_name,#drbob .fc_customer_country_name label,#drbob .fc_shipping_first_name label,
+#mobile-checkout .fc_shipping_country_name,#mobile-checkout .fc_customer_country_name label,#mobile-checkout .fc_shipping_first_name label{
+     display: none;
+}
+#drbob .fc_text, #mobile-checkout .fc_text{
+      background: white !important;
+}
+#drbob .fc_customer_first_name label,#drbob .fc_shipping_last_name label,#drbob .fc_customer_last_name label,#drbob .fc_shipping_address1 label,#drbob .fc_customer_address1 label,#drbob .fc_customer_address2 label,#drbob .fc_shipping_address2 label,#drbob .fc_shipping_city label,#drbob .fc_customer_city label,#drbob .fc_shipping_state_name label,#drbob .fc_customer_state_name label,#drbob .fc_shipping_postal_code label,#drbob .fc_customer_postal_code label,#drbob .fc_shipping_postal_code label,
+#mobile-checkout .fc_customer_first_name label,#mobile-checkout .fc_shipping_last_name label,#mobile-checkout .fc_customer_last_name label,#mobile-checkout .fc_shipping_address1 label,#mobile-checkout .fc_customer_address1 label,#mobile-checkout .fc_customer_address2 label,#mobile-checkout .fc_shipping_address2 label,#mobile-checkout .fc_shipping_city label,#mobile-checkout .fc_customer_city label,#mobile-checkout .fc_shipping_state_name label,#mobile-checkout .fc_customer_state_name label,#mobile-checkout .fc_shipping_postal_code label,#mobile-checkout .fc_customer_postal_code label,#mobile-checkout .fc_shipping_postal_code label{
+      display: none;
+}
+#drbob .fc_customer_first_name input,#drbob .fc_shipping_first_name input,#drbob .fc_shipping_last_name input,#drbob .fc_customer_last_name input,#drbob .fc_shipping_address1 input,#drbob .fc_customer_address1 input,#drbob .fc_customer_address2 input,#drbob .fc_shipping_address2 input {
+      width: 417px !important;
+      height: 27px !important;
+}
+#mobile-checkout .fc_customer_first_name input,#mobile-checkout .fc_shipping_first_name input,#mobile-checkout .fc_shipping_last_name input,#mobile-checkout .fc_customer_last_name input,#mobile-checkout .fc_shipping_address1 input,#mobile-checkout .fc_customer_address1 input,#mobile-checkout .fc_customer_address2 input,#mobile-checkout .fc_shipping_address2 input {
+	width: 99% !important;
+	height: 40px !important;
+	font-size: 36px;
+}
+
+#mobile-checkout #fc_checkout_container input.fc_text.fc_location {
+	font-size: 48px;
+    width: 45% !important;
+}
+#mobile-checkout #fc_checkout_container select option, #mobile-checkout #fc_checkout_container ul.fc_foxycomplete_list li p{
+  	font-size: 36px;
+    height: 40px;
+}
+#mobile-checkout #fc_checkout_container input{
+	border-radius: 10px 10px 10px 10px;
+	height: 100px !important;
+}
+#mobile-checkout #fc_checkout_container input.checkbox {
+	height: 30px !important;
+}
+#mobile-checkout #fc_checkout_container input.fc_text_short {
+	font-size: 48px;
+	height: 40px;
+	width: 30% !important;
+}
+#mobile-checkout #fc_checkout_container li.fc_row_select select {
+	height: 100px;
+	width: 45% !important;
+}
+#mobile-checkout label.fc_error {
+	font-size: 20px;
+}
+#mobile-checkout #fc_checkout_container label.fc_pre, #mobile-checkout #fc_checkout_container span.fc_pre, #mobile-checkout #fc_receipt_container span.fc_pre{
+	line-height: 105px;
+}
+#mobile-checkout #fc_checkout_container #fc_custom_fields_container label.fc_pre {
+	line-height: 20px;
+	font-size: 28px;
+}
+#mobile-checkout #fc_checkout_container .fc_sub_frequency {
+	width: 280px !important;
+}
+#mobile-checkout #fc_checkout_container #sub_selection_container .fc_sub_frequency #sub_frequency {
+	font-size: 24px;
+	height: 50px;
+width: 260px !important;
+}
+#mobile-checkout #fc_form_checkout h2#scheduled {
+	height: 30px;
+}
+#mobile-checkout #fc_custom_fields_container {
+	margin-top: 20px;
+}
+#mobile-checkout #fc_checkout_container #sub_selection_container li.fc_row + li.fc_row {
+	margin-top: 30px;
+	width: 210px;
+}
+#mobile-checkout #fc_checkout_container #sub_selection_container label.ship-once{
+	font-size: 28px;
+}
+#mobile-checkout #fc_checkout_container #sub_selection_container label.ship-once #just_ship_once{
+	height: 15px !important;
+}
+#mobile-checkout #fc_checkout_container #sub_selection_container li.fc_row + li.fc_row + li.fc_row {
+	width: 100%;
+}
+#drbob .fc_shipping_city input,#drbob .fc_customer_city input,#drbob .fc_shipping_state_name input,#drbob .fc_customer_state_name input,#drbob .fc_shipping_postal_code input,#drbob .fc_customer_postal_code input,#drbob .fc_shipping_postal_code input,
+#mobile-checkout .fc_shipping_city input,#mobile-checkout .fc_customer_city input,#mobile-checkout .fc_shipping_state_name input,#mobile-checkout .fc_customer_state_name input,#mobile-checkout .fc_shipping_postal_code input,#mobile-checkout .fc_customer_postal_code input,#mobile-checkout .fc_shipping_postal_code input{
+      height: 27px !important;
+}
+#drbob .fc_shipping_city input,#drbob .fc_customer_city input {
+      width: 203px !important;    
+}
+#mobile-checkout .fc_shipping_city input,#mobile-checkout .fc_customer_city input{
+	font-size: 36px;
+	height: 40px;
+    width: 60% !important;    
+}
+#drbob #fc_address_shipping_container h2,#drbob #fc_customer_billing_container h2, #mobile-checkout #fc_address_shipping_container h2,#mobile-checkout #fc_customer_billing_container h2{
+       display: none;
+}
+#drbob .fc_use_different_billing_address, #mobile-checkout .fc_use_different_billing_address{
+       padding-left: 4% !important;
+}
+#drbob .fc_use_different_billing_address label span,#drbob .user-email, #mobile-checkout .fc_use_different_billing_address label span,#mobile-checkout .user-email{
+       font-size: 16px;
+       font-weight: bold;
+       color: #777777;
+}
+#drbob .user-email-label,#drbob .user-country-label, #mobile-checkout .user-email-label,#mobile-checkout .user-country-label{
+       font-size: 16px;
+       color: #777777;
+}
+#drbob .edit-email,#drbob .edit-country, #mobile-checkout .edit-email,#mobile-checkout .edit-country{
+       color: skyblue;
+       text-decoration: underline;
+       cursor: pointer;
+}
+#drbob #fc_payment_container {
+       width: 52% !important;
+       float: left !important;
+       padding: 15px 0px;
+}
+#mobile-checkout #fc_payment_container{
+		background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/05/securecreditcardpayment.png") no-repeat scroll 0 0 transparent;
+		padding-top: 65px;
+		padding-right: 1px;
+		background-size: 100%;
+       float: left !important;
+}       
+#mobile-checkout #fc_payment_container select#cc_start_date_month, #mobile-checkout #fc_payment_container select#cc_start_date_year {
+	font-size: 36px;
+    height: 100px;
+}
+#mobile-checkout #fc_payment_container li {
+	font-size: 20px;
+}
+#drbob .country-name, #mobile-checkout .country-name{
+       margin-bottom: 17px;
+}
+#drbob .checkout-header-div{
+       background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://staging.orabrush.com/foxy_css/images/whereshouldweship_orapups.png") no-repeat scroll 0 0 transparent;
+       height: 45px;
+       width: 804px;
+       float: left;
+}
+#mobile-checkout .checkout-header-div{
+       background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/05/whereshouldweshipyourorapups.png") no-repeat scroll 0 0 transparent;
+       height: 95px;
+       background-size: 80%;
+       margin-top: 10px;
+       width: 99%;
+       float: left;
+}
+#mobile-checkout #fc_payment_container h2 {
+	width: 100%;
+}
+#mobile-checkout #fc_payment_list #li_cc_number input{
+    width: 45%;
+	height: 40px;
+	font-size: 36px;
+}
+#mobile-checkout div#fc_continue a.fc_link_nav, #fc_receipt_links a#fc_receipt_continue_link {
+    background-size: 100%;
+    height: 44px;
+    width: 275px;
+}
+#mobile-checkout div#fc_continue a.fc_link_nav, #fc_receipt_links a#fc_receipt_continue_link:hover {
+	background-position: 0 -78px;
+}
+#drbob .checkout-header-div-singular, #mobile-checkout .checkout-header-div-singular{
+       background: url("https://secure.oraclub.com/cache.php?url=d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/whereshouldweshipyourorapup.png") no-repeat scroll 0 0 transparent;
+       height: 45px;
+       width: 782px;
+}
+/* variation testing for 4/19/2013 */
+#drbob .address .checkout-header-div, #mobile-checkout .address .checkout-header-div{
+       background: url("https://secure.oraclub.com/cache.php?url=d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/address.png") no-repeat scroll 0 0 transparent;
+}
+#drbob .addyourshippingaddress .checkout-header-div, #mobile-checkout .addyourshippingaddress .checkout-header-div{
+       background: url("https://secure.oraclub.com/cache.php?url=d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/addyourshippingaddress.png") no-repeat scroll 0 0 transparent;
+}
+#drbob .shippingaddress .checkout-header-div, #mobile-checkout .shippingaddress .checkout-header-div{
+       background: url("https://secure.oraclub.com/cache.php?url=d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/shippingaddress.png") no-repeat scroll 0 0 transparent;
+}
+#drbob .shippingaddress .checkout-header-div, #mobile-checkout .shippingaddress .checkout-header-div{
+       background: url("https://secure.oraclub.com/cache.php?url=d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/shippingaddress.png") no-repeat scroll 0 0 transparent;
+}
+#drbob .whatisyourshippingaddress .checkout-header-div, #mobile-checkout .whatisyourshippingaddress .checkout-header-div{
+       background: url("https://secure.oraclub.com/cache.php?url=d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/Whatisyourshippingaddress.png") no-repeat scroll 0 0 transparent;
+}
+#drbob .whereshouldweshipyourpackage .checkout-header-div, #mobile-checkout .whereshouldweshipyourpackage .checkout-header-div{
+       background: url("https://secure.oraclub.com/cache.php?url=d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/whereshouldweshipyourpackage.png") no-repeat scroll 0 0 transparent;
+width:802px;
+}
+/* end variation testing for 4/19/2013 */
+#drbob .payment-info-bob-img, #mobile-checkout .payment-info-bob-img{
+       width: 900px;
+       float: left;
+}
+#drbob #fc_shipping_container, #mobile-checkout #fc_shipping_container{
+       width: 52% !important;
+}
+#drbob .secure-payment-label, #mobile-checkout .secure-payment-label{
+       background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://staging.orabrush.com/foxy_css/images/securecreditcardpayment.png") no-repeat scroll 0 0 transparent;
+       height: 30px;
+       width: 804px;
+       float: left;
+}
+#drbob #fc_complete_order_button{
+       background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://staging.orabrush.com/foxy_css/images/confirm-order.png") no-repeat scroll 0 0 transparent !important;
+       width: 288px;   
+       height: 53px;
+       padding:0px;
+}
+
+#drbob #fc_complete_order_button:hover {
+       background-position: 0px -62px !important;
+}
+#mobile-checkout #fc_complete_order_button_old{
+       background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/05/confirm_order.png") no-repeat scroll 0 0 transparent !important;
+       background-size: 100% !important;
+       height: 53px;
+	    margin-left: 15px;
+	    padding: 0;
+	    width: 380px;
+}
+#mobile-checkout #fc_complete_order_button_old:hover{
+       background-position: 0px -63px !important;
+}
+#mobile-checkout #fc_complete_order_button{
+       background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/05/confirmorder_btn_new.png") no-repeat scroll 0 0 transparent !important;
+       height: 85px;
+	   padding: 0;
+	   width: 600px;
+	   margin-left: 5px;
+}
+#mobile-checkout #fc_complete_order_button:hover{
+       background-position: 0px -113px !important;
+}
+#mobile-checkout .fc_foxycomplete_combobox {
+    height: 105px !important;
+    left: 356px !important;
+}
+#mobile-checkout .fc_foxycomplete_flag {
+    left: 320px !important;
+}
+#drbob #fc_complete_order_button.fc_subscription_update, #mobile-checkout #fc_complete_order_button.fc_subscription_update{
+        width: 224px;
+        height: 0;
+        overflow: hidden;
+        padding: 25px 10px 0;
+        border: none;
+        background: url("//cdn.foxycart.com/static/themes/standard/images/button-update-subscription.png?v=1") no-repeat top left !important;
+        text-indent: -5000px;
+        cursor: pointer;
+}
+#drbob #fc_complete_order_button.fc_subscription_cancel,#mobile-checkout #fc_complete_order_button.fc_subscription_cancel{
+        width: 189px;
+        height: 0;
+        overflow: hidden;
+        padding: 25px 10px 0;
+        border: none;
+        background: url("//cdn.foxycart.com/static/themes/standard/images/button-cancel-subscription.png?v=1") no-repeat top left !important;
+        text-indent: -5000px;
+        cursor: pointer;    
+}
+#drbob #fc_complete_order_button.fc_subscription_cancel:hover, #mobile-checkout #fc_complete_order_button.fc_subscription_cancel:hover{
+        background-position: 0px -25px !important;
+}
+#drbob #fc_complete_order_button.fc_subscription_update:hover, #mobile-checkout #fc_complete_order_button.fc_subscription_update:hover{
+        background-position: 0px -25px !important;
+}
+#drbob #fc_complete_order_button_container {
+       float: left !important;
+       padding:0px;
+       padding-bottom:300px;
+       text-align: left;
+}
+#mobile-checkout #fc_complete_order_button_container{
+	float: left !important;
+    padding:0px;
+    text-align: left;
+}
+#mobile-checkout .drbob-mobile-img {
+	float: left;
+	margin-top: 30px;
+	width: 100%;
+}
+#mobile-checkout .drbob-mobile-img span{
+	background: url('https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/05/dr_bob_guarantee.png') no-repeat scroll 0 0 transparent;
+	width: 101%;
+	float: left;
+	height: 295px;
+	background-size: 100%;
+}
+#drbob .protected #fc_complete_order_button, #drbob .protected #fc_complete_order_processing,
+#mobile-checkout .protected #fc_complete_order_button, #mobile-checkout .protected #fc_complete_order_processing{
+	float:left;
+}
+#drbob .product-details{
+       width: 890px;
+       height: 150px;
+}
+#drbob .rightpackage .product-details, #mobile-checkout .rightpackage .product-details{
+       width: 380px;
+       height: 150px;
+}
+#drbob .rightpackage .product-img, #mobile-checkout .rightpackage .product-img{
+       margin-bottom:15px;
+}
+#drbob .product-color-name, #mobile-checkout .product-color-name{
+       float: left;
+       width: 350px;
+}
+#mobile-checkout .product-color-name{
+	padding-bottom: 40px;
+}
+#drbob .color1, #mobile-checkout .color1{
+       clear: both;
+       display: block;
+       font-size: 14px;
+       color: #4d4d4d;
+       line-height: 21px;
+}
+#drbob .color2, #mobile-checkout .color2{
+       font-size: 14px;
+       color: #4d4d4d;
+}
+#drbob .edit-color,#drbob .edit-package, #mobile-checkout .edit-color,#mobile-checkout .edit-package{
+       color: #0b9ec4;
+       text-decoration: underline;
+       cursor:pointer;
+}
+#mobile-checkout .edit-color,#mobile-checkout .edit-package{
+	font-size: 36px;
+}
+#drbob li.fc_shipping_country_name label, #mobile-checkout li.fc_shipping_country_name label{
+       display: none;
+}
+#drbob li.fc_shipping_country_name input, #mobile-checkout li.fc_shipping_country_name input{
+       width: 304px !important;
+       height: 14px !important;
+}
+#drbob li.fc_customer_country_name input, #mobile-checkout li.fc_customer_country_name input{
+       width: 304px !important;
+       height: 14px !important;
+}
+#drbob .fc_shipping_state_name .fc_foxycomplete_combobox, #drbob .fc_customer_state_name .fc_foxycomplete_combobox,
+#mobile-checkout .fc_shipping_state_name .fc_foxycomplete_combobox, #mobile-checkout .fc_customer_state_name .fc_foxycomplete_combobox{
+       height: 33px !important;
+       left: 132px !important;
+}
+#drbob .edit-package, #mobile-checkout .edit-package{
+       display: block;
+       clear: both;
+}
+#mobile-checkout .edit-package{
+	float: left;
+	width: 85%;
+	text-align: right;
+	margin-bottom: 10px;
+}
+#drbob .product-desc-label-img, #mobile-checkout .product-desc-label-img{
+       background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://staging.orabrush.com/foxy_css/images/yourpackage.png") no-repeat scroll 0 0 transparent;
+       height: 45px;
+       width: 804px;
+       position: relative;
+}
+#mobile-checkout .product-desc-label-img{
+background-size: 50%;
+       width: auto;
+}
+.privacy_terms_notice{
+	text-align:center;
+	font-size:9px;
+	color:grey;
+}
+.privacy_terms_notice a{
+	text-decoration:underline;
+}
+#drbob #fc_checkout_container,#mobile-checkout #fc_checkout_container {
+       background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://staging.orabrush.com/foxy_css/images/progressbar_2.png") no-repeat scroll left top transparent;
+       background-color: #fff;
+       margin-top: 4px !important;
+}
+#mobile-checkout #fc_checkout_container {
+	float: left;
+	background-size: 57%;
+	background-position: center 0;
+	margin-top: 10px !important;
+	width: 100%;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+#mobile-checkout .checkout-container-labe-div, #mobile-checkout #fc_form_checkout, #mobile-checkout div.product-img,
+#mobile-checkout .product-color-name {
+	width: 99.8%;
+}
+#mobile-checkout #fc_data_entry_container{
+	width: 99.9% !important;
+}
+#drbob .checkout-container-labe-div, #mobile-checkout .checkout-container-labe-div{
+	clear: both;
+    margin-left: 4px;
+	font-family: Arial, San-serif;
+	font-size: 12px;
+	text-align: left;
+}
+#mobile-checkout .checkout-container-labe-div{
+	text-align: center;
+	margin: 0 auto;
+	width: 90%;
+}
+#mobile-checkout #fc_payment_method_plastic_container {
+	width: 47% !important;
+}
+#mobile-checkout #fc_payment_method_plastic_container label.fc_radio {
+	width: 100%;
+}
+#mobile-checkout #fc_payment_method_plastic_container span img {
+    width: 21%;
+}
+#drbob .pick-colors,#drbob .place-order,#drbob .receipt {
+       margin-right: 48px;
+}
+span.pick-colors{
+    color: #F05F00;
+}    
+#mobile-checkout span.pick-colors{
+    color: #F05F00;
+    width: 38%;
+	float: left;
+	font-size: 20px;
+}
+span.place-order{
+    color: #041E3F;
+}    
+#mobile-checkout span.place-order{
+    color: #041E3F;
+    float: left;
+	font-size: 20px;
+}
+span.receipt{
+       color: #B9B9C8;
+}
+#mobile-checkout span.receipt{
+    color: #B9B9C8;
+    font-size: 20px;
+	margin-left: -10px;
+}
+#mobile-checkout select#cc_exp_year {
+	width: 30%;
+	height: 100px;
+	font-size: 48px;
+}
+#mobile-checkout select#cc_exp_month {
+	width: 35%;
+	height: 100px;
+	font-size: 48px;
+}
+#mobile-checkout div#product-description-value, #mobile-checkout div#product-description-value span {
+	font-size: 54px !important;
+	width: auto;
+}
+#mobile-checkout div#product-description-value {
+	margin-left: 5px;
+}
+#mobile-checkout .product-img img {
+	width: 90%;
+}
+#mobile-checkout .product-img span, #mobile-checkout h2, #mobile-checkout #fc_checkout_container .fc_account_mes
+#mobile-checkout #fc_checkout_container .fc_account_message b, #mobile-checkout .secure-logo-label, #mobile-checkout #fc_payment_container li span,
+#mobile-checkout #fc_payment_container div, #mobile-checkout #fc_checkout_container .fc_account_message,
+#mobile-checkout .fc_use_different_billing_address label span, #mobile-checkout .fc_account_message b {
+	font-size: 36px !important;
+}
+#mobile-checkout #fc_payment_list #li_cc_number .fc_pre, #mobile-checkout #fc_payment_list #li_cc_exp_month .fc_pre,
+#mobile-checkout #fc_payment_list #li_cc_cvv2 .fc_pre {
+	height: auto;
+}
+#mobile-checkout #fc_form_checkout h2 {
+	height: 105px;
+}
+#mobile-checkout #fc_checkout_container label.fc_pre {
+	font-size: 36px;
+}
+#mobile-checkout #fc_checkout_container input.fc_text {
+	font-size: 48px;
+	width: 50%;
+}
+#mobile-checkout .fc_use_different_billing_address .checkbox {
+	width: 20px;
+	height: 30px;
+}
+div#product-description-value{font-size:14px !important;width:300px; line-height: 1.4;}
+div#product-description-value span{font-size:14px !important;}
+span.made-in-usa-custom{color:red !important;}
+span.free-shipping-custom{color:#ff7800 !important; font-weight:bold;}
+div.product-img{float:left;}
+/*dr bob checkout css*/
+#drbob .checkout-title,#drbob #fc_shipping_list,#drbob .cards-images, #drbob .truste-info, #drbob #fc_shipping_container h2, #drbob #fc_shipping_container fieldset,
+#mobile-checkout .checkout-title,#mobile-checkout #fc_shipping_list,#mobile-checkout .cards-images, #mobile-checkout .truste-info, #mobile-checkout #fc_shipping_container h2, #mobile-checkout #fc_shipping_container fieldset{
+    display: none;
+}
+#drbob .right #fc_shipping_container, #mobile-checkout .right #fc_shipping_container{
+	float:left;
+}
+#drbob .bob-image-div, #mobile-checkout .bob-image-div{
+     background: url("https://secure.oraclub.com/cache.php?url=www2.orabrush.com/foxy_css/images/bob.png") no-repeat scroll 0 0 transparent;
+     float: left;
+     width: 367px;
+     height: 387px;
+     margin-top: 15px;
+}
+#drbob #fc_checkout_container #fc_payment_container, #mobile-checkout #fc_checkout_container #fc_payment_container {
+    margin-right: 0%;
+}
+#drbob #fc_payment_list, #mobile-checkout #fc_payment_list {
+	padding-bottom: 3px !important;
+	min-height: 243px;
+}
+#mobile-checkout #fc_payment_list {
+	width: 100%;
+}
+li_cc_cvv2 .security-code-img
+.security-code-label {
+      float: left;
+      padding-right: 20px;
+}
+#drbob #scheduled, #mobile-checkout #scheduled {
+      background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://staging.orabrush.com/foxy_css/images/scheduled_delivery.png") no-repeat scroll 0 0 transparent !important;
+      text-indent: -99999em;
+      margin-top: 15px;
+      padding: 0px 0 10px;        
+}
+.fc_edit_cart{
+	float: left;
+    margin-top: 80px;
+    left: 88%;
+}
+#drbob .privacy_terms_notice, #mobile-checkout .privacy_terms_notice{
+      margin-bottom: 5px;
+      font-size: 13px;
+      text-align: left; 
+}
+#drbob .privacy_terms_notice a, #mobile-checkout .privacy_terms_notice a{
+     font-size: 13px;
+}
+.product-img img{
+    width: 300px;
+}
+#drbob .truste-space,#mobile-checkout .truste-space {
+	display: none;
+}
+
+/**/
+#mobile-checkout .header-content {
+	float: left;
+	width: 100%;
+}
+#mobile-checkout #pageContainer {
+	float: left;
+	width: 100%;
+}
+.mobile-checkout .site-header {
+    background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/blue_header_slice.png") repeat-x scroll 0 140px #031D40;
+    float: left;
+    border-bottom: 14px solid #0A9DC3;
+    height: 82px;
+    width: 100%;
+}
+.mobile-checkout .site-header h1{
+float: none !important;
+margin: 0 auto !important;
+padding-top: 11px;
+}
+.mobile-checkout .orapup-nav {
+    height: 220px;
+}
+
+.mobile-checkout .by-orabrush {
+    background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/04/byorabrush.png") no-repeat scroll right 10px transparent;
+    float: left;
+    height: 40px;
+    width: 100%;
+}
+.mobile-checkout hgroup, .mobile-checkout #main {
+    clear: both;
+    float: left;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+}
+.mobile-checkout hgroup {
+	height: 100%;
+}
+.menu-button {
+    background: url("https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/05/menu.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 85px;
+    width: 42%;
+}
+.mobile-checkout .site-header h1 {
+    float: left;
+    height: 91%;
+    font-size: 1.85714rem;
+    line-height: 1.84615;
+    margin-bottom: 0;
+    margin-top: 5px;
+    overflow: hidden;
+    width: 40%;
+}
+.mobile-checkout .site-header h1.site-title a {
+    background: url('https://oraclub-staging.foxycart.com/cache.php?url=http://d24u6jzgh6a90w.cloudfront.net/wp-content/uploads/sites/2/2013/05/orapup_logo1.png') no-repeat scroll 0 40px transparent;
+    float: left;
+    height: 91%;
+    width: 100%;
+   background-size: 100%;
+}
+
+.mobile-checkout .fancybox-wrap {
+	left: 50px !important;
+	width: 90% !important;
+}
+.mobile-checkout .fancybox-inner {
+	width: 100% !important;
+        height: 90% !important;
+}
+.mobile-checkout #ship-content {
+	width: 98% !important;
+}
+/*Mobile Checkout*/
+.mobile-checkout .delivery-header h1,.mobile-checkout .delivery-header h2 {
+	font-size: 48px !important;
+}
+.mobile-checkout .delivery-header h3, .mobile-checkout .delivery-desc span {
+	font-size: 36px !important;
+}
+.mobile-checkout .email-week {
+	width: auto;
+}
+.mobile-checkout .bottom-content p.right-content {
+	top: 0;
+	width: 70%;
+}
+
+.mobile-checkout .bottom-content p.right-content span {
+	line-height: 40px;
+	font-size: 32px !important;
+}
+.mobile-checkout .schedule-btn {
+	height: 68px;
+	width: 98%;
+	background-size: 100%;
+}
+.mobile-checkout .ship-title p {
+	font-size: 24px;
+}
+.mobile-checkout .schedule-btn:hover {
+	background-position: 0px -81px;
+}

@@ -1,0 +1,415 @@
+{% if not is_subscription_cancel %}
+<!--
+    We have customized the subscription system to take preorders
+    and we don't want to notify people of a subscription cancellation
+    on a backorder
+    
+    TODO: send out subscription cancellation notices when it is legitimate
+-->
+
+{% use 'cart.inc.twig' %}
+
+<!--
+    This template taken from www.campaignmonitor.com
+    They provide great mailing list services, and have
+    an API for integration with FoxyCart (coming soon
+    at http://wiki.foxycart.com).
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<style type="text/css" media="screen">
+
+    /* common
+    --------------------------------------------------*/
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        color: #666;
+        background: #e5e0c9;
+    }
+    * #BodyImposter {
+        color: #666;
+        background: #e5e0c9;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+    }
+    * #BodyImposter li,
+    * #BodyImposter p,
+    * #BodyImposter td {
+        font-size: 12px;
+        line-height: 1.5em;
+        font-family: Helvetica, Arial, sans-serif;
+        text-align: justify;
+    }
+    * #BodyImposter p,
+    * #BodyImposter ol,
+    * #BodyImposter ul {
+        margin: 0em 0em 1em 0em;
+    }
+    * #BodyImposter img {
+        border: 0px;
+    }
+    * #Primary img {
+        float: right;
+        margin: 5px 0px 15px 15px;
+        border: 1px solid #d3d3d3;
+        padding: 6px;
+    }
+    * #BodyImposter small {
+        font-size: 10px;
+        line-height: 1.3em;
+    }
+    * #BodyImposter ol {
+        padding-left: 1em;
+    }
+    * #Primary ul {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    * #BodyImposter ol li {
+        margin: 0px;
+        padding: 0px;
+    }
+    * #BodyImposter ul li {
+        padding: 0px 0px 0px 8px;
+        margin: 0px;
+        list-style: square outside;
+    }
+
+    /* links
+    --------------------------------------------------*/
+
+    * #BodyImposter a {
+        text-decoration: underline;
+    }
+    * #Primary a:link,
+    * #Primary a:visited {
+        color: #000;
+        background: #fff;
+    }
+    * #Helpful a:link,
+    * #Helpful a:visited,
+    * #Legal a:link,
+    * #Legal a:visited {
+        color: #666;
+        background: transparent;
+    }
+    * #BodyImposter a:hover {
+        text-decoration: none;
+    }
+    * #BodyImposter a:active {
+        color: #000;
+        background: #fff;
+        text-decoration: none;
+    }
+
+    /* heads
+    --------------------------------------------------*/
+
+    * #BodyImposter h1,
+    * #BodyImposter h2 {
+        color: #945620;
+        background: #fff;
+        font-family: Georgia, Palatino, serif;
+        font-weight: normal;
+        line-height: normal;
+        margin: 0em 0em 0.5em 0em;
+        padding: 0px;
+        text-align: left;
+    }
+    * #Masthead h1 {
+        font-size: 28px;
+        color: #fff;
+        background: #333;
+        margin: 0px;
+    }
+    * #Primary h2,
+    * #Primary p.fc_heading {
+        color: #945620;
+        font-size: 22px;
+        font-family: Georgia, Palatino, serif;
+        padding-top: 35px;
+        text-align: left;
+    }
+
+    /* boxes
+    --------------------------------------------------*/
+
+    * #Box {
+        color: #666;
+        background: #fff;
+        border: 1px solid #d3d3d3;
+        margin: 0px auto;
+    }
+    * #Content {
+        border: 1px solid #d3d3d3;
+    }
+    * #Helpful,
+    * #Legal {
+        margin: 0px auto;
+    }
+    * #Helpful p,
+    * #Legal p {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+    }
+    * #Masthead {
+        color: #fff;
+        background: #333;
+    }
+    * #Masthead h1,
+    * #Masthead p {
+        text-align: left;
+    }
+    * #Masthead p {
+        font-size: 14px;
+        margin: 0px;
+    }
+    * #Masthead p #Date {
+        float: right;
+    }
+    * #Masthead {
+        width: 100%;
+        text-align: center;
+    }
+    /*
+    The asterisks preceding every selector ensure styles are rendered in Dot Mac.
+    The inline styles in headlines are for Outlook 2007.
+    */
+
+    #fc_purchasing_information_billing_address,
+    #fc_purchasing_information_shipping_address {
+        width:50%;
+        float:left;
+    }
+    p.fc_heading {
+        margin:10px 0px 0px;
+        border-top:2px solid #ccc;
+    }
+    #fc_purchasing_information_billing_address span.fc_item_label,
+    #fc_purchasing_information_shipping_address span.fc_item_label {
+        padding:4px;
+        background:#E5E0C9;
+        color:#000;
+    }
+    #fc_cart_table {
+        width:100%;
+        margin-bottom:20px;
+    }
+    #fc_cart_head th {
+        background:#E5E0C9 !important;
+        color:#000;
+    }
+    #fc_cart_foot_total_row td {
+        background:#eee !important;
+    }
+    #BodyImposter td{
+    	float: left;
+    	width: 100% !important;
+    }
+.gt div div table p{
+width: 48%;
+font-size: 20px;
+}
+.gt div div table ul{
+width: 46%;
+font-size: 16px;
+line-height: 30px;
+}
+.fc_cart_item_subscription_details{
+        display: none;
+}
+</style>
+</head>
+
+<body>
+<div id="BodyImposter">
+    <table id="Box" cellspacing="0" cellpadding="15" width="900" style="color: #666; background-color: #fff;">
+        
+  <tr><td>{% for custom_field in custom_fields %}
+       {% if custom_field.name == 'storename' and custom_field.value == 'orapup.com' or custom_field.name == 'storename' and custom_field.value == 'oraclub.com/orapup' or custom_field.name == 'host site' and custom_field.value == 'orapup'  %}
+         	<img id="email-domain-logo" src="staging.orabrush.com/foxy/orapup_logo_by_orabrush_gray.png"></img>     		  
+       {% endif %}	
+       {% if custom_field.name == 'storename' and custom_field.value == 'orabrush.com' or custom_field.name == 'storename' and custom_field.value == 'oraclub.com/orabrush' or custom_field.name == 'host site' and custom_field.value == 'orabrush'  %}
+		<img id="email-domain-logo" src="staging.orabrush.com/foxy/orabrush_web_logo_tongue_cleaner.png"></img>     		    
+       {% endif %}	
+    {% endfor %}</td></tr>
+<tr><td style="font-size:18px; font-weight: bold; width:100%; float: left;">Hello {{ first_name }} {{ last_name }} </td>
+<td style="font-size:16px;width:100%; float: left;">Thank you for ordering from 
+{% for custom_field in custom_fields %}
+       {% if custom_field.name == 'storename' and custom_field.value == 'orapup.com' or custom_field.name == 'storename' and custom_field.value == 'oraclub.com/orapup' or custom_field.name == 'host site' and custom_field.value == 'orapup'  %}
+         	Orapup
+       {% endif %}	
+       {% if custom_field.name == 'storename' and custom_field.value == 'orabrush.com' or custom_field.name == 'storename' and custom_field.value == 'oraclub.com/orabrush' or custom_field.name == 'host site' and custom_field.value == 'orabrush'  %}
+		Orabrush
+       {% endif %}	
+    {% endfor %}.
+</td>
+</tr>
+  <tr>
+^^order_begin^^
+{% for custom_field in custom_fields %}
+       {% if custom_field.name == 'storename' and custom_field.value == 'orapup.com' or custom_field.name == 'storename' and custom_field.value == 'oraclub.com/orapup' or custom_field.name == 'host site' and custom_field.value == 'orapup'  %}
+         	<td id="Primary" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px;width:100%">
+							<p style="line-height: 24px; font-size: 18px;width:100% ">We know how excited you are to receive your Orapup, so we strive to ship within one business day. Once your package ships, you will receive an email containing your shipping information. If you live in the US, your Orapup should arrive in 3-7 days.For most every where else takes 2-4 weeks. A few destinations upto six.</p>
+						</td></tr>
+					<tr><td>
+						 <span style="width:100%;font-size: 18px; float: left;">If you have any questions about order please contact us at <span style="color:blue;">drbob@orapup.com</span> or call us at <span style="color:blue;">888-841-5286</span> Monday-Friday,6am-6pm MST.<br/><br/>
+						 Thank you again for your business.Your order confirmation is below.
+						</span>
+						</td>
+					</tr>
+					<tr><td style="font-size:18px; font-weight: bold; width:100%; float: left;">Your Order #^^order_id^^</td></tr>
+		</td>
+         	
+       {% endif %}	
+       {% if custom_field.name == 'storename' and custom_field.value == 'orabrush.com' or custom_field.name == 'storename' and custom_field.value == 'oraclub.com/orabrush' or custom_field.name == 'host site' and custom_field.value == 'orabrush'  %}
+		<td id="Primary" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px;width:100%">
+							<p style="line-height: 24px; font-size: 18px;width:100% ">We know how excited you are to receive your Orabrush, so we strive to ship within one business day. Once your package ships, you will receive an email containing your shipping information. If you live in the US, your Orabrush should arrive in 3-7 days.For most every where else takes 2-4 weeks. A few destinations upto six.</p>
+						</td></tr>
+					<tr>
+						<td style="width:100%;font-size: 18px;">While you wait, check out our new video on how to use Orabrush:</td></tr>
+					<tr><td>
+						<span style="float: left; margin-right: 40px;"><a href="http://tutorial.orabrush.com">
+						<img src="staging.orabrush.com/foxy/tutorial-email.png"></img></a></span>
+						<span style="width:50%;font-size: 18px; float: left;">If you have any questions about order please contact us at <span style="color:blue;">drbob@orabrush.com</span> or call us at <span style="color:blue;">888-841-5286</span> Monday-Friday,6am-6pm MST.<br/><br/>
+						 Thank you again for your business.Your order confirmation is below.
+						</span>
+						</td>
+					</tr>
+					<tr><td style="font-size:18px; font-weight: bold; width:100%; float: left;">Your Order #^^order_id^^</td></tr>
+		</td>
+
+       {% endif %}	
+    {% endfor %}.
+		</tr>
+
+
+
+<div style="float:none; clear:both;"></div>
+{% if not is_updateinfo %}
+   {{ custom_cart }}
+{% endif %}
+
+
+^^order_end^^
+
+^^updateinfo_begin^^
+		<tr>
+            <td>
+                <table id="Masthead" cellspacing="0" cellpadding="20" width="900">
+                    <tr>
+                        <td style="color: #fff; background: #333; font-family: Helvetica, Arial, sans-serif;">
+                            <h1 style="font-family: Georgia, Palatino, serif;">{{ store_name|raw }}</h1>
+                            <p>Updated Billing Information</p>
+                        </td>
+
+                    </tr>
+                </table>
+                <table id="Content" cellspacing="0" cellpadding="20" width="580" style="color: #666; background-color: #fff;">
+                    <tr valign="top">
+                        <td id="Primary" style="font-family: Helvetica, Arial, sans-serif;">
+
+
+			<p>Your billing information has been updated as displayed below.</p>
+
+			{% include 'email_order_details.inc.twig' %}
+			
+			^^updateinfo_end^^
+			
+			^^subscription_cancel_begin^^
+            <td>
+                <table id="Masthead" cellspacing="0" cellpadding="20" width="900">
+                    <tr>
+                        <td style="color: #fff; background: #333; font-family: Helvetica, Arial, sans-serif;">
+                            <h1 style="font-family: Georgia, Palatino, serif;">{{ store_name|raw }}</h1>
+                            <p><strong>Scheduled Delivery Cancelled</strong></p>
+                        </td>
+
+                    </tr>
+                </table>
+              	<table id="Content" cellspacing="0" cellpadding="20" width="900" style="color: #666; background-color: #fff;">
+                    <tr valign="top">
+                        <td id="Primary" style="font-family: Helvetica, Arial, sans-serif;">
+
+
+                            <p><strong>This email is confirmation that the scheduled delivery listed below will be canceled and not billed further.</strong></p>
+
+							{% include 'email_order_details.inc.twig' %}
+							{{ block('cart_begin') }}
+							{{ block('header') }}
+							{{ block('body') }}
+							{{ block('footer') }}
+							{{ block('cart_end') }}
+							
+							^^subscription_cancel_end^^
+							
+							^^subscription_modification_begin^^
+				<td>
+                <table id="Masthead" cellspacing="0" cellpadding="20" width="900">
+                    <tr>
+                        <td style="color: #fff; background: #333; font-family: Helvetica, Arial, sans-serif;">
+                            <h1 style="font-family: Georgia, Palatino, serif;">{{ store_name|raw }}</h1>
+                            <p>Scheduled Delivery Modification</p>
+                        </td>
+
+                    </tr>
+                </table>
+                <table id="Content" cellspacing="0" cellpadding="20" width="900" style="color: #666; background-color: #fff;">
+                    <tr valign="top">
+                        <td id="Primary" style="font-family: Helvetica, Arial, sans-serif;">
+
+
+                            <p>This email is confirmation that the scheduled delivery listed below has been modified.</p>
+
+{% include 'email_order_details.inc.twig' %}
+{{ block('cart_begin') }}
+{{ block('header') }}
+{{ block('body') }}
+{{ block('footer') }}
+{{ block('cart_end') }}
+
+^^subscription_modification_end^^
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table id="Legal" cellspacing="0" cellpadding="15" width="610">
+
+        <tr>
+            <td style="font-family: Helvetica, Arial, sans-serif;">
+                <p>{{ store_name|raw }}</p>
+            </td>
+        </tr>
+    </table>
+    </td>
+    </td>
+    </tr>
+    </table>
+    </td>
+    </tr>
+    </table>
+</div>
+
+</body>
+</html>
+<!--
+    We have customized the subscription system to take preorders
+    and we don't want to notify people of a subscription cancellation
+    on a backorder
+    
+    TODO: send out subscription cancellation notices when it is legitimate
+-->
+{% endif %}
