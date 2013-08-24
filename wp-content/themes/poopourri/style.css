@@ -3492,5 +3492,5 @@ div#widget_highlight .shadow_right{
 #landing-page #satisfiedpooers{ background:url(images/satisfied_pooers_header.png); width:1064px; height:64px;}
 #landing-page #youtubereviews{ background:url(images/youtube_reviews_header.png); width:1064px; height:64px;}
 
-a.ytlightbox{ position:relative;display:block;width:244px;height:138px;border:1px solid #000;float:left;margin-left:20px;margin-bottom:20px; }
-a.ytlightbox span{position:absolute;top:0px;left:0px;width: 244px; height: 138px; background-image:url(/wp-content/themes/poopourri/images/vid_thumb_overlay.png);}
+a.ytlightbox{ position:relative;width:244px;height:138px;border:1px solid #000;float:left;margin-left:20px;margin-bottom:20px; }
+a.ytlightbox span{position:absolute;top:0px;left:0px;width: 244px; height: 138px; background-image:url(/wp-content/themes/poopourri/images/vid_thumb_overlay.png);display:block;}
