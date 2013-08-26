@@ -3514,6 +3514,7 @@ padding-bottom: 20px;
 clear: both;
 display: block;
 }
+div#packages div{position:relative;height:}
 div#packages ul{
 padding-top:0px;
 margin-top:0px;
