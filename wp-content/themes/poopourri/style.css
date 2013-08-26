@@ -3526,6 +3526,7 @@ padding-bottom: 0px;
 margin-top: 20px;
 margin-bottom: 20px;
 }
+div.narrower-content{ width:550px;}
 div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;}
 a.ytlightbox{ position:relative;width:244px;height:138px;border:1px solid #000;float:left;margin-left:20px;margin-bottom:20px; }
 a.ytlightbox span{position:absolute;top:0px;left:0px;width: 244px; height: 138px; background-image:url(/wp-content/themes/poopourri/images/vid_thumb_overlay.png);display:block;}
