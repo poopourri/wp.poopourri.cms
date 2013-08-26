@@ -3520,6 +3520,7 @@ div#packages ul{
 padding-top:0px;
 margin-top:0px;
 padding-right:40px;
+line-height: 12pt;
 }
 div#packages img.package_products{
 padding-top: 0px;
@@ -3535,6 +3536,6 @@ div#packages blockquote {
 }
 div#packages p{margin:0 0 16px;}
 div.narrower-content{ width:725px;margin-left:auto;margin-right:auto; }
-div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;line-height: 12pt;}
+div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;}
 a.ytlightbox{ position:relative;width:244px;height:138px;border:1px solid #000;float:left;margin-left:20px;margin-bottom:20px; }
 a.ytlightbox span{position:absolute;top:0px;left:0px;width: 244px; height: 138px; background-image:url(/wp-content/themes/poopourri/images/vid_thumb_overlay.png);display:block;}
