@@ -3497,6 +3497,21 @@ div#widget_highlight .shadow_right{
 #landing-page #youtubereviews{ background:url(images/youtube_reviews_header.png); width:1064px; height:64px;}
 #landing-page #getyourstoday{ background:url(images/get_yours_today_header.png); width:1064px; height:64px;}
 
+div#packages .a_package{
+    width: 30%;
+    text-align: left;
+    float: left;
+}
+div#packages img.package_header{width: 320px;height: 95px;}
+div#packages a.order_now_link{
+    color: #0088B0;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-left:10px;
+    margin-top:10px;
+}
+
+
 div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;}
 a.ytlightbox{ position:relative;width:244px;height:138px;border:1px solid #000;float:left;margin-left:20px;margin-bottom:20px; }
 a.ytlightbox span{position:absolute;top:0px;left:0px;width: 244px; height: 138px; background-image:url(/wp-content/themes/poopourri/images/vid_thumb_overlay.png);display:block;}
