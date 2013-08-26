@@ -3504,7 +3504,7 @@ div#packages .a_package{
     margin-left:22px;
 }
 div#packages img.package_header{width: 320px;height: 95px;}
-div#packages div.inner_package{ height:930px;position:relative;}
+div#packages div.inner_package{ height:860px;position:relative;}
 div#packages a.order_now_link{
 color: #0088B0;
 font-weight: bold;
@@ -3534,6 +3534,6 @@ div#packages blockquote {
 }
 div#packages p{margin:0 0 16px;}
 div.narrower-content{ width:725px;margin-left:auto;margin-right:auto; }
-div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;}
+div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;padding-right: 40px;line-height: 12pt;}
 a.ytlightbox{ position:relative;width:244px;height:138px;border:1px solid #000;float:left;margin-left:20px;margin-bottom:20px; }
 a.ytlightbox span{position:absolute;top:0px;left:0px;width: 244px; height: 138px; background-image:url(/wp-content/themes/poopourri/images/vid_thumb_overlay.png);display:block;}
