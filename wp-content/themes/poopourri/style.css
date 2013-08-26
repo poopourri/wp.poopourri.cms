@@ -3498,7 +3498,7 @@ div#widget_highlight .shadow_right{
 #landing-page #getyourstoday{ background:url(images/get_yours_today_header.png); width:1064px; height:64px;}
     
 div#packages .a_package{
-    width: 30%;
+    width: 300px;
     text-align: left;
     float: left;
 }
