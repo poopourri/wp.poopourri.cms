@@ -3478,6 +3478,10 @@ div#widget_highlight .shadow_right{
 .order_now_small_btn{ width:140px; height:43px; background-position:-10px -10px; }
 .order_now_small_btn:hover{ width:140px; height:43px; background-position:-10px -63px; }
 
+.order_now_package_btn{ background:url("images/order_now_package_btn.png") top left no-repeat; }
+.order_now_package_btn{ width:320px; height:66px; background-position:-10px -10px; }
+.order_now_package_btn:hover{ width:320px; height:66px; background-position:-10px -86px; }
+
 .cart_btn{ background:url("images/cart_btn.png") top left no-repeat; }
 .cart_btn{ width:206px; height:42px; background-position:-10px -12px; }
 .cart_btn:hover{ width:206px; height:42px; background-position:-10px -64px; }
