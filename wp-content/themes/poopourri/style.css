@@ -3526,6 +3526,12 @@ padding-bottom: 0px;
 margin-top: 20px;
 margin-bottom: 20px;
 }
+div#packages blockquote {
+	font-size: 18px;
+	font-style: italic;
+	font-weight: 300;
+	margin: 0px 0px;
+}
 div.narrower-content{ width:725px;margin-left:auto;margin-right:auto; }
 div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;}
 a.ytlightbox{ position:relative;width:244px;height:138px;border:1px solid #000;float:left;margin-left:20px;margin-bottom:20px; }
