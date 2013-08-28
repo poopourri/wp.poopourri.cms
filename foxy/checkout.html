@@ -101,8 +101,8 @@ if(jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout
 		
 		// this is showing a way to create an account without guest option
 		if(!$('#is_anonymous_0').is(':visible') && $('#li_customer_password').is(':visible') && $('#li_customer_password2').is(':visible') && !is_resetting_password){
-var unix = Math.round(+new Date()/1000);
-			var auto_password = $('#customer_email').val().split('@')[0] + $('#order_total').val();
+                        var unix = Math.round(+new Date()/1000);
+			var auto_password = $('#customer_email').val().split('@')[0] + $('#order_total').val() + unix;
 			jQuery('#fc_account_message_status').show().html('Your confirmation will be sent to <b>'+$('#customer_email').val()+'</b> after you complete your order below.');
 			$('#li_customer_password').hide();
 			$('#li_customer_password2').hide();
@@ -114,6 +114,7 @@ var unix = Math.round(+new Date()/1000);
 		handleEmailType();
 	});
 }
+
 var mustShowEmail = false;
 function handleEmailType(){
 	if(jQuery("label.fc_error[for='customer_email']").is(':visible')){ // invalid email
@@ -121,38 +122,39 @@ function handleEmailType(){
 	}else if(jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_instructions_email){ // now email entered
 	mustShowEmail = true; 
 }
-// are we resetting the password?
-		var newString = FC.checkout.config.lang.checkout_found_customer_info_logged_in + ' Please create a new password below. Your new password will be saved when you click confirm at the bottom of the page.';
 
-		var is_resetting_password = (jQuery('#fc_account_message_status').text()==newString || (jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_password_sent_to + $('#customer_email').val() + FC.checkout.config.lang.checkout_password_sent_check_spam) || jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_sending_login_info);
+// are we resetting the password?
+var newString = FC.checkout.config.lang.checkout_found_customer_info_logged_in + ' Please create a new password below. Your new password will be saved when you click confirm at the bottom of the page.';
+
+var is_resetting_password = (jQuery('#fc_account_message_status').text()==newString || (jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_password_sent_to + $('#customer_email').val() + FC.checkout.config.lang.checkout_password_sent_check_spam) || jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_sending_login_info);
 		
 if(mustShowEmail==false && jQuery('#fc_account_message_status').text()==FC.checkout.config.lang.checkout_found_customer_info_account_only){
-$('.email-info').hide();
+                 $('.email-info').hide();
                  $('#fc_login_register_container').show();
         }else if(is_resetting_password==true){
-$('.email-info').hide();
+                 $('.email-info').hide();
                  $('#fc_login_register_container').show();
         }else if(typeof $('.email-info').val()!='undefined'){
                  $('.email-info .user-email').text($('#customer_email').val());
                  $('.email-info').show();
-                $('#fc_login_register_container').hide();
-		$('#customer_password').blur();
-		$('#shipping_first_name').focus();
+                 $('#fc_login_register_container').hide();
+		 $('#customer_password').blur();
+		 $('#shipping_first_name').focus();
         }
 }
 function prePopulateBilling(){
-var fields = new Array('first_name','last_name','address1','address2','city','state_name','postal_code','country');
-var sourcePrefix = '#fc_address_shipping_list #shipping_';
-var targetPrefix = '#fc_customer_billing_list #customer_';
-for(var i=0;i<fields.length;i++){
-	if(typeof $(sourcePrefix+fields[i]).val()!='undefined' && $(targetPrefix+fields[i]).val()=='' ||
-	   typeof $(sourcePrefix+fields[i]).val()!='undefined' && $('#use_different_addresses').is(':checked')==false){
-		$(targetPrefix+fields[i]).val($(sourcePrefix+fields[i]).val());
-	}
-}
+        var fields = new Array('first_name','last_name','address1','address2','city','state_name','postal_code','country');
+        var sourcePrefix = '#fc_address_shipping_list #shipping_';
+        var targetPrefix = '#fc_customer_billing_list #customer_';
+        for(var i=0;i<fields.length;i++){
+	      if(typeof $(sourcePrefix+fields[i]).val()!='undefined' && $(targetPrefix+fields[i]).val()=='' ||
+        	   typeof $(sourcePrefix+fields[i]).val()!='undefined' && $('#use_different_addresses').is(':checked')==false){
+		   $(targetPrefix+fields[i]).val($(sourcePrefix+fields[i]).val());
+	      }
+        }
 }
 
-function prepPlaceholders(){ // this function is for IE placeholders on drbob variation
+function prepPlaceholders(){ // this function is for IE placeholders
 if(navigator.userAgent.indexOf('MSIE')!=-1 && navigator.userAgent.indexOf('MSIE 10') == -1){
 $('#drbob [placeholder]').focus(function() {
   var input = $(this);

@@ -31,7 +31,7 @@ get_header(); ?>
   		<p style="position:absolute;right:0px;bottom: 225px;width:380px;text-align:center;font-size:14pt;font-weight:bold;color:#0088B0;">
 			Over 4 million sold!
 		</p>
-  		<a href="#" class="order_now_btn" style="position:absolute;right:0px;bottom: 165px;"></a>
+  		<a href="packages" class="order_now_btn" style="position:absolute;right:0px;bottom: 165px;"></a>
   
 		</div>
 		<div class="shadow_left"></div>
