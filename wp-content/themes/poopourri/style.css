@@ -1037,7 +1037,7 @@ a.cart-link:hover {
 .follow_header_btn:hover{ width:258px; height:99px; background-position:-10px -119px; }
 .follow_header_btn:active{ width:258px; height:99px; background-position:-10px -228px; }
 
-ul#menu-customer-menu{ float:left; }
+ul.nav-menu{ float:left; }
 
 .main-navigation {
 	clear: both;
