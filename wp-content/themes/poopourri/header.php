@@ -54,6 +54,11 @@
 				<nav id="site-navigation" class="main-navigation" role="navigation">
 					<h3 class="menu-toggle"><?php _e( 'Menu', 'twentythirteen' ); ?></h3>
 					<a class="screen-reader-text skip-link" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentythirteen' ); ?>"><?php _e( 'Skip to content', 'twentythirteen' ); ?></a>
+					<?php if ( is_user_logged_in() ) { ?>
+						<ul id="menu-account-menu" class="nav-menu"><li id="menu-item-account" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#">My Account</a></li></ul>
+					<?php } else { ?>
+						<ul id="menu-account-menu" class="nav-menu"><li id="menu-item-account" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#">Sign In / Create Account</a></li></ul>
+					<?php } ?>
 					<?php wp_nav_menu( array( 'theme_location' => 'customer', 'menu_class' => 'nav-menu' ) ); ?>
 					<?php get_search_form(); ?>
 				</nav><!-- #site-navigation -->
