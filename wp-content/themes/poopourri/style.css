@@ -1037,6 +1037,8 @@ a.cart-link:hover {
 .follow_header_btn:hover{ width:258px; height:99px; background-position:-10px -119px; }
 .follow_header_btn:active{ width:258px; height:99px; background-position:-10px -228px; }
 
+ul#menu-customer-menu{ float:left; }
+
 .main-navigation {
 	clear: both;
 	margin: 0 auto;
@@ -1244,7 +1246,7 @@ ul.nav-menu li:hover > ul,
 	border: none;
 	cursor: pointer;
 	height: 37px;
-	margin: 3px 0;
+	margin: -3px 0;
 	padding: 0 0 0 34px;
 	position: relative;
 	-webkit-transition: width 400ms ease, background 400ms ease;
