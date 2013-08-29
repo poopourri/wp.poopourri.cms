@@ -146,7 +146,6 @@
 		$('.cart-items .count').text(cart.product_count);
 
 		fcc.events.cart.preprocess.add_pre(function(e, arr) {
-		    if (arr['cart'] != "view") {
             		console.log("Preprocess - adding a product silently");
             		var jsonString = "";
             		jsonString = 'https://' + fcc.storedomain + '/cart?output=json&1:quantity=2&1:name=Add%20in%20preprocess&1:price=3.23&1:weight=5&1:code=pre1';
@@ -160,9 +159,6 @@
                 		fcc.events.cart.preprocess.resume();
             		});
             		return "pause";
-       		 } else {
-           		 return true;
-        	 }
     		});
 
 		fcc.events.cart.postprocess.add(function(){
