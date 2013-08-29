@@ -1289,7 +1289,7 @@ ul.nav-menu li:hover > ul,
 #follow-content .connect-link-list { padding-bottom: 20px; }
 #follow-content .connect-link-list li  { background: url(images/social_icons.png) no-repeat; display: block; width: 25px; height: 26px; margin-right: 10px; text-indent: 40%; margin-bottom: 5px; }
 #follow-content .connect-link-list li:hover { opacity: .8; }
-#follow-content .connect-link-list li a { text-indent: 100%; display: block; width: 250px; height: 26px; padding: 3px; margin-left: -11px; }
+#follow-content .connect-link-list li a { text-indent: 100%; display: block; width: 250px; height: 26px; padding: 3px; margin-left: -6px; }
 #follow-content .connect-link-list li.last a { margin-right: 0; }
 #follow-content .connect-link-list li.facebook  { background-position: 0 0; }
 #follow-content .connect-link-list li.twitter  { background-position: -25px 0; }
