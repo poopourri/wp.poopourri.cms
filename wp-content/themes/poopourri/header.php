@@ -48,11 +48,22 @@
                 </div>
                 <div id="follow-content" class="header-content clearfix">
        <div class="right">
+            <div class="newsletter-signup">
+                <h6 class="heading">Newsletter Signup</h6>
+                <div class="form clearfix">
+                    <div class="alert alert-error hide"><p></p></div>
+                    <div class="alert thank-you hide">
+                        <p>Your Email has been added.</p>
+                    </div>
+                    <input type="email" name="email" class="email" placeholder="Enter Your Email">
+                    <a class="btn btn-small action-submit"><span class="label">Send</span></a>
+                </div>
+            </div>
             <ul class="supernav-list connect-link-list addthis_toolbox addthis_default_style">
                 
-                <li class="facebook"><a class="addthis_button_facebook_follow at300b" addthis:userid="JRWNaturals" href="http://www.facebook.com/poopourri.spray" target="_blank" title="Follow on Facebook"><span class="at16nc at300bs at15nc at15t_facebook at16t_facebook"><span class="screen-reader-text">Share on facebook</span></span>“Like Us” on Facebook</a></li>
-                <li class="twitter"><a class="addthis_button_twitter_follow at300b" addthis:userid="JRWNaturals" target="_blank" title="Follow on Twitter" href="https://twitter.com/poopourri1"><span class="at16nc at300bs at15nc at15t_twitter at16t_twitter"><span class="screen-reader-text">Share on twitter</span></span>“Follow Us” on Twitter</a></li>
-                <li class="pinterest"><a class="addthis_button_pinterest_follow at300b" addthis:userid="jrwnaturals" href="http://pinterest.com/poopourri1/" target="_blank" title="Follow on Pinterest"><span class=" at300bs at15nc at15t_pinterest"><span class="screen-reader-text">Share on pinterest</span></span>“Follow Us” on Pinterest</a></li>
+                <li class="facebook"><a class="addthis_button_facebook_follow at300b" addthis:userid="JRWNaturals" href="http://www.facebook.com/poopourri.spray" target="_blank" title="Follow on Facebook"><span class="at16nc at300bs at15nc at15t_facebook at16t_facebook"><span class="screen-reader-text">Share on facebook</span></span>"Like Us" on Facebook</a></li>
+                <li class="twitter"><a class="addthis_button_twitter_follow at300b" addthis:userid="JRWNaturals" target="_blank" title="Follow on Twitter" href="https://twitter.com/poopourri1"><span class="at16nc at300bs at15nc at15t_twitter at16t_twitter"><span class="screen-reader-text">Share on twitter</span></span>"Follow Us" on Twitter</a></li>
+                <li class="pinterest"><a class="addthis_button_pinterest_follow at300b" addthis:userid="jrwnaturals" href="http://pinterest.com/poopourri1/" target="_blank" title="Follow on Pinterest"><span class=" at300bs at15nc at15t_pinterest"><span class="screen-reader-text">Share on pinterest</span></span>"Follow Us" on Pinterest</a></li>
                 <li class="tumblr"><a class="addthis_button_tumblr_follow at300b" addthis:userid="clearconscienceblog" href="http://www.youtube.com/channel/UCZyrOlKnW26YyLiPT0bvOCA" target="_blank" title="Subscribe on YouTube"><span class="at16nc at300bs at15nc at15t_tumblr at16t_tumblr"><span class="screen-reader-text">Subscribe on YouTube</span></span>Subscribe on YouTube</a></li>
                 
             <div class="clear"></div></ul>
