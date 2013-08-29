@@ -126,11 +126,12 @@
 			}else{
 				$('#cart-content').html('<iframe src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');
             		}
-			$('.cart-items .count').text(FC.json.product_count);
             }else{
 		$('#cart-content').html('<div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Loading...</div>');
-		$('.cart-items .count').text(FC.json.product_count);
 	    }
+	    jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
+		$('.cart-items .count').text(cart.product_count);
+ 	     });
 	});
 
 	/**
