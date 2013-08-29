@@ -164,7 +164,9 @@
 		fcc.events.cart.postprocess.add(function(){
 	    		jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
 				var openClass = 'cart-is-open';
-	    			_header.toggleClass(openClass);
+				if(!_header.hasClass(openClass)){
+	    				_header.toggleClass(openClass);
+				}
             			// load the cart if it has something in it
 	    			if(_header.hasClass(openClass)){
 					$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');	     
