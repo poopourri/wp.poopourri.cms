@@ -121,19 +121,12 @@
 	    _header.toggleClass(openClass);
             // load the cart if it has something in it
 	    if(_header.hasClass(openClass)){
-		jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
-			console.info(cart.product_count);
-			console.info(cart.total_price);
-			console.info(cart.total_discount);
-			var total_price = cart.total_price - cart.total_discount;
-			console.log('You have '+cart.product_count+' products in your cart, totalling $'+total_price+' (which is after a $'+cart.total_discount+' discount).');
-			if(cart.product_count==0){
+			if(FC.json.product_count==0){
 				$('#cart-content').html('<div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Your Cart Is Empty</div>');
 			}else{
 				$('#cart-content').html('<iframe src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');
             		}
-			$('.cart-items .count').text(cart.product_count);
-		});
+			$('.cart-items .count').text(FC.json.product_count);
             }else{
 		$('#cart-content').html('<div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Loading...</div>');
 		$('.cart-items .count').text(FC.json.product_count);
@@ -142,16 +135,9 @@
 
 	jQuery(document).ready(function($) {
 		$('.cart-items .count').text(FC.json.product_count);
-		fcc.events.cart.postprocess.add(function(){
-			$('.cart-items .count').text(FC.json.product_count);
-		});
-	});
-
-	/**
-	 * Load the cart quantity
-	 */
-	jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
-		$('.cart-items .count').text(cart.product_count);
+		if($('form.foxyshop_product').length!=0){
+			$('form.foxyshop_product').submit(function(){ alert(FC.json.product_count); $('.cart-items .count').text(this.$('.foxyshop_quantity').val() + FC.json.product_count);});
+		}
 	});
 
 
