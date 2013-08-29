@@ -140,7 +140,7 @@
 	jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
 		$('.cart-items .count').text(cart.product_count);
 		if($('form.foxyshop_product').length!=0){
-			$('form.foxyshop_product').submit(function(){ alert(FC.json.product_count); $('.cart-items .count').text(this.$('.foxyshop_quantity').val() + FC.json.product_count);});
+			$('form.foxyshop_product').submit(function(){ $('.cart-items .count').text($(this).find('.foxyshop_quantity').val() + FC.json.product_count);});
 		}
  	});
  
