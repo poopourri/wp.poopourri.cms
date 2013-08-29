@@ -69,7 +69,7 @@
 	// Header content classes
 	var contentClasses = 'follow-content-open shop-content-open',
 	    expandedClass = 'is-expanded',
-	    _header = $('.site_header');
+	    _header = $('#site_header');
 
     // Detect scroll position and change header class
 	_window.scroll(function() {
