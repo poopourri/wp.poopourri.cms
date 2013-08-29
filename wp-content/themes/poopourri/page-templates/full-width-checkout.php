@@ -38,7 +38,7 @@
 
 <body <?php body_class(); ?>>
 	<div id="page" class="hfeed site">
-		<header id="masthead" class="site_header is-minimized" role="banner">
+		<header id="masthead" class="site_header is-minimized site_header_checkout" role="banner">
 		    <div id="header-container">
 		        <div id="header-links">
     		        <a class="shop-link shop_header_btn header-content-link" data-content="shop-content"><span class="screen-reader-text">Shop over 20 scents</span></a>

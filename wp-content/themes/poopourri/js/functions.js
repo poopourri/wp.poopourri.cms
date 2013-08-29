@@ -69,10 +69,13 @@
 	// Header content classes
 	var contentClasses = 'follow-content-open shop-content-open',
 	    expandedClass = 'is-expanded',
-	    _header = $('#site_header');
+	    _header = $('.site_header');
 
     // Detect scroll position and change header class
 	_window.scroll(function() {
+            if($('.site_header_checkout')){
+		return false;
+            }
 	    var minimize = 300, top = _window.scrollTop();
 	    if (top >= minimize) {
 	        if (!_header.hasClass('is-minimized')) {
