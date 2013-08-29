@@ -136,9 +136,16 @@
 		});
             }else{
 		$('#cart-content').html('<div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Loading...</div>');
+		$('.cart-items .count').text(FC.json.product_count);
 	    }
 	});
 
+	jQuery(document).ready(function($) {
+		$('.cart-items .count').text(FC.json.product_count);
+		fcc.events.cart.postprocess.add(function(){
+			$('.cart-items .count').text(FC.json.product_count);
+		});
+	});
 
 	/**
 	 * Load the cart quantity
