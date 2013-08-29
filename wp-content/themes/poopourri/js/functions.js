@@ -144,14 +144,34 @@
 		$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');
  	     
 		$('.cart-items .count').text(cart.product_count);
+
+		fcc.events.cart.preprocess.add_pre(function(e, arr) {
+            		console.log("Preprocess - adding a product silently");
+            		var jsonString = "";
+            		jsonString = 'https://' + fcc.storedomain + '/cart?output=json&1:quantity=2&1:name=Add%20in%20preprocess&1:price=3.23&1:weight=5&1:code=pre1';
+            		$.getJSON(jsonString+'&callback=?' + fcc.session_get(), function(data) {
+                		console.log("And added.")
+                		console.info(this);
+                		FC.json = data;
+                		// fcc.cart_update();
+                		console.log('= = = = = = = = = = = = = = = = = = = = =');
+                		console.info(this);
+                		fcc.events.cart.preprocess.resume();
+            		});
+            		return "pause";
+    		});
+
 		fcc.events.cart.postprocess.add(function(){
 	    		jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
+				var openClass = 'cart-is-open';
+	    			_header.toggleClass(openClass);
+            			// load the cart if it has something in it
+	    			if(_header.hasClass(openClass)){
+					$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');	     
+	    			}
 				$('.cart-items .count').text(cart.product_count);
  	    		});
 		});
-		if($('form.foxyshop_product').length!=0){
-		//	$('form.foxyshop_product').submit(function(){ $('.cart-items .count').text($(this).find('.foxyshop_quantity').val() + FC.json.product_count);});
-		}
  	});
  
 
