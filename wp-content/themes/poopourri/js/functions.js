@@ -73,7 +73,7 @@
 
     // Detect scroll position and change header class
 	_window.scroll(function() {
-            if($('.site_header_checkout').length==0){
+            if($('.site_header_checkout').length!=0){
 		return false;
             }
 	    var minimize = 300, top = _window.scrollTop();
