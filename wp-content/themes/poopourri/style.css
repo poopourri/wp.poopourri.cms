@@ -1273,6 +1273,10 @@ ul.nav-menu li:hover > ul,
     padding-top: 180px;
 }
 
+#main-checkout {
+    padding-top: 90px;
+}
+
 .hentry {
 	padding: 40px 0;
 }
