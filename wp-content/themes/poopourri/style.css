@@ -1263,6 +1263,40 @@ ul.nav-menu li:hover > ul,
 	width: 230px;
 }
 
+  /* Connect SuperNav Styles
+----------------------------------------------------------------------------- */
+.site_header .right { border-left: 1px solid #4b4b4b; float:right; width:250px; }
+#connect-supernav .newsletter-signup { overflow: hidden; }
+#connect-supernav .newsletter-signup h6 { color: #ddd; font-weight: normal; font-size: 14px; font-size: 1.4rem; margin: 0 0 10px 0; padding: 0; line-height: 1; }
+#connect-supernav .newsletter-signup .form input.email { 
+  float: left;
+  width: 146px; 
+  height: 22px; 
+  line-height: 22px; 
+  padding: 0 4px; 
+  margin: 0 5px 0 0;
+  font-size: 14px; 
+  font-size: 1.4rem; 
+     -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+}
+#connect-supernav .newsletter-signup .form .action-submit { float: left; }
+#connect-supernav .newsletter-signup .alert-error { width: 195px; }
+#connect-supernav .newsletter-signup .thank-you { padding: 0px 8px 6px 0px; clear:both; }
+#connect-supernav .newsletter-signup .thank-you p {color: #ffffff; font-style:italic; }
+
+#connect-supernav .connect-link-list { padding-bottom: 20px; }
+#connect-supernav .connect-link-list li  { background: url(images/social_icons.png) no-repeat; display: block; width: 25px; height: 26px; margin-right: 10px; text-indent: 40%; margin-bottom: 5px; }
+#connect-supernav .connect-link-list li:hover { opacity: .8; }
+#connect-supernav .connect-link-list li a { text-indent: 100%; display: block; width: 222px; height: 26px; padding: 3px; margin-left: -11px; }
+#connect-supernav .connect-link-list li.last a { margin-right: 0; }
+#connect-supernav .connect-link-list li.facebook  { background-position: 0 0; }
+#connect-supernav .connect-link-list li.twitter  { background-position: -25px 0; }
+#connect-supernav .connect-link-list li.pinterest  { background-position: -50px 0; }
+#connect-supernav .connect-link-list li.tumblr  { background-position: -76px 0; }
+#connect-supernav .addthis_toolbox.addthis_default_style span { background: none; }
+
 
 /**
  * 5.0 Content
