@@ -156,7 +156,7 @@
                 		// fcc.cart_update();
                 		console.log('= = = = = = = = = = = = = = = = = = = = =');
                 		console.info(this);
-                		fcc.events.cart.preprocess.resume();
+                		fcc.events.cart.postprocess.execute(e);
             		});
             		return "pause";
     		});
