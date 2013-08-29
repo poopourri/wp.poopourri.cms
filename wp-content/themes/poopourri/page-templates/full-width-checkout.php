@@ -70,7 +70,7 @@
 
 		</header><!-- #masthead -->
 
-		<div id="main" class="site-main">
+		<div id="main-checkout" class="site-main">
 
 
 	<div id="primary" class="site-content">
