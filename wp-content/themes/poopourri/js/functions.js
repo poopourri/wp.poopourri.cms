@@ -148,7 +148,7 @@
 		fcc.events.cart.preprocess.add_pre(function(e, arr) {
             		console.log("Preprocess - adding a product silently");
             		var jsonString = "";
-            		jsonString = 'https://' + fcc.storedomain + '/cart?output=json&1:quantity=2&1:name=Add%20in%20preprocess&1:price=3.23&1:weight=5&1:code=pre1';
+            		jsonString = 'https://' + fcc.storedomain + '/cart?'+jQuery(e).serialize();
             		$.getJSON(jsonString+'&callback=?' + fcc.session_get(), function(data) {
                 		console.log("And added.")
                 		console.info(this);
@@ -160,6 +160,21 @@
             		});
             		return "pause";
     		});
+
+fcc.events.cart.process.add(function(e){
+	var href = '';
+	if (e.tagName == 'A') {
+		href = e.href;
+	} else if (e.tagName == 'FORM') {
+		href = 'https://'+storedomain+'/cart?'+jQuery(e).serialize();
+	}
+	if (href.match("cart=(checkout|updateinfo)") || href.match("redirect=")) {
+		return true;
+	} else {
+		fcc.events.cart.postprocess.execute(e);
+		return false;
+	}
+});
 
 		fcc.events.cart.postprocess.add(function(){
 	    		jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
