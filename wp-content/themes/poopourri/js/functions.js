@@ -172,7 +172,6 @@ fcc.events.cart.process.add(function(e){
 		return true;
 	} else {
 		fcc.events.cart.postprocess.execute(e);
-		return false;
 	}
 });
 
