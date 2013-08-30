@@ -146,34 +146,24 @@
 		$('.cart-items .count').text(cart.product_count);
 
 		fcc.events.cart.preprocess.add_pre(function(e, arr) {
-            		console.log("Preprocess - adding a product silently");
+        	    if (arr['cart'] != "view") {
+			console.log("Preprocess - adding a product silently");
             		var jsonString = "";
-            		jsonString = 'https://' + fcc.storedomain + '/cart?'+jQuery(e).serialize();
+            		jsonString = 'https://' + fcc.storedomain + '/cart?output=json&'+jQuery(e).serialize();
             		$.getJSON(jsonString+'&callback=?' + fcc.session_get(), function(data) {
-                		console.log("And added.")
+                		console.log("And added.");
                 		console.info(this);
                 		FC.json = data;
                 		// fcc.cart_update();
                 		console.log('= = = = = = = = = = = = = = = = = = = = =');
                 		console.info(this);
-                		fcc.events.cart.preprocess.resume();
+                		fcc.events.cart.postprocess.execute(e);
             		});
             		return "pause";
+        	    } else {
+           		 return true;
+        	    }
     		});
-
-fcc.events.cart.process.add(function(e){
-	var href = '';
-	if (e.tagName == 'A') {
-		href = e.href;
-	} else if (e.tagName == 'FORM') {
-		href = 'https://'+storedomain+'/cart?'+jQuery(e).serialize();
-	}
-	if (href.match("cart=(checkout|updateinfo)") || href.match("redirect=")) {
-		return true;
-	} else {
-		fcc.events.cart.postprocess.execute(e);
-	}
-});
 
 		fcc.events.cart.postprocess.add(function(){
 	    		jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {

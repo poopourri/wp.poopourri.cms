@@ -1859,7 +1859,7 @@ footer.entry-meta {
 .format-link .entry-title {
 	color: #ca3c08;
 	display: inline;
-	font: 300 italic 20px "Source Sans Pro", Helvetica, sans-serif;
+	font: 300 italic 20px "Georgia", serif;
 	margin-right: 20px;
 }
 
@@ -2061,7 +2061,7 @@ footer.entry-meta {
 .attachment .entry-title {
 	display: inline-block;
 	float: left;
-	font: 300 italic 30px "Source Sans Pro", Helvetica, sans-serif;
+	font: 300 italic 30px "Georgia", serif;
 	margin: 0;
 }
 
@@ -2300,7 +2300,7 @@ footer.entry-meta {
 
 .author-description .author-title {
 	clear: none;
-	font: 300 italic 20px "Source Sans Pro", Helvetica, sans-serif;
+	font: 300 italic 20px "Georgia", serif;
 	margin: 0 0 8px;
 }
 
@@ -2325,7 +2325,7 @@ footer.entry-meta {
 
 .archive-title,
 .archive-meta {
-	font: 300 italic 30px "Source Sans Pro", Helvetica, sans-serif;
+	font: 300 italic 30px "Georgia", serif;
 	margin: 0 auto;
 	max-width: 1040px;
 	padding: 30px 0;
@@ -2355,7 +2355,7 @@ footer.entry-meta {
 }
 
 .page-title {
-	font: 300 italic 30px "Source Sans Pro", Helvetica, sans-serif;
+	font: 300 italic 30px "Georgia", serif;
 	margin: 0 auto;
 	max-width: 1040px;
 	padding: 30px 0;
@@ -2448,7 +2448,7 @@ footer.entry-meta {
 }
 
 .comments-title {
-	font: 300 italic 28px "Source Sans Pro", Helvetica, sans-serif;
+	font: 300 italic 28px "Georgia", serif;
 }
 
 .comment-list,
@@ -2588,7 +2588,7 @@ footer.entry-meta {
 }
 
 .comment-reply-title {
-	font: 300 italic 28px "Source Sans Pro", Helvetica, sans-serif;
+	font: 300 italic 28px "Georgia", serif;
 }
 
 .comment-reply-title small a {
@@ -2749,8 +2749,8 @@ footer.entry-meta {
 }
 
 .widget .widget-title {
-	font: 300 italic 20px "Source Sans Pro", Helvetica, sans-serif;
 	margin: 0 0 10px;
+	font-weight:bold;
 }
 
 .widget ul,
@@ -3170,7 +3170,7 @@ div#widget_highlight .shadow_right{
 	.menu-toggle {
 		cursor: pointer;
 		display: inline-block;
-		font: bold 16px/1.3 "Source Sans Pro", Helvetica, sans-serif;
+		font: bold 16px/1.3 "Georgia", serif;
 		margin: 0;
 		padding: 12px 0 12px 20px;
 	}
@@ -3511,6 +3511,14 @@ div#widget_highlight .shadow_right{
  * ----------------------------------------------------------------------------
  */
 
+.add_to_cart_btn{ background:url("images/add_to_cart_btn.png") top left no-repeat; display:block; }
+.add_to_cart_btn{ width:140px; height:42px; background-position:-10px -10px; }
+.add_to_cart_btn:hover{ width:140px; height:42px; background-position:-10px -62px; }
+
+.paypal_btn{ background:url("images/paypal_btn.png") top left no-repeat;  display:block; }
+.paypal_btn{ width:172px; height:34px; background-position:-10px -10px; }
+.paypal_btn:hover{ width:172px; height:34px; background-position:-10px -54px; }
+
 .order_now_btn{ background:url("images/order_now_btn.png") top left no-repeat; }
 .order_now_btn{ width:386px; height:74px; background-position:-10px -10px; }
 .order_now_btn:hover{ width:386px; height:74px; background-position:-10px -94px; }
@@ -3576,6 +3584,51 @@ div#packages blockquote {
 	font-weight: 300;
 	margin: 0px 0px;
 }
+ul.foxyshop_product_list li{
+clear: left;
+background-image: url(images/dashed_horizontal_line.png);
+background-repeat: repeat-x;
+background-position: bottom;
+padding: 25px 0 25px;
+}
+ul.foxyshop_product_list{
+margin:0px;
+}
+div.category_image_holder{display:block;float:left;width:215px;height:200px;text-align:center;}
+div.category_image_holder img{height:200px;border:0px;}
+div.category_product_info{display:block;float:left;width:600px;text-align:left;}
+div.category_product_info .clr{float:left;}
+div.category_product_info .foxyshop_variations label {display:none;}
+div.category_product_info a{float:right;margin-top:-10px;margin-right:150px;}
+div.category_product_info select{margin-right:15px;}
+div.category_product_info p{padding:0px;margin:0 0 5px;}
+div.category_product_info h2{padding:0px;margin:5px 0;}
+div.category_product_info #foxyshop_main_price div{float:left;}
+div.category_product_info #foxyshop_main_price .foxyshop_price{color:red;}
+div.category_product_info #foxyshop_main_price .price_label{width:150px;font-weight:bold;}
+
+#foxyshop_container aside{
+margin-top: 120px;
+background-color: transparent;
+float: left;
+display: block;
+background-image: url(/wp-content/themes/poopourri/images/dashed_vertical_line.png);
+background-repeat: repeat-y;
+background-position: right;
+height:1000px;
+padding-top:0px;
+}
+#foxyshop_container .widget{
+background-color: transparent;
+}
+#foxyshop_container .widget li a{
+color:#444444;
+font-size:16pt;
+}
+
+#foxyshop_container{ width:985px; }
+#foxyshop_container .browse-right{float:right;}
+
 div#packages p{margin:0 0 16px;}
 div.narrower-content{ width:725px;margin-left:auto;margin-right:auto; }
 div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;}
