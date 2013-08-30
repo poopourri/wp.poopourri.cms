@@ -1322,6 +1322,7 @@ ul.nav-menu li:hover > ul,
 	margin: 0 auto;
 	max-width: 1064px;
 	width: 100%;
+	min-width: 1040px;
 }
 
 .sidebar .entry-header,
