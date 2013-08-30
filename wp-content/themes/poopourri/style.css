@@ -3545,6 +3545,7 @@ div#widget_highlight .shadow_right{
 #landing-page #satisfiedpooers{ background:url(images/satisfied_pooers_header.png); width:1064px; height:64px;}
 #landing-page #youtubereviews{ background:url(images/youtube_reviews_header.png); width:1064px; height:64px;}
 #landing-page #getyourstoday{ background:url(images/get_yours_today_header.png); width:1064px; height:64px;}
+#landing-page { min-width:1040px; }
     
 div#packages .a_package{
     width: 320px;
@@ -3628,7 +3629,7 @@ font-size:16pt;
 
 #foxyshop_container{ width:985px; }
 #foxyshop_container .browse-right{float:right;}
-
+div#packages{min-width:1040px;}
 div#packages p{margin:0 0 16px;}
 div.narrower-content{ width:725px;margin-left:auto;margin-right:auto; }
 div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;}
