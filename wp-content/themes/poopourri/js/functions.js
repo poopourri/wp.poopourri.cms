@@ -4,6 +4,8 @@
  * Provides helper functions to enhance the theme experience.
  */
 
+var free_shipping_total_required = 49;
+
 ( function( $ ) {
 	var body    = $( 'body' ),
 	    _window = $( window ),
@@ -115,13 +117,25 @@
 	    _header.addClass(expandedClass + ' ' + openClass);
 	});
 
+	function updateFreeShippingNotice(cart_price){
+		var package_price_on_page = parseInt($('#adding_package input#fs_price_'+$('.foxyshop_product').prop('id').split('_')[3]).val());
+		var current_total_price = cart_price + package_price_on_page;
+		$('#total_order_on_page').text(current_total_price);
+		if(current_total_price < free_shipping_total_required){
+			var remaining = free_shipping_total_required - current_total_price;
+			$('.free_shipping_notice').html('FREE FAST shipping to USA on any order $49+ ($<span class="free_shipping_remaining">'+remaining+'</span> left)');
+		}else{
+			$('.free_shipping_notice').html('You qualify for FREE shipping to the USA!');
+		}
+	}
+
 	// Toggle cart content
-	$('.cart-link').click(function() {
+	$('.cart-link, .close_cart_btn').click(function() {
 	    var openClass = 'cart-is-open';
 	    _header.toggleClass(openClass);
             // load the cart if it has something in it
 	    if(_header.hasClass(openClass)){
-		$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');	     
+		$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');
 	    }
 		//	if(FC.json.product_count==0){
 		//		$('#cart-content').html('<div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Your Cart Is Empty</div>');
@@ -131,22 +145,27 @@
             //}else{
 		//$('#cart-content').html('<div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Loading...</div>');
 	    //}
-            		
+
 	    jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
 		$('.cart-items .count').text(cart.product_count);
+		updateFreeShippingNotice(cart.total_price);
 	    });
 	});
 
 	/**
 	 * Load the cart quantity
 	 */
+	if (typeof fcc !== 'undefined') {
 	jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
+
 		$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');
- 	     
+
 		$('.cart-items .count').text(cart.product_count);
 
+		updateFreeShippingNotice(cart.total_price);
+
 		fcc.events.cart.preprocess.add_pre(function(e, arr) {
-        	    if (arr['cart'] != "view") {
+        	    if (arr['cart'] != "view" && arr['cart'] != "checkout") {
 			console.log("Preprocess - adding a product silently");
             		var jsonString = "";
             		jsonString = 'https://' + fcc.storedomain + '/cart?output=json&'+jQuery(e).serialize();
@@ -173,13 +192,15 @@
 				}
             			// load the cart if it has something in it
 	    			if(_header.hasClass(openClass)){
-					$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');	     
+					$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');
 	    			}
 				$('.cart-items .count').text(cart.product_count);
  	    		});
 		});
  	});
- 
+
+	}
+
 
 
 	/**

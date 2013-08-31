@@ -1,0 +1,327 @@
+body {
+    padding:10px;
+    background:url(../img/background.png) repeat top left;
+}
+
+#container {
+    padding:0;
+    counter-reset:fieldsets 0;
+    background-color: #fdfdfd !important;
+}
+#sidebar {
+    background:#F5F5F5;
+}
+#logo {
+    padding:20px 0;
+}
+#mini-nav {
+    text-align:center;
+    font-size:18px;
+    background:#EEEEEE;
+    padding:10px;
+    margin:0 -15px;
+}
+
+
+fieldset {
+    margin:30px 0;
+}
+
+legend {
+    color:#676767;
+    font-weight:thin;
+    border-bottom:none;
+    margin-bottom:10px;
+}
+legend span,
+#mini-nav span {
+    height:32px;
+    width:32px;
+    background:#5D5D5D;
+    color:#fff;
+    border-radius:20px;
+    display:inline-block;
+    /*padding:0.2em 0.7em;*/
+    margin:0 3px;
+    line-height:32px;
+    vertical-align:middle;
+    text-align:center;
+    box-shadow: inset 0 3px 5px -3px #000000;
+}
+
+legend .hidden-xs {
+    /* This is a little hacky, but it's overridden in the media query at the bottom. */
+    /* Without this, the .hidden- classes display:block !important, which causes problems here. */
+    display: inline-block !important;
+}
+
+legend span:before,
+#mini-nav span:before {
+    counter-increment: fieldsets 1;
+    content:counter(fieldsets, decimal);
+}
+#mini-nav span.active {
+    background-color:#00A533;
+}
+#mini-nav span.incomplete {
+    background-color:#B9B9B9;
+}
+
+input.form-control, textarea.form-control, select.form-control {
+    /* I know there is input-group-lg but this would require more html.  Height makes sense...I have sinned! */
+    height: 40px;
+    background: #f5f5f5;
+    border: 0;
+    border-color:#C3C3C3 #E6E6E6 #F2F2F2 #E6E6E6;
+    box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, .3);
+}
+
+p.text-muted a {
+    color:#A9A9A9;
+}
+
+
+/* =Buttons
+===================================================== */
+
+fieldset .btn {
+    margin-bottom:20px;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    -ms-transition: all .1s linear;
+    -o-transition: all .1s linear;
+    transition: all .1s linear;
+    font-size: 15px;
+}
+
+fieldset .btn-default {
+    background: #f9f9f9; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f9f9f9 0%, #eeeeee 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f9f9f9 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f9f9f9 0%,#eeeeee 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f9f9f9 0%,#eeeeee 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f9f9f9 0%,#eeeeee 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+    border: 1px solid #d5d5d5;
+    color: #888888;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 1);
+}
+
+fieldset .btn-default:hover {
+    margin-bottom:20px;
+    color: #555555;
+    border-color: #bbbbbb;
+}
+
+
+/* =FoxyCart-specific Form Elements LAYOUT Overrides
+===================================================== */
+/* First and Last name inputs on the same line */
+.form-group-firstname {
+    padding-right:7px;
+}
+.form-group-lastname {
+    padding-left:8px;
+}
+/* Postal Code specific elements */
+.form-group-postcode input.form-control-postcode {
+    width:7.5em;
+}
+.form-group-postcode p {
+    width:10em;
+    display:inline-block;
+}
+/* Shipping radios and labels */
+.shipping-rate label span {
+    float:right;
+    color:#999;
+    font-style:italic;
+}
+
+
+/* =Active Radio and Checkboxes
+===================================================== */
+.form-group .active {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding-bottom: 10px;
+}
+
+.form-group .active label.primary {
+    height: 40px;
+    line-height: 40px;
+    display: block !important;
+    background-color: #e1e1e1;
+    border-radius: 5px 5px 0px 0px;
+    margin-bottom: 20px;
+    margin-left: -20px;
+    padding-left: 20px;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, .5);
+}
+
+.form-group .active label.primary img {
+    position: relative;
+    top: -1px;
+}
+
+.form-group .radio, .form-group .checkbox {
+    padding-top: 0px;
+}
+
+/* The selected radio button */
+.form-group .active label.primary input {
+    width: 20px;
+    position: relative;
+    top: 10px;
+    border: 10px solid #000000;
+}
+
+/* The inputs inside the #payment-method-card */
+.form-group .active input, .form-group .active select {
+    background:#fff;
+}
+
+.form-group .active .form-group {
+    margin-bottom:0;
+    padding-bottom:15px;
+    margin-right:0;
+    margin-left:-20px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.form-group .active p {
+    font-size: 85%;
+}
+
+.form-group .active .form-group .col-xs-1,
+.form-group .active .form-group .col-xs-2,
+.form-group .active .form-group .col-xs-3,
+.form-group .active .form-group .col-xs-4,
+.form-group .active .form-group .col-xs-5,
+.form-group .active .form-group .col-xs-6,
+.form-group .active .form-group .col-xs-7,
+.form-group .active .form-group .col-xs-8 {
+    padding-right:5px;
+    padding-left:5px;
+}
+
+/* =Form Errors and Prompts
+===================================================== */
+.has-error label {
+    color: #cd4c4d;
+}
+
+.has-error input {
+    border: 2px solid #cd4c4d !important;
+    /*border-radius: 5px 5px 0 0;*/
+}
+
+.has-success input {
+    border: 2px solid #c8d59d !important;
+    /*border-radius: 5px 5px 0 0;*/
+}
+
+.has-error .alert-danger, .has-success .alert-success {
+    color: #ffffff;
+    background-color: #cd4c4d;
+    padding: 10px 15px !important;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, .5);
+    -webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+    margin-top: -2px;
+    font-size: 85%;
+}
+
+.has-success .alert-success {
+    color: #4d6011;
+    background-color: #c8d59d;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, .5);
+}
+
+.has-success .alert-success .input-group button {
+    height: 40px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding: 0px 15px;
+}
+
+/* =Errors and Prompts
+===================================================== */
+
+.alert {
+    border: 0;
+    padding: 15px;
+}
+
+.alert p {
+    margin-bottom: 15px;
+}
+
+.alert p:last-child {
+    margin-bottom: 0px;
+}
+
+.alert ul {
+    padding: 0;
+    margin-left: 15px;
+}
+
+.alert-danger {
+    color: #666666;
+    background-color: #f1f1f1;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid #cd4c4d;
+}
+
+.alert-danger h2 {
+    font-size: 21px;
+    color: #cd4c4d;
+    margin: 0;
+    padding: 0;
+}
+
+.alert-danger span {
+    color: #cd4c4d;
+    font-weight: bold;
+}
+
+.alert-danger p {
+    margin-top: 15px;
+}
+
+
+
+/* =MEDIA QUERIES
+===================================================== */
+
+@media (max-width: 768px)  {
+  legend .hidden-xs {
+    display: none !important;
+  }
+  .container .form-horizontal .form-group {
+    /* Not sure why this isn't included by default in Twitter Bootstrap for this size media query */
+    margin-left:-15px;
+    margin-right:-15px;
+  }
+}
+
+@media (min-width: 769px)  {
+  #payment-method-card-expires-month {
+      width:22%;
+  }
+  #payment-method-card-expires-year {
+      width:28%;
+  }
+  #payment-method-card-expires-csc {
+      width:24%;
+  }
+}
+
+@media (min-width: 1200px) {
+    div.container {
+        max-width:940px;
+    }
+}

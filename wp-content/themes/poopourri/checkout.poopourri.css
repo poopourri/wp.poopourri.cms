@@ -1,0 +1,167 @@
+body.foxyshop {
+	padding: 0;
+	margin: 0;
+}
+#page {
+	padding-top: 88px;
+	overflow: auto;
+}
+#container {
+	background: transparent;
+}
+body fieldset {
+	border: 0 none;
+}
+.fc_cart_item_code, .fc_cart_category_code, .fc_cart_item_weight, .fc_minicart, #fc_minicart {
+	display: none !important;
+}
+
+.fc_cart_thumbnail {
+	height: 100px;
+}
+
+#fc_cart_table tfoot td.fc_col1 {
+	text-align: right;
+}
+.fc_account_message {
+	margin-left: 156px;
+	width: 590px;
+	color: gray;
+	font-size: 16px;
+	margin-top: 6px;
+}
+#fc_continue {
+	margin-left: 194px;
+}
+.fc_account_message .fc_error {
+	margin-left: 0;
+	color: red;
+}
+#li_customer_new_password label {
+	width: 333px;
+}
+
+legend {
+	display: none;
+}
+body fieldset {
+	border: 0 none;
+}
+body h2 {
+	margin: 25px 0 0;
+}
+
+ol li {
+	list-style: none;
+	margin: 10px 0;
+}
+ol li label {
+	width: 150px;
+	text-align: right;
+	padding-right: 15px;
+}
+
+input[type=text], input[type=email] {
+	height: 40px;
+	background: #fff;
+	border: 0;
+	border-color: #C3C3C3 #E6E6E6 #F2F2F2 #E6E6E6;
+	box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, .3);
+	border-radius: 4px;
+}
+input.fc_text_short {
+	width: 150px;
+}
+input.fc_text_long {
+	width: 304px;
+}
+.fc_error {
+	display: block;
+	color: #fff;
+	width: 100%;
+	text-align: left;
+	clear: both;
+	margin-top: 5px;
+	margin-left: 154px;
+}
+.fc_row_error {
+	background-color: #cd4c4d;
+	padding: 9px 0;
+}
+.fc_row_error label {
+	color: #fff;
+	font-weight: normal;
+}
+#current_shipping_country, #current_customer_country {
+	font-size: 21px;
+	font-weight: bold;
+	margin-right: 16px;
+}
+.fc_checkbox input.checkbox {
+	width: 20px;
+	display: inherit;
+	margin-top: -2px;
+}
+.fc_clear {
+	height: 1px;
+	display: block;
+}
+
+#fc_payment_method_paypal_container {
+	display: none!important;
+}
+#fc_payment_list input.fc_radio {
+	display: none;
+}
+#fc_payment_method_plastic_container label {
+	width: 100%;
+	display: block;
+	text-align: left;
+}
+#fc_payment_method_plastic_container label span img {
+	margin: 4px;
+}
+
+#fc_shipping_methods_inner label {
+	display: block;
+	width: 410px;
+}
+#fc_shipping_methods_inner label span img {
+	margin-right: 4px;
+}
+#fc_shipping_methods_inner  .fc_shipping_carrier {
+	margin-left: 8px;
+	margin-right: 4px;
+}
+#fc_shipping_methods_inner .fc_shipping_cost {
+	text-align: right;
+	float: right;
+}
+#fc_payment_list, #fc_payment_list ol {
+	margin-left: 0;
+	padding-left: 0;
+}
+label.fc_shipping_methods {
+	display: none;
+}
+#fc_shipping_methods {
+	margin-bottom: 30px;
+}
+
+#li_cc_exp_month {
+	width: 250px;
+	float: left;
+	margin-right: 20px;
+}
+
+#li_cc_cvv2 {
+	width: 560px;
+	float: left;
+}
+
+#fc_payment_list .fc_row_error {
+	padding: 10px;
+}
+#fc_payment_list .fc_error {
+	margin-left: 0;
+}

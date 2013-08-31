@@ -143,7 +143,7 @@ h4,
 h5,
 h6 {
 	clear: both;
-	font-family: Bitter, Georgia, serif;
+	font-family: Georgia, serif;
 	line-height: 1.3;
 }
 
@@ -158,17 +158,17 @@ h2 {
 }
 
 h3 {
-	font-size: 22px;
+	font-size: 20px;
 	margin: 22px 0;
 }
 
 h4 {
-	font-size: 20px;
+	font-size: 18px;
 	margin: 25px 0;
 }
 
 h5 {
-	font-size: 18px;
+	font-size: 17px;
 	margin: 30px 0;
 }
 
@@ -947,6 +947,7 @@ a.cart-link {
     -webkit-transition: top 0.3s ease-out;
     transition: top 0.3s ease-out;
     z-index: 3;
+    cursor:pointer;
 }
 
 a.cart-link .cart-items {
@@ -1012,6 +1013,12 @@ a.cart-link:hover {
     margin: 0 auto;
 }
 
+#cart-close-content {
+    width: 658px;
+    height: 25px;
+    margin: 0 auto;
+    position:relative;
+}
 
 
 /**
@@ -1323,7 +1330,6 @@ ul.nav-menu li:hover > ul,
 	margin: 0 auto;
 	max-width: 1064px;
 	width: 100%;
-	min-width: 1040px;
 }
 
 .sidebar .entry-header,
@@ -1331,7 +1337,7 @@ ul.nav-menu li:hover > ul,
 .sidebar .entry-summary,
 .sidebar .entry-meta {
 	max-width: 1040px;
-	padding: 0 376px 0 60px;
+	padding: 0 0 0 0px;
 }
 
 
@@ -2909,9 +2915,9 @@ div#widget_highlight .shadow_right{
 }
 
 .sidebar .site-footer .widget-area {
-	max-width: 724px;
+	max-width: 1024px;
 	position: relative;
-	left: -158px;
+	left: 0px;
 }
 
 .site-footer .widget {
@@ -3513,6 +3519,11 @@ div#widget_highlight .shadow_right{
  * ----------------------------------------------------------------------------
  */
 
+
+.close_cart_btn{ background:url("images/close_cart.png") top left no-repeat; display:block; position:absolute;top:-405px;right:13px;z-index:1;cursor:pointer; }
+.close_cart_btn{ width:21px; height:20px; background-position:0px 0px; }
+.close_cart_btn:hover{ width:21px; height:21px; background-position:0px -21px; }
+
 .add_to_cart_btn{ background:url("images/add_to_cart_btn.png") top left no-repeat; display:block; }
 .add_to_cart_btn{ width:140px; height:42px; background-position:-10px -10px; }
 .add_to_cart_btn:hover{ width:140px; height:42px; background-position:-10px -62px; }
@@ -3520,6 +3531,10 @@ div#widget_highlight .shadow_right{
 .paypal_btn{ background:url("images/paypal_btn.png") top left no-repeat;  display:block; }
 .paypal_btn{ width:172px; height:34px; background-position:-10px -10px; }
 .paypal_btn:hover{ width:172px; height:34px; background-position:-10px -54px; }
+
+.continue_to_checkout_btn{ background:url("images/continue_to_checkout_btn.png") top left no-repeat;  display:block; }
+.continue_to_checkout_btn{ width:504px; height:64px; background-position:-10px -10px; }
+.continue_to_checkout_btn:hover{ width:504px; height:64px; background-position:-10px -87px; }
 
 .order_now_btn{ background:url("images/order_now_btn.png") top left no-repeat; }
 .order_now_btn{ width:386px; height:74px; background-position:-10px -10px; }
@@ -3587,16 +3602,18 @@ div#packages blockquote {
 	font-weight: 300;
 	margin: 0px 0px;
 }
-ul.foxyshop_product_list li{
+#foxyshop_container ul.foxyshop_product_list li{
 clear: left;
 background-image: url(images/dashed_horizontal_line.png);
 background-repeat: repeat-x;
 background-position: bottom;
 padding: 25px 0 25px;
 }
-ul.foxyshop_product_list{
+
+#foxyshop_container ul.foxyshop_product_list{
 margin:0px;
 }
+
 div.category_image_holder{display:block;float:left;width:215px;height:200px;text-align:center;}
 div.category_image_holder img{height:200px;border:0px;}
 div.category_product_info{display:block;float:left;width:600px;text-align:left;}
@@ -3610,7 +3627,7 @@ div.category_product_info #foxyshop_main_price div{float:left;}
 div.category_product_info #foxyshop_main_price .foxyshop_price{color:red;}
 div.category_product_info #foxyshop_main_price .price_label{width:150px;font-weight:bold;}
 
-#foxyshop_container aside{
+#foxyshop_container #nav_menu-6{
 margin-top: 120px;
 background-color: transparent;
 float: left;
@@ -3621,9 +3638,11 @@ background-position: right;
 height:1000px;
 padding-top:0px;
 }
+
 #foxyshop_container .widget{
 background-color: transparent;
 }
+
 #foxyshop_container .widget li a{
 color:#444444;
 font-size:16pt;
@@ -3635,5 +3654,17 @@ div#packages{min-width:1040px;}
 div#packages p{margin:0 0 16px;}
 div.narrower-content{ width:725px;margin-left:auto;margin-right:auto; }
 div#ytreviews ul{list-style-type: none;margin:0px;padding:0px;}
+div#ytreviews{width:1064px;}
 a.ytlightbox{ position:relative;width:244px;height:138px;border:1px solid #000;float:left;margin-left:20px;margin-bottom:20px; }
 a.ytlightbox span{position:absolute;top:0px;left:0px;width: 244px; height: 138px; background-image:url(/wp-content/themes/poopourri/images/vid_thumb_overlay.png);display:block;}
+
+.feu-box{
+width: 800px;
+margin-left: auto;
+margin-right: auto;
+margin-top: 50px;
+}
+
+div.foxyshop_addon_container{
+display:none; 
+}
