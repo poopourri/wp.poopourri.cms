@@ -118,7 +118,11 @@ var free_shipping_total_required = 49;
 	});
 
 	function updateFreeShippingNotice(cart_price){
-		var package_price_on_page = parseInt($('#adding_package input#fs_price_'+$('.foxyshop_product').prop('id').split('_')[3]).val());
+		if($('.foxyshop_product').length!=0){
+			var package_price_on_page = parseInt($('#adding_package input#fs_price_'+$('.foxyshop_product').prop('id').split('_')[3]).val());
+		}else{
+			var package_price_on_page = 0;
+		}
 		var current_total_price = cart_price + package_price_on_page;
 		$('#total_order_on_page').text(current_total_price);
 		if(current_total_price < free_shipping_total_required){
@@ -137,14 +141,6 @@ var free_shipping_total_required = 49;
 	    if(_header.hasClass(openClass)){
 		$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');
 	    }
-		//	if(FC.json.product_count==0){
-		//		$('#cart-content').html('<div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Your Cart Is Empty</div>');
-		//	}else{
-		//		$('#cart-content').html('<iframe id="foxycart_iframe" src="'+_foxycartURL+'cart?'+fcc.session_get()+'" style="width:'+$('#cart-content').width()+'px;height:'+$('#cart-content').height()+'px;border:0px;margin:0px;padding:0px;"></iframe>');
-            	//	}
-            //}else{
-		//$('#cart-content').html('<div style="margin-top: 150px; display: block; color: #ddd; text-transform: uppercase; font-size: 20px; text-align: center;">Loading...</div>');
-	    //}
 
 	    jQuery.getJSON(_foxycartURL+'cart?'+fcc.session_get()+'&output=json&callback=?', function(cart) {
 		$('.cart-items .count').text(cart.product_count);
