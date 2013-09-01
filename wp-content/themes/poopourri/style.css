@@ -1045,8 +1045,7 @@ a.cart-link:hover {
 .follow_header_btn:hover{ width:258px; height:99px; background-position:-10px -119px; }
 .follow_header_btn:active{ width:258px; height:99px; background-position:-10px -228px; }
 
-ul.nav-menu{ float:left; }
-ul#menu-account-menu{ padding: 0 10px 0 0 !important;}
+ul#menu-customer-menu{ margin-left:120px; }
 
 .main-navigation {
 	clear: both;
@@ -1148,6 +1147,7 @@ ul.nav-menu li:hover > ul,
     overflow: hidden;
     -webkit-transition: height 0.3s ease-out;
     transition: height 0.3s ease-out;
+    position:relative;
 }
 
 .is-expanded #header-content {
@@ -1167,6 +1167,7 @@ ul.nav-menu li:hover > ul,
 .follow-content-open #follow-content,
 .shop-content-open #shop-content {
     opacity: 1;
+    z-index: 1;
 }
 
 /* Shop Content */
@@ -3627,7 +3628,7 @@ div.category_product_info #foxyshop_main_price div{float:left;}
 div.category_product_info #foxyshop_main_price .foxyshop_price{color:red;}
 div.category_product_info #foxyshop_main_price .price_label{width:150px;font-weight:bold;}
 
-#foxyshop_container #nav_menu-6{
+#foxyshop_container #nav_menu-7{
 margin-top: 120px;
 background-color: transparent;
 float: left;
@@ -3667,4 +3668,15 @@ margin-top: 50px;
 
 div.foxyshop_addon_container{
 display:none; 
+}
+
+ul#menu-account-menu{
+    display:none;
+}
+
+a.product_target_adjusted_fixed{
+    display:block;
+    position:relative;
+    top:-130px;
+    visibility:hidden;
 }

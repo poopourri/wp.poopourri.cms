@@ -55,10 +55,14 @@
 {% endif %}
 {% if for_email %}
     <table id="fc_cart_table" width="100%" style="font-size:12px; text-align:left;" cellspacing="0" cellpadding="5">
+        <h2 id="your_cart_header"><span class="screen-reader-text">{{ lang.cart_caption|raw }}</span></h2>
 {% else %}
+        <h2 id="your_cart_header"><span class="screen-reader-text">{{ lang.cart_caption|raw }}</span></h2>
+
+<div id="cart_container_checkout" class="white-checkout-box">
     <table id="fc_cart_table" cellspacing="0" cellpadding="0">
 {% endif %}
-        <h2>{{ lang.cart_caption|raw }}</h2>
+
 
 {% endblock cart_begin %}
 
@@ -337,6 +341,10 @@
     {% endif %}
 {% endif %}
     </table>
+{% if not for_email %}
+</div>
+{% endif %}
+
 {% if with_controls %}
     <div id="fc_cart_controls_bottom" class="fc_cart_controls">
     {{ block('cart_controls') }}

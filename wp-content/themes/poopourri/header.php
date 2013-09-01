@@ -39,7 +39,7 @@
     		        <div class="logo-container">
     			        <a class="home-link poopourri_logo_btn" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span class="screen-reader-text"><?php bloginfo( 'name' ); ?>: <?php bloginfo( 'description' ); ?></span></a>
     			    </div>
-    			    <a class="follow-link follow_header_btn header-content-link" data-content="follow-content"><span class="screen-reader-text">Follow:</span><span class="following"><span class="counter">1,230,000</span> Followers</span></a>
+    			    <a class="follow-link follow_header_btn header-content-link" data-content="follow-content"><span class="screen-reader-text">Follow:</span><span class="following"><span class="counter">9,096</span> Followers</span></a>
     			</div>
 		    </div>
 		    <div id="header-content">
@@ -63,11 +63,6 @@
 				<nav id="site-navigation" class="main-navigation" role="navigation">
 					<h3 class="menu-toggle"><?php _e( 'Menu', 'twentythirteen' ); ?></h3>
 					<a class="screen-reader-text skip-link" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentythirteen' ); ?>"><?php _e( 'Skip to content', 'twentythirteen' ); ?></a>
-					<?php if ( is_user_logged_in() ) { ?>
-						<ul id="menu-account-menu" class="nav-menu"><li id="menu-item-account" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#">My Account</a></li></ul>
-					<?php } else { ?>
-						<ul id="menu-account-menu" class="nav-menu"><li id="menu-item-account" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#">Sign In / Create Account</a></li></ul>
-					<?php } ?>
 					<?php wp_nav_menu( array( 'theme_location' => 'customer', 'menu_class' => 'nav-menu' ) ); ?>
 					<?php get_search_form(); ?>
 				</nav><!-- #site-navigation -->

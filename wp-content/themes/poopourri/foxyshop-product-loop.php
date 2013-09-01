@@ -24,7 +24,7 @@ global $foxyshop_prettyphoto_included;
 
 if (!$product['hide_product']) {
 
-       echo '<li id="'.str_replace(' ','',$product['name']).'"><div>';
+       echo '<li><a name="'.str_replace(array(' ','~','’'),'',$product['name']).'" class="product_target_adjusted_fixed"></a><div>';
 
 	//Just for the widget, since url links are no longer available
 	global $foxyshop_skip_url_link;

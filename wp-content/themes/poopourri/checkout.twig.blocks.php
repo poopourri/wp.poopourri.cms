@@ -67,8 +67,8 @@ BEGIN checkout
     {% block login_register %}
     <!--  *********** login_register : Login or Register ************* -->
     <div class="fc_fieldset_container" id="fc_login_register_container">
-    <h2>Your Email Address For Shipment Confirmation</h2>
-    <fieldset id="fc_login_register">
+    <h2 id="your_email_address" style="margin-top:30px;"><span class="screen-reader-text">Your Email Address For Shipment Confirmation</span></h2>
+    <fieldset id="fc_login_register" class="white-checkout-box">
         <legend>{% if checkout_type == 'guest_only' %}{{ lang.checkout_as_guest|raw }}{% else %}{{ lang.checkout_login_or_register|raw }}{% endif %}</legend>
         <div class="fc_inner">
             <ol id="fc_login_register_list">
@@ -83,7 +83,7 @@ BEGIN checkout
                     <span style="display:none" id="login_ajax"><img alt="{{ lang.checkout_loading|raw }}" src="//cdn.foxycart.com/static{{ base_directory }}/images/ajax-loader.gif?ver=1"></span>
                     <p style="display:none;" class="fc_account_message" id="fc_account_message_explanation"></p>
                 </li>
-            {% if not is_updateinfo and checkout_type != 'guest_only' and checkout_type != 'account_only' %}
+            {% if not is_updateinfo and checkout_type != 'guest_only' and checkout_type != 'account_only' %} 
                 <li class="fc_row fc_row_radio fc_guest_checkout">
                     <label for="is_anonymous_1" class="fc_radio">
                         <input type="radio" name="is_anonymous" value="1" id="is_anonymous_1" class="fc_radio"{% if default_to_guest %} checked="checked"{% endif %} autocomplete="off"/>
@@ -151,8 +151,8 @@ BEGIN checkout
             {% block customer_shipping %}
             <!--  *********** address_shipping : Shipping Address ************* -->
             <div class="fc_fieldset_container" id="fc_address_shipping_container">
-                 <h2>Where Should We Ship Your Order?</h2>
-                <fieldset id="fc_shipping_address">
+                 <h2 id="where_should_we_ship"><span class="screen-reader-text">Where Should We Ship Your Order?</span></h2>
+                <fieldset id="fc_shipping_address" class="white-checkout-box">
                     <legend>{{ lang.checkout_shipping_address|raw }}</legend>
                     <div class="fc_inner">
                         <ol id="fc_address_shipping_list">
@@ -239,8 +239,8 @@ BEGIN checkout
         {% block customer_billing %}
             <!--  *********** customer_billing : Billing Address ************* -->
             <div class="fc_fieldset_container" id="fc_customer_billing_container"{{ not use_different_billing_address ? ' style="display: none;"' }}>
-                <h2>Credit Card Billing Address</h2>
-                <fieldset id="fc_customer_billing">
+                <h2 id="credit_card_billing_address"><span class="screen-reader-text">Credit Card Billing Address</span></h2>
+                <fieldset id="fc_customer_billing" class="white-checkout-box">
                     <legend>{{ lang.checkout_billing_address|raw }}</legend>
                     <div class="fc_inner">
                         <ol id="fc_customer_billing_list">
@@ -321,8 +321,8 @@ BEGIN checkout
     {% block checkout_shipping_and_summary %}
         <!--  *********** shipping : Delivery &amp; Subtotal ************* -->
         <div id="fc_shipping_container" class="fc_fieldset_container"{% if is_updateinfo %} style="display:none;"{% endif %}>
-            <h2>{{ lang.checkout_delivery_and_subtotal|raw }}</h2>
-            <fieldset id="fc_shipping">
+            <h2 id="checkout_delivery_subtotal"><span class="screen-reader-text">{{ lang.checkout_delivery_and_subtotal|raw }}</span></h2>
+            <fieldset id="fc_shipping" class="white-checkout-box">
                 <legend>{{ lang.checkout_delivery_and_subtotal|raw }}</legend>
                 <div class="fc_inner">
                 {% if has_live_rate_shippable_products and not has_multiship %}
@@ -403,10 +403,10 @@ BEGIN checkout
     {% block checkout_payment %}
         <!--  *********** payment : Payment Information ************* -->
         <div id="fc_payment_container" class="fc_fieldset_container ">
-            <h2>{{ lang.checkout_payment_information|raw }}</h2>
-            <fieldset id="fc_payment">
+            <h2 id="checkout_payment_information"><span class="screen-reader-text">{{ lang.checkout_payment_information|raw }}</span></h2>
+            <fieldset id="fc_payment" class="secure-payment-checkout">
                 <legend>{{ lang.checkout_payment_information|raw }}</legend>
-                <div class="fc_inner">
+                <div class="fc_inner" style="position:relative;">
                     <ol id="fc_payment_list">
                     {% if supports_pay_with_plastic %}
                         <li id="fc_payment_method_plastic_container" class="fc_row fc_row_payment_method">
@@ -562,15 +562,15 @@ BEGIN checkout
                             {{ lang.checkout_no_payment_needed|raw }}
                         </li>
                     </ol>
+			<div id="stink-free-guarantee"><span class="screen-reader-text">Stink Free Guarantee</span></div>
+                </div><!-- .fc_inner -->
+            </fieldset><!-- #fc_payment -->
 
                     <div id="fc_complete_order_button_container" class="fc_row fc_row_actions">
-                        <button id="fc_complete_order_button" class="fc_button{{ submit_button_class }}" type="button" value="{{ submit_button_value }}" onclick="FC.checkout.validateAndSubmit()">{{ submit_button_value }}</button>
+                        <a id="fc_complete_order_button" class="confirm_order_btn fc_button{{ submit_button_class }}" type="button" value="{{ submit_button_value }}" onclick="FC.checkout.validateAndSubmit()"><span class="screen-reader-text">{{ submit_button_value }}</span></a>
                         <div id="fc_complete_order_processing" style="display:none;"><strong class="fc_error"></strong> <br /><img src="//cdn.foxycart.com/static{{ base_directory }}/images/ajax-loader.gif?ver=1" alt="{{ lang.checkout_loading|raw }}" width="220" height="19" /></div>
                     </div><!-- #fc_complete_order_button_container -->
 
-                    <span class="fc_clear">&nbsp;</span>
-                </div><!-- .fc_inner -->
-            </fieldset><!-- #fc_payment -->
             <span class="fc_clear">&nbsp;</span>
         </div><!-- #fc_payment_container -->
     {% endblock checkout_payment %}
@@ -605,7 +605,8 @@ BEGIN checkout
 </form>
 <span class="fc_clear">&nbsp;</span>
 </div><!-- #fc_checkout_container -->
-
+<span class="fc_clear">&nbsp;</span>
+<br/><br/><br/><br/><br/>
 
 
 <!-- ###########################################################################
