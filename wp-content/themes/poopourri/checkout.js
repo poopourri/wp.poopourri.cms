@@ -57,15 +57,21 @@ function clearBillingFields() {
 }
 
 function copyShippingFieldsToBillingFields() {
-	var fields = ["first_name", "last_name", "company", "address1", "address2", "city", "state", "postal_code", "country", "phone"];
-	for (var i = 0; i < fields.length; i++) {
-		$("#customer_" + fields[i]).val($("#shipping_" + fields[i]).val());
+	var fields = new Array('first_name','last_name','address1','address2','city','state_name','postal_code','country','phone');
+	var sourcePrefix = '#fc_address_shipping_list #shipping_';
+	var targetPrefix = '#fc_customer_billing_list #customer_';
+	for(var i=0;i<fields.length;i++){
+		if(typeof $(sourcePrefix+fields[i]).val()!='undefined' && $(targetPrefix+fields[i]).val()=='' ||
+	  	 typeof $(sourcePrefix+fields[i]).val()!='undefined' && $('#use_different_addresses').is(':checked')==false){
+			$(targetPrefix+fields[i]).val($(sourcePrefix+fields[i]).val());
+		}
 	}
 }
 
-
-
-
+  jQuery(document).ready(function(){
+     FC.checkout.overload('updateShipping',null,function(){copyShippingFieldsToBillingFields();});
+     FC.checkout.overload('validateAndSubmit',function(){copyShippingFieldsToBillingFields();},null);
+  });
 
 
 

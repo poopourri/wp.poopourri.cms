@@ -369,7 +369,7 @@ box-shadow:inset 1px 1px 4px rgba(0,0,0,0.4);
 
 .secure-payment-checkout{
 margin-top: 20px;
-height: 320px;
+height: 275px;
 background-color:rgb(238,238,238);
 width:800px;
 /* Firefox v1.0+ */
@@ -400,7 +400,7 @@ filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=0,Color=#8000000
 #your_email_address{ background:url(images/email_checkout_header.png); width:673px; height:26px; }
 #where_should_we_ship{ background:url(images/where_should_we_ship_header.png); width:706px; height:27px; }
 
-#stink-free-guarantee{background:url(images/stink_free_guarantee_small.png); width:311px; height:210px; position:absolute; right:0px;bottom:-130px; }
+#stink-free-guarantee{background:url(images/stink_free_guarantee_small.png); width:311px; height:210px; position:absolute; right:0px;bottom:-310px; }
 #credit_card_billing_address{ background:url(images/credit_card_header.png); width:575px; height:27px; }
 #checkout_delivery_subtotal{ background:url(images/shipping_and_subtotal.png); width:399px; height:26px; }
 #checkout_payment_information{ background:url(images/secure_payment_header.png); width:325px; height:26px; }
