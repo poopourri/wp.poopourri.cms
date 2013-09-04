@@ -1296,14 +1296,15 @@ ul.nav-menu li:hover > ul,
 #follow-content .newsletter-signup .thank-you p {color: #ffffff; font-style:italic; }
 
 #follow-content .connect-link-list { padding-bottom: 20px; }
-#follow-content .connect-link-list li  { background: url(images/social_icons.png) no-repeat; display: block; width: 25px; height: 26px; margin-right: 10px; text-indent: 40%; margin-bottom: 5px; }
+#follow-content .connect-link-list li  { background: url(images/follow_icons.png) no-repeat; display: block; width: 25px; height: 26px; margin-right: 10px; text-indent: 40%; margin-bottom: 5px; }
 #follow-content .connect-link-list li:hover { opacity: .8; }
 #follow-content .connect-link-list li a { text-indent: 100%; display: block; width: 250px; height: 26px; padding: 3px; margin-left: 0px; padding-left:5px; }
 #follow-content .connect-link-list li.last a { margin-right: 0; }
 #follow-content .connect-link-list li.facebook  { background-position: 0 0; }
 #follow-content .connect-link-list li.twitter  { background-position: -25px 0; }
 #follow-content .connect-link-list li.pinterest  { background-position: -50px 0; }
-#follow-content .connect-link-list li.tumblr  { background-position: -76px 0; }
+#follow-content .connect-link-list li.youtube { background-position: -76px 0; }
+#follow-content .connect-link-list li.instagram { background-position: -102px 0; }
 #follow-content .addthis_toolbox.addthis_default_style span { background: none; }
 
 
@@ -3679,4 +3680,8 @@ a.product_target_adjusted_fixed{
     position:relative;
     top:-130px;
     visibility:hidden;
+}
+
+.testimonial_hl{
+	background:#FFFF66;
 }
