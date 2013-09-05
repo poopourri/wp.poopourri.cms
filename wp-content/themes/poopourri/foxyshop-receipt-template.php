@@ -101,7 +101,7 @@ body {
 ?>
 
 
-<?php get_header("foxycart"); ?>
+<?php get_header("foxycartoptimizely"); ?>
 
 
 

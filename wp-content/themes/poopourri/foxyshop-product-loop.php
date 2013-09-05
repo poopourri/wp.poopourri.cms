@@ -1,4 +1,4 @@
-<?php /*
+﻿<?php /*
 ------------ ATTENTION ------------
 If you need to edit this template, do not edit the version in the plugin directory. Place a copy in your template folder and edit it there.
 This will allow you to upgrade FoxyShop without breaking your customizations. More details here: http://www.foxy-shop.com/documentation/theme-customization/
@@ -24,7 +24,7 @@ global $foxyshop_prettyphoto_included;
 
 if (!$product['hide_product']) {
 
-       echo '<li><a name="'.str_replace(array(' ','~','�'),'',$product['name']).'" class="product_target_adjusted_fixed"></a><div>';
+       echo '<li><a name="'.str_replace(array(' ','~','’'),'',$product['name']).'" class="product_target_adjusted_fixed"></a><div>';
 
 	//Just for the widget, since url links are no longer available
 	global $foxyshop_skip_url_link;
@@ -69,7 +69,7 @@ if (!$product['hide_product']) {
 	echo $product['description'];
 
 	//Shows the Price (includes sale price if applicable)
-	echo '<div id="foxyshop_main_price"><div class="price_label">Bottle Price:</div> ';
+	echo '<div id="foxyshop_main_price"><div class="price_label">Price:</div> ';
 	foxyshop_price();
 	echo '</div><div class="clr"></div><br/><br/>';
 
