@@ -45,6 +45,27 @@ function poopourri_footer() {
 
 </script>
 ^^analytics_google_ga_async^^
+
+<!-- Google Code for Sale on Poopourri.com Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 988742319;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "lyosCKG1twcQr4W81wM";
+var google_conversion_value = 40;
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/988742319/?value=40&amp;label=lyosCKG1twcQr4W81wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
 {% endif %}
 
 
@@ -80,7 +101,7 @@ body {
 ?>
 
 
-<?php get_header("foxycart"); ?>
+<?php get_header("foxycartoptimizely"); ?>
 
 
 
