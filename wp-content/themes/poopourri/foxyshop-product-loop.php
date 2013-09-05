@@ -48,7 +48,7 @@ if (!$product['hide_product']) {
 	//-------------------------------------------------------------------------------------------------------------------------
 	//Show Image on Left
 	echo '<div class="category_image_holder">';
-		if ($thumbnailSRC = foxyshop_get_main_image("medium")) echo '<a href="' . $product['url'] . '"><img src="' . $thumbnailSRC . '" alt="' . htmlspecialchars($product['name']) . '"/></a>';
+		if ($thumbnailSRC = foxyshop_get_main_image("medium")) echo '<img src="' . $thumbnailSRC . '" alt="' . htmlspecialchars($product['name']) . '"/>';
       		 echo '<div style="display:none" class="foxyshop_image_holder">';
        		foxyshop_build_image_slideshow("prettyPhoto", true);
 		 echo '</div>';
@@ -56,7 +56,7 @@ if (!$product['hide_product']) {
 
 
 	//Main Product Information Area
-	echo '<div class="category_product_info"><div class="foxycart_product_info">';
+	echo '<div class="category_product_info"><div class="foxycart_product_info">'; 
 	echo '<h2>' . apply_filters('the_title', $product['name']) . '</h2>';
 	
 	//Show a sale tag if the product is on sale
@@ -69,7 +69,7 @@ if (!$product['hide_product']) {
 	echo $product['description'];
 
 	//Shows the Price (includes sale price if applicable)
-	echo '<div id="foxyshop_main_price"><div class="price_label">100-Use Bottle:</div> ';
+	echo '<div id="foxyshop_main_price"><div class="price_label">Bottle Price:</div> ';
 	foxyshop_price();
 	echo '</div><div class="clr"></div><br/><br/>';
 
