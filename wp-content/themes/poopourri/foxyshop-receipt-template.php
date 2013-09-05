@@ -54,7 +54,7 @@ var google_conversion_language = "en";
 var google_conversion_format = "3";
 var google_conversion_color = "ffffff";
 var google_conversion_label = "lyosCKG1twcQr4W81wM";
-var google_conversion_value = 40;
+var google_conversion_value = my_order_total;
 var google_remarketing_only = false;
 /* ]]> */
 </script>

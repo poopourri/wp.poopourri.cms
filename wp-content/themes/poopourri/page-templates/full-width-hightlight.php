@@ -28,7 +28,7 @@ get_header(); ?>
 			Poo~Pourri is the award-winning<br/>before-you-go toilet spray.
 		</p>
 		<img src="/wp-content/themes/poopourri/images/good_housekeeping_seal.png" style="position:absolute;bottom:25px;right:80px;">
-  		<p style="position:absolute;right:0px;bottom: 225px;width:380px;text-align:center;font-size:14pt;font-weight:bold;color:#0088B0;">
+  		<p style="position:absolute;right:0px;bottom: 225px;width:380px;text-align:center;font-size:14pt;font-weight:bold;color:#0088B0;" id="buy_now_text">
 			Over 4 million sold!
 		</p>
   		<a href="packages" class="order_now_btn" style="position:absolute;right:0px;bottom: 165px;"></a>
@@ -49,5 +49,43 @@ get_header(); ?>
 
 		</div><!-- #content -->
 	</div><!-- #primary -->
+<script><!--
 
+/* Calculate the initial number as of now */
+	  var beginMilliseconds = 1322069896041; /* Milliseconds as of November 22, 2011 */
+	  var millisecondsPerMin = 60000;
+	  var today = new Date();
+	  var NumberPerMinute = 1.7;  /* Don't use the actual number per minute*/
+          var total = 2405000;
+	  total = total + (NumberPerMinute * (today.getTime() - beginMilliseconds) / millisecondsPerMin);
+
+	  /* Update every two seconds */
+	  setInterval("UpdateBuyBtn()", 2000);
+
+function UpdateBuyBtn() {
+    /* Increment by a random number between 0 and 11 */
+    total = total + Math.floor(Math.random() * 11);
+
+    total = Math.round(total);
+
+    /* Update the Buy Buttons */
+    var s = addCommas(total) + ' SOLD';
+    $('#buy_now_text').html(s);
+}
+
+/* Buy Now Count*/
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}
+
+
+//--></script>
 <?php get_footer(); ?>
