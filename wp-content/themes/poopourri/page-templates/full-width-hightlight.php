@@ -32,7 +32,18 @@ get_header(); ?>
 			Over 4 million sold!
 		</p>
   		<a href="packages" class="order_now_btn" style="position:absolute;right:0px;bottom: 165px;"></a>
-  
+  		<div class="social-network-icon" style="bottom:0px;left:0px;position:absolute;width:500px;height:25px;">
+			<!-- AddThis Button BEGIN -->
+			<div class="addthis_toolbox addthis_default_style ">
+				<a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://poopourri.com" addthis:title="PooPourri" addthis:description="Spritz the bowl Before-You-Go and no one else will ever know!"></a>
+				<a class="addthis_button_tweet" addthis:url="http://poopourri.com" addthis:title="PooPourri" addthis:description="Spritz the bowl Before-You-Go and no one else will ever know!"></a>
+				<a class="addthis_button_pinterest_pinit" addthis:url="http://poopourri.com" addthis:title="PooPourri" addthis:description="Spritz the bowl Before-You-Go and no one else will ever know!"></a>
+				<a class="addthis_counter addthis_pill_style" addthis:url="http://poopourri.com" addthis:title="PooPourri" addthis:description="Spritz the bowl Before-You-Go and no one else will ever know!"></a>
+			</div>
+			<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+			<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-522e30237ef8e7c8"></script>
+			<!-- AddThis Button END -->
+	       </div>
 		</div>
 		<div class="shadow_left"></div>
 		<div class="shadow_right"></div>
