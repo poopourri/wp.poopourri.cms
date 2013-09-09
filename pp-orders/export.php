@@ -28,12 +28,12 @@ if (isset($_GET['q'])) {
 }
 
 //Today **testing
-if ($q == "today") {
+if ($query_date == "today") {
 	$start_date = date("Y-m-d");
 	$end_date = date("Y-m-d");
 
 //Lots of Days **testing
-} elseif ($q == "30days") {
+} elseif ($query_date == "30days") {
 	$start_date = date("Y-m-d", strtotime("-30 days"));
 	$end_date = date("Y-m-d", strtotime("now"));
 
