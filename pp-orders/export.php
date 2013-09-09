@@ -11,7 +11,7 @@ $entries_per_page = 300;
 //$to_email = "david@sparkweb.net"; //testing
 //$to_email = "nealsharmon@gmail.com"; //testing
 $to_email = "janette@poopourri.net";
-$cc_email = "todd@poopourri.net";
+$cc_email = array("todd@poopourri.net", "nealsharmon@gmail.com");
 
 
 //Setup Pagination
@@ -20,17 +20,29 @@ if (isset($_GET['pagination_start'])) {
 	$pagination_start = (int)$_GET['pagination_start'];
 }
 
-//Just Yesterday
-$start_date = date("Y-m-d", strtotime("-1 day"));
-$end_date = date("Y-m-d", strtotime("-1 day"));
+
+//Get Date Range
+$query_date = "yesterday";
+if (isset($_GET['q'])) {
+	$query_date = $_GET['q'];
+}
 
 //Today **testing
-//$start_date = date("Y-m-d");
-//$end_date = date("Y-m-d");
+if ($q == "today") {
+	$start_date = date("Y-m-d");
+	$end_date = date("Y-m-d");
 
 //Lots of Days **testing
-//$start_date = date("Y-m-d", strtotime("-30 days"));
-//$end_date = date("Y-m-d", strtotime("now"));
+} elseif ($q == "30days") {
+	$start_date = date("Y-m-d", strtotime("-30 days"));
+	$end_date = date("Y-m-d", strtotime("now"));
+
+//Just Yesterday
+} else {
+	$start_date = date("Y-m-d", strtotime("-1 day"));
+	$end_date = date("Y-m-d", strtotime("-1 day"));
+}
+
 
 
 //Includes
@@ -225,8 +237,10 @@ if (!isset($_GET['neal-debug'])) {
 	$mail->CharSet = "UTF-8";
 	$mail->SetFrom($to_email, "Order Management");
 	$mail->AddAddress($to_email);
-	if (isset($cc_email)) {
-		$mail->AddCC($cc_email);
+	if (is_array($cc_email)) {
+		foreach ($cc_email as $cc) {
+			$mail->AddCC($cc);
+		}
 	}
 	$mail->Subject = $subject;
 	$mail->Body = $email_body;
