@@ -87,13 +87,27 @@ foreach ($xml->transactions->transaction as $transaction) {
 	$extra_rows = array();
 
 	//Basics
-	$cols['source_key'] = "harmon";
-	$cols['sales_id'] = "har";
+	$cols['source_key'] = "HARMON";
+	$cols['sales_id'] = "HAR";
 	$cols['shipvia'] = "PM";
+	$cols['paymethod'] = "CC";
 	$cols['continued'] = "";
-	$cols['paymethod'] = "cc";
 	$cols['useshipamt'] = "Y";
 	$cols['internet'] = "T";
+
+	//Credit Card Type
+	$original_card_type = (string)$transaction->cc_type;
+	$cardtype = "";
+	if ($original_card_type == "Visa") {
+		$cardtype = "VI";
+	} elseif ($original_card_type == "MasterCard") {
+		$cardtype = "MC";
+	} elseif ($original_card_type == "Amex") {
+		$cardtype = "AE";
+	} elseif ($original_card_type == "Discover") {
+		$cardtype = "DI";
+	}
+	$cols['cardtype'] = $cardtype;
 
 	//Billing Address
 	$cols['firstname'] = (string)$transaction->customer_first_name;
