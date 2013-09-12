@@ -126,7 +126,7 @@ function toggleCart(indexLoc,pid){
 
 	if(current_total < free_shipping_total_required){
 		var remaining = free_shipping_total_required - current_total;
-		$('.free_shipping_notice').html('FREE FAST shipping to USA on any order $49+ ($<span class="free_shipping_remaining">'+remaining+'</span> left)');
+		$('.free_shipping_notice').html('FREE FAST shipping to USA on any order $49+ ($<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> left)');
 	}else{
 		$('.free_shipping_notice').html('You qualify for FREE shipping to the USA!');
 	}	

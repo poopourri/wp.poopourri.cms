@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Full-width Page Template, With Highlight
+ * Template Name: FREE Page Auto Popup
  *
  * Description: Twenty Twelve loves the no-sidebar look as much as
  * you do. Use this page template to remove the sidebar from any page.
@@ -27,7 +27,7 @@ get_header(); ?>
   		<img src="/wp-content/uploads/2013/09/leave_the_toilet_smelling_better.png" style="position:absolute;right:160px;top:155px;">
   		<p style="position:absolute;right:132px;top:250px;width:250px;font-size:14pt;text-align:left;">
 			Poo-Pourri is a blend of essential oils that virtually eliminates bathroom odors! Our award-winning before-you-go&reg; sprays come in a variety of scents and sizes. 		</p>
-		<img src="/wp-content/uploads/2013/09/100_uses_lasts_over_3_months_productshot.png" style="position:absolute;bottom:125px;right:-90px;">
+		<img src="/wp-content/uploads/2013/08/By-Scent_Original-4oz-218x300.png" style="position:absolute;bottom:125px;right:-90px;">
   		<p style="position:absolute;right:100px;bottom: 100px;width:280px;text-align:center;font-size:14pt;font-weight:bold;color:#0088B0;" id="buy_now_text">
 			Over 4 million sold!
 		</p>
@@ -86,6 +86,11 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+$(document).ready(function(){
+  if(document.location.href.indexOf('nosample')==-1){
+    $.colorbox({href:"/free-sample/",initialHeight:"450", maxWidth:"90%",maxHeight:"90%",minWidth:"825px",minHeight:"480px",opacity:0.8});
+  }
+});
 
 //--></script>
 <?php get_footer(); ?>
