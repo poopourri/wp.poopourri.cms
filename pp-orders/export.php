@@ -27,7 +27,7 @@ if (isset($_GET['q'])) {
 	$query_date = $_GET['q'];
 }
 
-//Today **testing
+//Today **just for testing
 if ($query_date == "today") {
 	$start_date = date("Y-m-d");
 	$end_date = date("Y-m-d");
@@ -268,8 +268,11 @@ if (!isset($_GET['neal-debug'])) {
 //Delete Temp File
 unlink($localpath . $file);
 
+//Setup counter because we only want to do 5 at a time
+$counter = 1;
+
 //Keep Going if Paging Isn't Done
-if ($pagination_end < $filtered_total) {
+if ($pagination_end < $filtered_total && $counter <= 5) {
 	$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . "?pagination_start=" . ($pagination_end + 1);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -278,6 +281,7 @@ if ($pagination_end < $filtered_total) {
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 	echo curl_exec($ch);
 	$info = curl_getinfo($ch);
+	$counter++;
 
 	//Show Diagnostic Info
 	//echo "<pre>" . print_r($info, 1) . "</pre>";
