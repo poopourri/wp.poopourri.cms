@@ -32,7 +32,20 @@ get_header(); ?>
 			Over 4 million sold!
 		</p>
   		<a href="packages" class="order_now_btn" style="position:absolute;right:0px;bottom: 30px;"></a>
-  
+   
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style " style="position:absolute;left:0px;bottom:6px;width:400px;height:20px;">
+<a class="addthis_button_youtube"></a>
+<a class="addthis_button_instagram"></a>
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-522e30237ef8e7c8"></script>
+<!-- AddThis Button END -->
+
 		</div>
 		<div class="shadow_left"></div>
 		<div class="shadow_right"></div>

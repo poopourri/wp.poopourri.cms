@@ -125,7 +125,7 @@ box-shadow:inset 1px 1px 3px rgba(0,0,0,0.5);
 </form>
 <br/>
 <a href="javascript:void();" class="yes_send_me_my_free_sample_btn free_popup_page_r8_c3" onclick="document.getElementById('foxyshop_product_form_208').submit();"></a>
-<br/><a href="/home-page-free-sample/?nosample=1" class="free-sample">I already believe it works. Just let me SHOP for a solution to my polution.
+<br/><a href="/home-page-free-sample/?nosample=1" class="free-sample">I already believe it works. Just let me SHOP for a solution to my pollution.
 </div>
 </body>
 </html>
