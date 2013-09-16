@@ -11,7 +11,12 @@ $entries_per_page = 300;
 //$to_email = "david@sparkweb.net"; //testing
 //$to_email = "nealsharmon@gmail.com"; //testing
 $to_email = "janette@poopourri.net";
-$cc_email = array("todd@poopourri.net", "nealsharmon@gmail.com", "bentoncrane@gmail.com", "hector@poopourri.net");
+$cc_email = array(
+	"todd@poopourri.net",
+	"nealsharmon@gmail.com",
+	"bentoncrane@gmail.com",
+	"hector@poopourri.net",
+);
 
 
 //Setup Pagination
