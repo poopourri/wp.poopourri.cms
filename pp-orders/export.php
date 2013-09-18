@@ -134,6 +134,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 	$cols['paid'] = (double)$transaction->order_total;
 	$cols['order_date'] = date("Ymd", strtotime((string)$transaction->transaction_date));
 	$cols['odr_num'] = (string)$transaction->id;
+	$cols['altnum'] = (string)$transaction->id;
 	$cols['shipping'] = (double)$transaction->shipping_total;
 	$cols['email'] = substr((string)$transaction->customer_email, 0, 50);
 	$processor_response = (string)$transaction->processor_response;
