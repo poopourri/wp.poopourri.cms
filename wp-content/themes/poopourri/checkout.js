@@ -53,7 +53,19 @@ FC.customLiveShipping.logic = function() {
 
 
 
-
+function UpdateUSPSRates() {
+    jQuery(".fc_shipping_service").each(function() {
+        var reg = /\d-day/i;
+        var service = jQuery(this).html();
+        if (reg.test(service)) {
+            jQuery(this).html(service.replace(reg, "").trim());
+        }
+        var saved_service = jQuery("#shipping_service_description").val();
+        if (reg.test(saved_service)) {
+            jQuery("#shipping_service_description").val(saved_service.replace(reg, "").trim());
+        }
+    });
+}
 
 
 
@@ -86,11 +98,13 @@ function copyShippingFieldsToBillingFields() {
     jQuery(document).ajaxComplete(function(event, request, settings) {
       if (settings.url.indexOf('GetShippingCost') != -1) {
         FC.customLiveShipping.execute();
+        UpdateUSPSRates();
       }
     });
 
     if (FC.checkout.config.postedCheckout && FC.checkout.config.shippingServiceId > 0) {
       FC.customLiveShipping.execute();
+      UpdateUSPSRates();
     }
   });
 
