@@ -42,7 +42,12 @@ FC.customLiveShipping.config = {
 
 FC.customLiveShipping.logic = function() {
 	var country = (jQuery("#use_different_addresses").is(":checked") ? $("#shipping_country").val() : $("#customer_country").val());
-	if ((country == "US" && fc_json.total_price < 49) || country != "US") FC.customLiveShipping.remove("free");
+	var state = (jQuery("#use_different_addresses").is(":checked") ? $("#shipping_state").val() : $("#customer_state").val());
+  var non_lower48_states = ["AF","AA","AC","AE","AM","AP","AS","PR","VI","GU","FM","MH","MP","AK","HI"];
+
+  if ((country == "US" && fc_json.total_price < 49) || country != "US" || jQuery.inArray(state, non_lower48_states)) {
+    FC.customLiveShipping.remove("free");
+  }
 }
 
 
