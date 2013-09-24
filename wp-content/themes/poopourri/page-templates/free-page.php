@@ -17,6 +17,50 @@
  ?>
 <html>
 <head>
+                                                                     
+                                             
+<!-- Rejoiner Tracking -->
+<script type="text/javascript">
+var _rejoiner = _rejoiner || [];
+_rejoiner.push(["setAccount", "522ff53918484d289600004f"]);
+_rejoiner.push(["setDomain", ".poopourri.com"]);
+
+(function() {
+        var s = document.createElement('script'); s.type = 'text/javascript';
+        s.async = true; s.src = 'https://s3.amazonaws.com/rejoiner/js/v3/t.js';
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+})();
+</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-17466510-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 988742319;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/988742319/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
 <style>
 .granite-backdrop{
 width:760px;

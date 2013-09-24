@@ -2,9 +2,15 @@
 //Set Timezone and errors
 date_default_timezone_set("America/Chicago");
 
+// just pull international numbers?
+$shipping_region = 'domestic';
+if(isset($_GET['shipping_region'])){
+	$shipping_region = $_GET['shipping_region'];
+}
+
 //Set Config Details
-$foxycart_domain = "poopourri.foxycart.com";
-$foxycart_api_key = "spfxd22f6593863ada65d41ad99494dfe354f8ba8f6875fba646f1db0d35fbaa419b";
+$foxycart_domain = "secure.poopourri.com";
+$foxycart_api_key = "sp92fx6c4bf31eddd9a1a5555b4274436991bfdcaa01a2a98554bc37ed10f3e76d9b76";
 $entries_per_page = 300;
 
 //Email Settings
@@ -12,10 +18,11 @@ $entries_per_page = 300;
 //$to_email = "nealsharmon@gmail.com"; //testing
 $to_email = "janette@poopourri.net";
 $cc_email = array(
-	"todd@poopourri.net",
-	"nealsharmon@gmail.com",
-	"bentoncrane@gmail.com",
-	"hector@poopourri.net",
+	//"todd@poopourri.net",
+	//"nealsharmon@gmail.com",
+	//"bentoncrane@gmail.com",
+	//"hector@poopourri.net",
+	//"janette@poopourri.net"
 );
 
 
@@ -32,6 +39,12 @@ if (isset($_GET['q'])) {
 	$query_date = $_GET['q'];
 }
 
+//Get Days Ago
+$daysago = "1";
+if (isset($_GET['daysago'])) {
+	$daysago = $_GET['daysago'];
+}
+
 //Today **just for testing
 if ($query_date == "today") {
 	$start_date = date("Y-m-d");
@@ -40,11 +53,16 @@ if ($query_date == "today") {
 //Lots of Days **testing
 } elseif ($query_date == "30days") {
 	$start_date = date("Y-m-d", strtotime("-30 days"));
-	$end_date = date("Y-m-d", strtotime("now"));
+	$end_date = date("Y-m-d", strtotime("-1 day"));
+
+//days ago
+} elseif ($query_date == "daysago") {
+	$start_date = date("Y-m-d", strtotime("-".$daysago." days"));
+	$end_date = date("Y-m-d", strtotime("-".$daysago." days"));
 
 //Just Yesterday
 } else {
-	$start_date = date("Y-m-d", strtotime("-1 day"));
+	$start_date = date("Y-m-d", strtotime("-1 days"));
 	$end_date = date("Y-m-d", strtotime("-1 day"));
 }
 
@@ -88,6 +106,11 @@ $filtered_total = (int)$xml->statistics->filtered_total;
 
 //For Each Order
 foreach ($xml->transactions->transaction as $transaction) {
+   if(
+	(get_country_code((string)$transaction->shipping_country)!="001" && $shipping_region=='international')
+	|| (get_country_code((string)$transaction->shipping_country)=="001" && $shipping_region=='domestic')
+	|| $shipping_region=='all'
+	){
 	$cols = getFieldTitles();
 	$extra_rows = array();
 
@@ -99,11 +122,11 @@ foreach ($xml->transactions->transaction as $transaction) {
 	$cols['continued'] = "";
 	$cols['useshipamt'] = "Y";
 	$cols['internet'] = "T";
-	$cols['paymethod'] = "PREPAID";
+	//$cols['paymethod'] = "PREPAID";
 
 	//Credit Card Type
 	$original_card_type = (string)$transaction->cc_type;
-	$cardtype = "";
+	$cardtype = "VI";
 	if ($original_card_type == "Visa") {
 		$cardtype = "VI";
 	} elseif ($original_card_type == "MasterCard") {
@@ -114,6 +137,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 		$cardtype = "DI";
 	}
 	$cols['cardtype'] = $cardtype;
+	$cols['expires'] = '02/22';
 
 	//Billing Address
 	$cols['firstname'] = (string)$transaction->customer_first_name;
@@ -134,7 +158,6 @@ foreach ($xml->transactions->transaction as $transaction) {
 	$cols['paid'] = (double)$transaction->order_total;
 	$cols['order_date'] = date("Ymd", strtotime((string)$transaction->transaction_date));
 	$cols['odr_num'] = (string)$transaction->id;
-	$cols['altnum'] = (string)$transaction->id;
 	$cols['shipping'] = (double)$transaction->shipping_total;
 	$cols['email'] = substr((string)$transaction->customer_email, 0, 50);
 	$processor_response = (string)$transaction->processor_response;
@@ -204,7 +227,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 			$rows[] = $new_row;
 		}
 	}
-
+   }
 }
 
 
@@ -227,9 +250,13 @@ if (isset($_GET['neal-debug'])) {
 }
 
 
+//Make subject and file name the same
+$subject = "Sales Data ($shipping_region) For " . date("m-d-Y", strtotime("-$daysago day")) . " (" . $pagination_start . "-" . $pagination_end . ")";
+
+
 //Setup File
 $localpath = dirname(__FILE__) . "/tempfiles/";
-$file = Date("Y-m-d_H-i-s") . ".csv";
+$file = strtolower(str_replace(array('(',')','Sales Data '),array('','',''),$subject)).".csv";
 $fp = fopen($localpath . $file, 'w');
 //fwrite($fp, pack("CCC",0xef,0xbb,0xbf)); //Do the UTF-8 Encoding
 //fwrite($fp, "\xEF\xBB\xBF");
@@ -243,8 +270,6 @@ if (!isset($_GET['neal-debug'])) {
 	$email_attachment = $localpath . $file;
 
 	$mail = new PHPMailer();
-
-	$subject = "Sales Data For " . date("m/d/Y", strtotime("-1 day")) . " (" . $pagination_start . "-" . $pagination_end . ")";
 
 	//Attachment
 	if (isset($email_attachment)) {
@@ -268,7 +293,7 @@ if (!isset($_GET['neal-debug'])) {
 	if (!$mail->Send()) {
 		echo "Email Not Sent\n";
 	} else {
-		echo "Email Sent (" . $pagination_start . "-" . $pagination_end . ")\n";
+		echo "Email (".$shipping_region.") Sent (" . $pagination_start . "-" . $pagination_end . ")\n";
 	}
 }
 
@@ -280,7 +305,7 @@ $counter = 1;
 
 //Keep Going if Paging Isn't Done
 if ($pagination_end < $filtered_total && $counter <= 5) {
-	$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . "?pagination_start=" . ($pagination_end + 1);
+	$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . "?q=".$query_date."&shipping_region=".$shipping_region."&daysago=".$daysago."&pagination_start=" . ($pagination_end + 1);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

@@ -528,3 +528,22 @@ function twentythirteen_customize_preview_js() {
 	wp_enqueue_script( 'twentythirteen-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20130226', true );
 }
 add_action( 'customize_preview_init', 'twentythirteen_customize_preview_js' );
+
+/*
+Requires the special capability "order_management" to be able to access the Order, Customers, and Subscriptions
+ 
+Instructions:
+1. Place this code in your functions.php file
+2. Install the Capabilities Manager plugin
+3. Create a new role called "Order Manager"
+4. Create a new capability of "order_management" and assign that role to the Admin and Order Manager roles
+4a. Make sure the Order Manager has the "Read" capability also or they won't be able to login to the admin
+5. Create your new user and assign them to the Order Manager role
+*/
+ 
+add_filter('foxyshop_order_perm', 'my_special_role');
+add_filter('foxyshop_customer_perm', 'my_special_role');
+add_filter('foxyshop_subscription_perm', 'my_special_role');
+function my_special_role() {
+        return 'order_management';
+}
