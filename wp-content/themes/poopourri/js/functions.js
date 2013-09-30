@@ -9,7 +9,7 @@ var free_shipping_total_required = 49;
 ( function( $ ) {
 	var body    = $( 'body' ),
 	    _window = $( window ),
-		_foxycartURL = 'https://poopourri.foxycart.com/';
+		_foxycartURL = 'https://secure.poopourri.com/';
 
 	/**
 	 * Adds a top margin to the footer if the sidebar widget area is higher

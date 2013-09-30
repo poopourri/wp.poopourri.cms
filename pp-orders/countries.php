@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 function getCountries() {
 	return array(
@@ -275,7 +275,7 @@ function getCountries() {
 function full_country_names() {
 
 	return array(
-		'AX' => 'Åland Islands',
+		'AX' => 'Ã…land Islands',
 		'AL' => 'Albania',
 		'DZ' => 'Algeria',
 		'AS' => 'American Samoa',
@@ -455,11 +455,11 @@ function full_country_names() {
 		'PT' => 'Portugal',
 		'PR' => 'Puerto Rico',
 		'QA' => 'Qatar',
-		'RE' => 'Réunion',
+		'RE' => 'RÃ©union',
 		'RO' => 'Romania',
 		'RU' => 'Russian Federation',
 		'RW' => 'Rwanda',
-		'BL' => 'Saint Barthélemy',
+		'BL' => 'Saint BarthÃ©lemy',
 		'SH' => 'Saint Helena',
 		'KN' => 'Saint Kitts and Nevis',
 		'LC' => 'Saint Lucia',
@@ -525,4 +525,30 @@ function full_country_names() {
 		'ZM' => 'Zambia',
 		'ZW' => 'Zimbabwe'
 	);
+}
+
+function getStateCode($st,$co){
+	$canadian_states = array(
+		"BC"=>"British Columbia",
+		"ON"=>"Ontario", 
+		"NL"=>"Newfoundland and Labrador", 
+		"NS"=>"Nova Scotia", 
+		"PE"=>"Prince Edward Island", 
+		"NB"=>"New Brunswick", 
+ 		"QC"=>"Quebec", 
+ 		"MB"=>"Manitoba", 
+		"SK"=>"Saskatchewan", 
+		"AB"=>"Alberta", 
+		"NT"=>"Northwest Territories", 
+		"NU"=>"Nunavut",
+		"YT"=>"Yukon Territory"
+	);
+
+	foreach($canadian_states as $k=>$v){
+		if($v==$st && $co=='CA'){
+			return $k;
+		}
+	}
+
+	return $st;
 }

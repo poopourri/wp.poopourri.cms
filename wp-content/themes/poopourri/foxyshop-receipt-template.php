@@ -83,6 +83,19 @@ add_action('wp_footer', 'foxyshop_insert_google_analytics_receipt');
 add_action('wp_head', 'foxycart_template_header_includes');
 function foxycart_template_header_includes() {
 	?>
+<!-- Rejoiner Conversion -->
+<script type="text/javascript">
+var _rejoiner = _rejoiner || [];
+_rejoiner.push(["setAccount", "522ff53918484d289600004f"]);
+_rejoiner.push(["setDomain", ".poopourri.com"]);
+_rejoiner.push(["sendConversion"]);
+
+(function() {
+        var s = document.createElement('script'); s.type = 'text/javascript';
+        s.async = true; s.src = 'https://s3.amazonaws.com/rejoiner/js/v3/t.js';
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+})();
+</script>
 <!--<link rel="shortcut icon" href="<?php bloginfo("url");?>/favicon.ico" />-->
 <meta name="ROBOTS" content="NOINDEX">
 <link rel="stylesheet" href="https://^^store_domain^^/themes/standard/styles.css" type="text/css" media="screen" charset="utf-8" />
