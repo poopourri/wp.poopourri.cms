@@ -3,8 +3,8 @@
 date_default_timezone_set("America/Chicago");
 
 //Set Config Details
-$foxycart_domain = "poopourri.foxycart.com";
-$foxycart_api_key = "spfxd22f6593863ada65d41ad99494dfe354f8ba8f6875fba646f1db0d35fbaa419b";
+$foxycart_domain = "secure.poopourri.com";
+$foxycart_api_key = "sp92fx6c4bf31eddd9a1a5555b4274436991bfdcaa01a2a98554bc37ed10f3e76d9b76";
 $entries_per_page = 300;
 
 //Email Settings
@@ -60,8 +60,9 @@ require "functions.php";
 $foxydata = array(
 	"api_action" => "transaction_list",
 	"is_test_filter" => 0,
-	"transaction_date_filter_begin" => $start_date,
-	"transaction_date_filter_end" => $end_date,
+	"id_filter" => "137913369",
+//	"transaction_date_filter_begin" => $start_date,
+//	"transaction_date_filter_end" => $end_date,
 	"pagination_start" => $pagination_start,
 	"entries_per_page" => $entries_per_page,
 );
@@ -183,21 +184,22 @@ foreach ($xml->transactions->transaction as $transaction) {
 		$product_count = 0;
 		for ($i = 5; $i < count($arr_products); $i++) {
 			$product_count++;
+			$current_product = $arr_products[$i - 1];
 			$new_col['continued'] = "Y";
-			$new_col["product0" . $product_count] = $val['code'];
-			$new_col["quantity0" . $product_count] = $val['quantity'];
-			$new_col["price0" . $product_count] = $val['price'];
+			$new_col["product0" . $product_count] = $current_product['code'];
+			$new_col["quantity0" . $product_count] = $current_product['quantity'];
+			$new_col["price0" . $product_count] = $current_product['price'];
 			if ($product_count == 5) {
 				$product_count = 0;
 				$extra_rows[] = $new_col;
-				$new_col = $cols;
+				$new_col = getFieldTitles();
+				$new_col['continued'] = "Y";
 			}
 		}
 		if ($product_count > 0) {
 			$extra_rows[] = $new_col;
 		}
 	}
-
 	$rows[] = $cols;
 	if (count($extra_rows) > 0) {
 		foreach ($extra_rows as $new_row) {
@@ -223,7 +225,7 @@ foreach ($rows as $row) {
 if (isset($_GET['neal-debug'])) {
 	echo "<pre>" . $write . "</pre>";
 	//echo "<pre>" . print_r($rows, 1) . "</pre>";
-	//die;
+	die;
 }
 
 
