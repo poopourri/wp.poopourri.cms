@@ -1,408 +1,334 @@
-body {
-    padding:10px;
-    background:url(../img/background.png) repeat top left;
-}
+jQuery(document).ready(function($) {
+	$("#change_shipping_country").click(function() {
+		$(".fc_shipping_country_change").hide();
+		$(".fc_shipping_country_name").show();
+		return false;
+	});
+	$("#change_customer_country").click(function() {
+		$(".fc_customer_country_change").hide();
+		$(".fc_customer_country_name").show();
+		return false;
+	});
 
-#container {
-    padding:0;
-    counter-reset:fieldsets 0;
-    background-color: #fdfdfd !important;
-}
-#sidebar {
-    background:#F5F5F5;
-}
-#logo {
-    padding:20px 0;
-}
-#mini-nav {
-    text-align:center;
-    font-size:18px;
-    background:#EEEEEE;
-    padding:10px;
-    margin:0 -15px;
-}
+	$("#different_billing_address").click(function() {
 
+		//Use Different
+		if ($(this).is(":checked")) {
+			$("#fc_customer_billing_container").show();
+			copyShippingFieldsToBillingFields();
 
-fieldset {
-    margin:30px 0;
-}
+		//Don't Use Different
+		} else {
+			$("#fc_customer_billing_container").hide();
+			clearBillingFields();
 
-legend {
-    color:#676767;
-    font-weight:thin;
-    border-bottom:none;
-    margin-bottom:10px;
-}
-legend span,
-#mini-nav span {
-    height:32px;
-    width:32px;
-    background:#5D5D5D;
-    color:#fff;
-    border-radius:20px;
-    display:inline-block;
-    /*padding:0.2em 0.7em;*/
-    margin:0 3px;
-    line-height:32px;
-    vertical-align:middle;
-    text-align:center;
-    box-shadow: inset 0 3px 5px -3px #000000;
-}
+		}
+	});
 
-legend .hidden-xs {
-    /* This is a little hacky, but it's overridden in the media query at the bottom. */
-    /* Without this, the .hidden- classes display:block !important, which causes problems here. */
-    display: inline-block !important;
-}
-
-legend span:before,
-#mini-nav span:before {
-    counter-increment: fieldsets 1;
-    content:counter(fieldsets, decimal);
-}
-#mini-nav span.active {
-    background-color:#00A533;
-}
-#mini-nav span.incomplete {
-    background-color:#B9B9B9;
-}
-
-input.form-control, textarea.form-control, select.form-control {
-    /* I know there is input-group-lg but this would require more html.  Height makes sense...I have sinned! */
-    height: 40px;
-    background: #f5f5f5;
-    border: 0;
-    border-color:#C3C3C3 #E6E6E6 #F2F2F2 #E6E6E6;
-    box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, .3);
-}
-
-p.text-muted a {
-    color:#A9A9A9;
-}
+	$(".fc_foxycomplete_input").css("width", $(".fc_foxycomplete_input").innerWidth() + 14);
+	$(".fc_shipping_country_name, .fc_customer_country_name").hide();
 
 
-/* =Buttons
-===================================================== */
 
-fieldset .btn {
-    margin-bottom:20px;
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    -ms-transition: all .1s linear;
-    -o-transition: all .1s linear;
-    transition: all .1s linear;
-    font-size: 15px;
-}
-
-fieldset .btn-default {
-    background: #f9f9f9; /* Old browsers */
-    background: -moz-linear-gradient(top,  #f9f9f9 0%, #eeeeee 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #f9f9f9 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #f9f9f9 0%,#eeeeee 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #f9f9f9 0%,#eeeeee 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #f9f9f9 0%,#eeeeee 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-    border: 1px solid #d5d5d5;
-    color: #888888;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 1);
-}
-
-fieldset .btn-default:hover {
-    margin-bottom:20px;
-    color: #555555;
-    border-color: #bbbbbb;
-}
+});
 
 
-/* =FoxyCart-specific Form Elements LAYOUT Overrides
-===================================================== */
-/* First and Last name inputs on the same line */
-.form-group-firstname {
-    padding-right:7px;
-}
-.form-group-lastname {
-    padding-left:8px;
-}
-/* Postal Code specific elements */
-.form-group-postcode input.form-control-postcode {
-    width:7.5em;
-}
-.form-group-postcode p {
-    width:10em;
-    display:inline-block;
-}
-/* Shipping radios and labels */
-.shipping-rate label span {
-    float:right;
-    color:#999;
-    font-style:italic;
-}
 
+FC.customLiveShipping = {}
 
-/* =Active Radio and Checkboxes
-===================================================== */
-.form-group .active {
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding-bottom: 10px;
-}
+FC.customLiveShipping.config = {
+	autoSelect: true
+};
 
-.form-group .active label.primary {
-    height: 40px;
-    line-height: 40px;
-    display: block !important;
-    background-color: #e1e1e1;
-    border-radius: 5px 5px 0px 0px;
-    margin-bottom: 20px;
-    margin-left: -20px;
-    padding-left: 20px;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, .5);
-}
-
-.form-group .active label.primary img {
-    position: relative;
-    top: -1px;
-}
-
-.form-group .radio, .form-group .checkbox {
-    padding-top: 0px;
-}
-
-/* The selected radio button */
-.form-group .active label.primary input {
-    width: 20px;
-    position: relative;
-    top: 10px;
-    border: 10px solid #000000;
-}
-
-/* The inputs inside the #payment-method-card */
-.form-group .active input, .form-group .active select {
-    background:#fff;
-}
-
-.form-group .active .form-group {
-    margin-bottom:0;
-    padding-bottom:15px;
-    margin-right:0;
-    margin-left:-20px;
-    padding-left:10px;
-    padding-right:10px;
-}
-
-.form-group .active p {
-    font-size: 85%;
-}
-
-.form-group .active .form-group .col-xs-1,
-.form-group .active .form-group .col-xs-2,
-.form-group .active .form-group .col-xs-3,
-.form-group .active .form-group .col-xs-4,
-.form-group .active .form-group .col-xs-5,
-.form-group .active .form-group .col-xs-6,
-.form-group .active .form-group .col-xs-7,
-.form-group .active .form-group .col-xs-8 {
-    padding-right:5px;
-    padding-left:5px;
-}
-
-/* =Form Errors and Prompts
-===================================================== */
-.has-error label {
-    color: #cd4c4d;
-}
-
-.has-error input {
-    border: 2px solid #cd4c4d !important;
-    /*border-radius: 5px 5px 0 0;*/
-}
-
-.has-success input {
-    border: 2px solid #c8d59d !important;
-    /*border-radius: 5px 5px 0 0;*/
-}
-
-.has-error .alert-danger, .has-success .alert-success {
-    color: #ffffff;
-    background-color: #cd4c4d;
-    padding: 10px 15px !important;
-    text-shadow: 1px 1px 0px rgba(0, 0, 0, .5);
-    -webkit-border-radius: 0px 0px 5px 5px;
-    border-radius: 0px 0px 5px 5px;
-    margin-top: -2px;
-    font-size: 85%;
-}
-
-.has-success .alert-success {
-    color: #4d6011;
-    background-color: #c8d59d;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, .5);
-}
-
-.has-success .alert-success .input-group button {
-    height: 40px;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    padding: 0px 15px;
-}
-
-/* =Errors and Prompts
-===================================================== */
-
-.alert {
-    border: 0;
-    padding: 15px;
-}
-
-.alert p {
-    margin-bottom: 15px;
-}
-
-.alert p:last-child {
-    margin-bottom: 0px;
-}
-
-.alert ul {
-    padding: 0;
-    margin-left: 15px;
-}
-
-.alert-danger {
-    color: #666666;
-    background-color: #f1f1f1;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border: 2px solid #cd4c4d;
-}
-
-.alert-danger h2 {
-    font-size: 21px;
-    color: #cd4c4d;
-    margin: 0;
-    padding: 0;
-}
-
-.alert-danger span {
-    color: #cd4c4d;
-    font-weight: bold;
-}
-
-.alert-danger p {
-    margin-top: 15px;
+FC.customLiveShipping.logic = function() {
+	var country = (jQuery("#use_different_addresses").is(":checked") ? $("#shipping_country").val() : $("#customer_country").val());
+	if ((country == "US" && fc_json.total_price < 49) || country != "US") FC.customLiveShipping.remove("free");
 }
 
 
 
-/* =MEDIA QUERIES
-===================================================== */
 
-@media (max-width: 768px)  {
-  legend .hidden-xs {
-    display: none !important;
-  }
-  .container .form-horizontal .form-group {
-    /* Not sure why this isn't included by default in Twitter Bootstrap for this size media query */
-    margin-left:-15px;
-    margin-right:-15px;
-  }
+
+
+
+
+function clearBillingFields() {
+	$("#customer_first_name, #customer_last_name, #customer_address1, #customer_address2, #customer_city, #customer_state, #customer_state_name, #customer_postal_code, #customer_phone").val("");
 }
 
-@media (min-width: 769px)  {
-  #payment-method-card-expires-month {
-      width:22%;
-  }
-  #payment-method-card-expires-year {
-      width:28%;
-  }
-  #payment-method-card-expires-csc {
-      width:24%;
-  }
+function copyShippingFieldsToBillingFields() {
+	var fields = new Array('first_name','last_name','address1','address2','city','state_name','state','postal_code','country','phone');
+	var sourcePrefix = '#fc_address_shipping_list #shipping_';
+	var targetPrefix = '#fc_customer_billing_list #customer_';
+	for(var i=0;i<fields.length;i++){
+		if(typeof $(sourcePrefix+fields[i]).val()!='undefined' && $(targetPrefix+fields[i]).val()=='' ||
+	  	 typeof $(sourcePrefix+fields[i]).val()!='undefined' && $('#different_billing_address').is(':checked')==false){
+			$(targetPrefix+fields[i]).val($(sourcePrefix+fields[i]).val());
+		}
+	}
 }
 
-@media (min-width: 1200px) {
-    div.container {
-        max-width:940px;
+  jQuery(document).ready(function(){
+     FC.checkout.overload('updateShipping',null,function(){copyShippingFieldsToBillingFields();});
+     FC.checkout.overload('validateAndSubmit',function(){copyShippingFieldsToBillingFields();},null);
+  });
+
+
+
+  /* Live Rate Shipping Modification Logic v1.3 */
+
+  jQuery(document).ready(function() {
+    jQuery(document).ajaxComplete(function(event, request, settings) {
+      if (settings.url.indexOf('GetShippingCost') != -1) {
+        FC.customLiveShipping.execute();
+      }
+    });
+
+    if (FC.checkout.config.postedCheckout && FC.checkout.config.shippingServiceId > 0) {
+      FC.customLiveShipping.execute();
     }
+  });
+
+
+  /**
+   *  PUBLIC FUNCTIONS
+   *  Use these functions to modify the returned live rates
+   */
+
+  FC.customLiveShipping.add = function(code, cost, carrier, service) {
+    var newShippingOption = '<label for="shipping_service_' + code + '" class="fc_radio"><input type="radio" class="fc_radio fc_required" value="' + code + '|' + cost + '" id="shipping_service_' + code + '" name="shipping_service" onclick="FC.checkout.updatePrice(-1)" /><span class="fc_shipping_carrier">' + carrier + '</span><span class="fc_shipping_service">' + service + '</span><span class="fc_shipping_cost">' + FC.formatter.currency(cost, true) + '</span></label>';
+    jQuery("#fc_shipping_methods_inner").append(newShippingOption);
+  }
+
+  FC.customLiveShipping.hide = function(selector) {
+    if (typeof(selector) != "number") FC.customLiveShipping.alterShippingOptions(FC.customLiveShipping.hide, selector);
+    jQuery("label[for=shipping_service_" + selector + "]").hide();
+  }
+
+  FC.customLiveShipping.show = function(selector) {
+    if (typeof(selector) != "number") FC.customLiveShipping.alterShippingOptions(FC.customLiveShipping.show, selector);
+    jQuery("label[for=shipping_service_" + selector + "]").show();
+  }
+
+  FC.customLiveShipping.update = function(selector, modifier) {
+    if (typeof(selector) != "number") FC.customLiveShipping.alterShippingOptions(FC.customLiveShipping.update, selector, modifier);
+    var rateAttributes = FC.customLiveShipping.getShippingAttributes(jQuery("input#shipping_service_" + selector)),
+        price = FC.customLiveShipping.modifyPrice(rateAttributes.price, modifier);
+    jQuery("input#shipping_service_" + selector).val(selector + '|' + price).siblings("span.fc_shipping_cost").html(FC.formatter.currency(price, true));
+  }
+
+  FC.customLiveShipping.remove = function(selector) {
+    if (typeof(selector) != "number") FC.customLiveShipping.alterShippingOptions(FC.customLiveShipping.remove, selector);
+    jQuery("label[for=shipping_service_" + selector + "]").remove();
+  }
+
+  FC.customLiveShipping.reset = function() {
+    FC.checkout.updateShipping(-1);
+  }
+
+
+  /**
+   *  PRIVATE FUNCTIONS
+   *  These aren't the droids you're looking for
+   */
+
+  FC.customLiveShipping.execute = function() {
+    if (!jQuery("#fc_shipping_methods_inner input[type='radio']:first").data("custom-shipping-logic-applied")) {
+      FC.customLiveShipping.logic();
+
+      if (FC.customLiveShipping.config.autoSelect) {
+        jQuery("#fc_shipping_methods_inner input[type='radio']:first").attr("checked", "checked");
+      }
+
+      // Remove hidden rates - they're obviously not needed
+      jQuery("#fc_shipping_methods_inner label[for^='shipping_service']:hidden").remove();
+
+      FC.checkout.updatePrice(-1);
+
+      // Set the inputs to be marked as updated, to prevent it being run twice.
+      jQuery("#fc_shipping_methods_inner input[type='radio']").data("custom-shipping-logic-applied", true);
+    }
+  }
+
+  FC.customLiveShipping.alterShippingOptions = function(func, selector, modifier) {
+    if (typeof(selector) == "number") {
+      // They've just provided a rate code, pass them on.
+      func.call(null, selector, modifier);
+
+    } else if (typeof(selector) == "string") {
+      // It's a string, must be a combination of carrier and service or all
+      var rates = [];
+      if (selector.toLowerCase() == "all") {
+        // This applies to all returned rates
+        rates = jQuery("#fc_shipping_methods_inner label[for^='shipping_service']");
+      } else {
+        // Some filter has been specified
+        var regex = /(fedex|usps|ups)?\s?([\w\s]+)?/i,
+            provider = regex.exec(selector);
+
+        if (provider == undefined) return;
+
+        var carrierSelector = "span.fc_shipping_carrier";
+        if (provider[1] != undefined) {
+          switch(provider[1].toLowerCase()) {
+            case "fedex":
+              carrierSelector = "span.fc_shipping_carrier:contains('FedEx')";
+              break;
+            case "usps":
+              carrierSelector = "span.fc_shipping_carrier:contains('USPS')";
+              break;
+            case "ups":
+              carrierSelector = "span.fc_shipping_carrier:contains('UPS')";
+              break;
+          }
+        }
+
+        if (provider[2] != undefined) {
+          rates = jQuery("#fc_shipping_methods_inner label[for^='shipping_service'] "+carrierSelector).siblings("span.fc_shipping_service").filter(function() {
+            return (jQuery(this).text().toLowerCase().indexOf(provider[2].toLowerCase()) > -1);
+          }).parent();
+        } else {
+          rates = jQuery("#fc_shipping_methods_inner label[for^='shipping_service'] "+carrierSelector).parent();
+        }
+      }
+
+      rates.each(function() {
+        var rateAttributes = FC.customLiveShipping.getShippingAttributes(jQuery(this).children("input[name='shipping_service']"));
+        func.call(null, parseInt(rateAttributes.id), modifier);
+      });
+
+    } else if (typeof(selector) == "object") {
+      // Assume it's an array of codes
+      for (var i in selector) {
+        func.call(null, parseInt(selector[i]), modifier);
+      }
+    }
+  }
+
+  FC.customLiveShipping.getShippingAttributes = function(item) {
+    if (typeof(item) == "number") {
+      // Passed the code
+      item = jQuery("input#shipping_service_" + item);
+    }
+
+    var carrier = "",
+        service = "",
+        inputVal = 0,
+        id = 0,
+        price = 0;
+
+    if (item.length) {
+      carrier = item.siblings(".fc_shipping_carrier").html(),
+      service = item.siblings(".fc_shipping_service").html(),
+      inputVal = item.val().split("|"),
+      id = parseInt(inputVal[0]),
+      price = parseFloat(inputVal[1]);
+    }
+
+    return {"carrier": carrier, "service": service, "id": id, "price": price};
+  }
+
+  FC.customLiveShipping.modifyPrice = function(price, modifier) {
+    var modifier = modifier.toString(),
+        regex = /([\+\-\=\*\/])?(\d+(?:\.\d+)?)(\%)?/,
+        parts = regex.exec(modifier),
+        price = parseFloat(price),
+        modifyBy = parseFloat(parts[2]);
+
+    if (parts[3] != undefined) {
+      modifyBy = price * (modifyBy / 100);
+    }
+
+    var operator = (parts[1] == undefined) ? "=" : parts[1];
+    switch(operator) {
+      case "+":
+        price = (price + modifyBy);
+        break;
+      case "-":
+        price = (price - modifyBy);
+        break;
+      case "/":
+        price = (price / modifyBy);
+        break;
+      case "*":
+        price = (price * modifyBy);
+        break;
+      default:
+        price = modifyBy;
+    }
+
+    return (price < 0) ? 0 : price;
+  }
+
+
+//COUPON CUSTOMIZATION
+FC.checkout.InitCoupon = function() {
+  fc_cart_foot_discount_new = '<tr id="fc_cart_foot_discount_new"><td class="fc_col1" colspan="3"><a href="#" onclick="FC.checkout.AddCoupon(); this.blur(); return false;">Add a coupon</a></td><td class="fc_col2"><input type="text" name="coupon" id="fc_coupon" class="fc_text fc_text_short" value="" style="display:none;" /><a id="fc_coupon_apply" href="javascript:;" style="display:none;">Apply!</a></td></tr>';
+
+  if (jQuery('#fc_cart_foot_discount_new').length == 0) {
+    jQuery(fc_cart_foot_discount_new).insertBefore('#fc_cart_foot_shipping');
+  }
+
+  jQuery('#fc_coupon_apply').unbind('click').click(function(){
+    var coupon = jQuery('#fc_coupon').val();
+    if (coupon != '') {
+      FC.checkout.ApplyCoupon(coupon);
+    } else {
+      alert('Please enter a coupon code.');
+    }
+  });
 }
 
-/* Daniel Designs */
-
-.white-checkout-box{
-margin-top: 20px;
-margin-bottom: 30px;
-background-color:rgb(255,255,255);
-width:800px;
-/* Firefox v1.0+ */
--moz-border-radius:7px;
-/* Safari v3.0+ and by Chrome v0.2+ */
--webkit-border-radius:7px;
-/* Firefox v4.0+ , Safari v5.0+ , Chrome v4.0+ , Opera v10.5+  and by IE v9.0+ */
-border-radius:7px;
-/* Firefox v3.5+ */
--moz-box-shadow:0px 0px 2px rgba(0,0,0,0.5);
-/* Safari v3.0+ and by Chrome v0.2+ */
--webkit-box-shadow:0px 0px 2px rgba(0,0,0,0.5);
-/* Firefox v4.0+ , Safari v5.1+ , Chrome v10.0+, IE v10+ and by Opera v10.5+ */
-box-shadow:0px 0px 2px rgba(0,0,0,0.5);
--ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=0,Color=#80000000,Positive=true)";
-filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=0,Color=#80000000,Positive=true);
+FC.checkout.AddCoupon = function() {
+  jQuery("#fc_coupon, #fc_coupon_apply").toggle();
+  if (jQuery("#fc_coupon").is(":visible")) {
+    jQuery("#fc_coupon")[0].focus();
+  }
 }
 
-.text-fields-checkout{
-background-color:rgb(255,255,255);
-width:760px;
-height:44px;
-/* Firefox v1.0+ */
--moz-border-radius:5px;
-/* Safari v3.0+ and by Chrome v0.2+ */
--webkit-border-radius:5px;
-/* Firefox v4.0+ , Safari v5.0+ , Chrome v4.0+ , Opera v10.5+  and by IE v9.0+ */
-border-radius:5px;
-/* Firefox v3.5+ */
--moz-box-shadow:inset 1px 1px 4px rgba(0,0,0,0.4);
-/* Safari v3.0+ and by Chrome v0.2+ */
--webkit-box-shadow:inset 1px 1px 4px rgba(0,0,0,0.4);
-/* Firefox v4.0+ , Safari v5.1+ , Chrome v10.0+, IE v10+ and by Opera v10.5+ */
-box-shadow:inset 1px 1px 4px rgba(0,0,0,0.4);
+FC.checkout.ApplyCoupon = function(coupon) {
+  jQuery('#fc_coupon_apply').html('Loading...');
+  jQuery.getJSON('https://' + window.location.hostname + '/cart?output=json&' + FC.checkout.config.session + '&coupon=' + coupon + '&callback=?',
+    function(data) {
+      if (data.messages.errors.length > 0) {
+        alert("We're sorry. An error occurred: " + data.messages.errors[0]);
+      } else {
+        FC.checkout.BuildCouponTR(data.coupons);
+      }
+      jQuery('#fc_coupon_apply').html('Apply!');
+    }
+  );
 }
 
-.secure-payment-checkout{
-margin-top: 20px;
-height: 275px;
-background-color:rgb(238,238,238);
-width:800px;
-/* Firefox v1.0+ */
--moz-border-radius:7px;
-/* Safari v3.0+ and by Chrome v0.2+ */
--webkit-border-radius:7px;
-/* Firefox v4.0+ , Safari v5.0+ , Chrome v4.0+ , Opera v10.5+  and by IE v9.0+ */
-border-radius:7px;
-/* Firefox v3.5+ */
--moz-box-shadow:0px 0px 2px rgba(0,0,0,0.5);
-/* Safari v3.0+ and by Chrome v0.2+ */
--webkit-box-shadow:0px 0px 2px rgba(0,0,0,0.5);
-/* Firefox v4.0+ , Safari v5.1+ , Chrome v10.0+, IE v10+ and by Opera v10.5+ */
-box-shadow:0px 0px 2px rgba(0,0,0,0.5);
--ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=0,Color=#80000000,Positive=true)";
-filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=0,Color=#80000000,Positive=true);
+FC.checkout.BuildCouponTR = function(coupons) {
+  fc_cart_foot_discounts = '';
+  FC.checkout.config.orderDiscount = 0;
+  for (var coupon in coupons) {
+    fc_cart_foot_discounts += '<tr class="fc_cart_foot_discount"><td class="fc_col1" colspan="3">' + coupons[coupon].name + ':</td><td class="fc_col2"><span class="fc_discount">' + FC.formatter.currency(coupons[coupon].discount, true) + '</span></td></tr>';
+    FC.checkout.config.orderDiscount += coupons[coupon].discount;
+  }
+  jQuery(fc_cart_foot_discounts).insertAfter('#fc_cart_foot_subtotal');
+  // Set the subtotal amounts
+  jQuery('#discount, label[for=discount]').remove();
+  if (FC.checkout.config.orderDiscount != 0) {
+    discount_total = '<li class="fc_row fc_discount"><label for="discount" class="fc_pre">Discount</label><input type="text" name="discount" id="discount" class="fc_text fc_text_short fc_text_readonly" readonly="readonly" onfocus="this.blur()" value="' + FC.formatter.currency(FC.checkout.config.orderDiscount) + '" /></li>';
+    jQuery(discount_total).insertAfter('li.fc_shipping_cost');
+  }
+  FC.checkout.updatePriceDisplay();
+
+  // Comment the following line out if you want to remove the coupon line once a coupon has been added
+  jQuery('#fc_cart_foot_discount_new').remove();
 }
 
-.text-in-fields-checkout{
-  color: #888888;
-}
 
-.confirm_order_btn{ background:url("images/confirm_order_btn.png") top left no-repeat; display:block; margin-top: 10px; cursor: pointer; }
-.confirm_order_btn{ width:389px; height:66px; background-position:-10px -10px; }
-.confirm_order_btn:hover{ width:389px; height:66px; background-position:-10px -86px; }
+jQuery(document).ready(function(){
+  var coupon_length = 0;
+  for (var c in fc_json.coupons) {
+    if (c.hasOwnProperty('id')) coupon_length++;
+  }
+  if (coupon_length == 0) FC.checkout.InitCoupon();
 
-#your_cart_header{ background:url(images/your_cart_checkout_header.png); width:205px; height:27px; }
-#your_email_address{ background:url(images/email_checkout_header.png); width:673px; height:26px; }
-#where_should_we_ship{ background:url(images/where_should_we_ship_header.png); width:706px; height:27px; }
-
-#stink-free-guarantee{background:url(images/stink_free_guarantee_small.png); width:311px; height:210px; position:absolute; right:0px;bottom:-310px; }
-#credit_card_billing_address{ background:url(images/credit_card_header.png); width:575px; height:27px; }
-#checkout_delivery_subtotal{ background:url(images/shipping_and_subtotal.png); width:399px; height:26px; }
-#checkout_payment_information{ background:url(images/secure_payment_header.png); width:325px; height:26px; }
-#cart_container_checkout{ padding:10px;}
-#page{height:10000px;}
+  // If you'd like to display the "apply coupon" regardless of whether
+  // or not a coupon has already been added, comment out the above lines and uncomment the following
+  // FC.checkout.InitCoupon();
+});
