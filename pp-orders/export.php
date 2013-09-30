@@ -30,7 +30,7 @@ $cc_email = array(
 //Setup Pagination
 $pagination_start = 1;
 if (isset($_GET['pagination_start'])) {
-	$pagination_start = (int)$_GET['pagination_start']; 
+	$pagination_start = (int)$_GET['pagination_start'];
 }
 
 
@@ -80,9 +80,8 @@ require "functions.php";
 $foxydata = array(
 	"api_action" => "transaction_list",
 	"is_test_filter" => 0,
-	"id_filter" => "137913369",
-//	"transaction_date_filter_begin" => $start_date,
-//	"transaction_date_filter_end" => $end_date,
+	"transaction_date_filter_begin" => $start_date,
+	"transaction_date_filter_end" => $end_date,
 	"pagination_start" => $pagination_start,
 	"entries_per_page" => $entries_per_page,
 );
