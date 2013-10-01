@@ -146,29 +146,29 @@ box-shadow:inset 1px 1px 3px rgba(0,0,0,0.5);
 </head>
 <body style="text-align:center;">
 <div style="min-height:480px;min-width:800px;text-align:center;margin-top:15px;">
-<img src="http://www2.poopourri.com/wp-content/uploads/2013/09/try_poopourri_free.png"/><br/>
+<img src="http://www.poopourri.com/wp-content/uploads/2013/09/try_poopourri_free.png"/><br/>
 <span class="proof-pooping">It really works. The proof is in the pooping!</span><br/> 
-<img src="http://www2.poopourri.com/wp-content/uploads/2013/09/it_works_seal.png"/>
-<img src="http://www2.poopourri.com/wp-content/uploads/2013/09/tester_productshot.png" style="margin-left:20px;"/><br/>
-<form action="https://poopourri.foxycart.com/cart" method="post" accept-charset="utf-8" class="foxyshop_product" id="foxyshop_product_form_208" rel="208">
-<input type="hidden" name="price||e9718389b55082f39f848f528fba05f473ba903c7dac6745ab315dd49e473ae6" id="fs_price_208" value="5.00">
-<input type="hidden" name="x:originalprice" value="5.00" id="originalprice_208">
-<input type="hidden" name="x:l18n" value="$|.|,|1|0" id="foxyshop_l18n_208">
-<input type="hidden" name="image||7c370401890690da715f69ad775740e00beb41ac89575ae4502964b74f36cd01||open" value="http://2e66oe3rzn2ypgx2b6reb115c6.wpengine.netdna-cdn.com/wp-content/uploads/2013/09/value-photo-150x150.jpg" id="foxyshop_cart_product_image_208">
-<input type="hidden" name="url||0a7ccc3741c400e5015d01a41ae38acf22b0b91d828d9344337d9def247deb02" value="http://www2.poopourri.com/products/poopourri-original-5ml-sample-tester/" id="fs_url_208">
-<input type="hidden" name="quantity_min||d730dc8763134bb2450a6d0fcee34b184c4b74b9c63364bf5a55afb8c74b2c96||open" value="0" id="fs_quantity_min_208">
-<input type="hidden" name="quantity_max||e0dc70babf6bf022134df73327624008e7e9b097835d672358e27731ce0ca6c6||open" value="0" id="fs_quantity_max_208">
-<input type="hidden" name="x:quantity_max" value="0" rel="||637a96cf3228e15c45bd3e1c48dc8d5c8e3296a73b238a0011fb52ab2d7f30e1" id="original_quantity_max_208">
-<input type="hidden" name="name||a0d59c305897417adba6bf2080aa1d379218f891674bce34dbc9416bd3a55ce7" id="fs_name_208" value="Purse or Pocket-Sized Poo~Pourri">
-<input type="hidden" name="code||ed0b15cb4d9080cad9868373d45a2b4103c29bcde44ff2490c6ec20c92e0dd89" id="fs_code_208" value="PP-TSTR-5ML">
-<input type="hidden" name="category||a8e312b13d05669eafc2b4c4b2f2ea61ee09f99b183a968dd7fd6430d7c9299e" id="fs_category_208" value="just_shipping">
-<input type="hidden" name="weight||d419510905d89cb0ba1468b64fcd36b906ec5c1a391acd8e370fba2e87ed2537" id="fs_weight_208" value="0.125">
-<input type="hidden" name="cart" id="fs_cart_208" value="checkout">
-<input type="hidden" name="coupon" id="fs_coupon_208" value="FreeSample">
+<img src="http://www.poopourri.com/wp-content/uploads/2013/09/it_works_seal.png"/>
+<img src="http://www.poopourri.com/wp-content/uploads/2013/09/tester_productshot.png" style="margin-left:20px;"/><br/>
+<form action="https://secure.poopourri.com/cart" method="post" accept-charset="utf-8" target="_top" class="foxyshop_product" id="foxyshop_product_form_598" rel="598">
+<input type="hidden" name="price||c3ecd1d7e0185ac71ea12c1ad40b7d581d9e351e327f7423bf6e416cebd7c8f3" id="fs_price_598" value="5.00">
+<input type="hidden" name="x:originalprice" value="5.00" id="originalprice_598">
+<input type="hidden" name="x:l18n" value="$|.|,|1|0" id="foxyshop_l18n_598">
+<input type="hidden" name="image||b08050ff7e5ef3e830f83e2b35742ee2f5d160602e1a26bd314174909b14f779||open" value="http://1bh76q10q3yx1n1t6l2jf15s15v0.wpengine.netdna-cdn.com/wp-content/uploads/2013/09/value-photo_1-150x150.jpg" id="foxyshop_cart_product_image_598">
+<input type="hidden" name="url||a6f52006ece7fd6b9f72b6f9ba180d482616e2f7db7744a667dfd12557fcc9e4" value="http://www.poopourri.com/products/purse-or-pocket-sized-poopourri/" id="fs_url_598">
+<input type="hidden" name="quantity_min||e8e2d73e364f3e878f183639f3c650ad241fb8b1006ad59c185c02b3f265379d||open" value="1" id="fs_quantity_min_598">
+<input type="hidden" name="quantity_max||cb510a05a2d8db04afd4a5126ddea6c8fe325d66edd3c1c787e6e64d57b3d927||open" value="12832" id="fs_quantity_max_598">
+<input type="hidden" name="x:quantity_max" value="25" rel="||7075dceae9973a2a0ad656ff8fbe70814eee68d60ae264585be4f777e68f16bd" id="original_quantity_max_598">
+<input type="hidden" name="name||5bfe9a356e582d37e197baefc9d216fe0a20402b3023c10d559435c3fcb78f02" id="fs_name_598" value="Purse or Pocket-Sized Poo~Pourri">
+<input type="hidden" name="code||387fdb1e214f3c0493eede41d37f6d402a8325c976ba9770727eae18736b3658" id="fs_code_598" value="TRYITFREE PP-5ML">
+<input type="hidden" name="category||0848424297ab87526b19d825a03753704b3e2a8ecd3c45a491c939d48dba7a3e" id="fs_category_598" value="just_shipping">
+<input type="hidden" name="weight||3fc67072c2254ee5ad70f5cfd9382c6fa42d94f46c130aa6aadc3c5c5a36ff98" id="fs_weight_598" value="0.125">
+<input type="hidden" name="cart" id="fs_cart_598" value="checkout">
+<input type="hidden" name="coupon" id="fs_coupon_598" value="FreeSample">
 <input type="text" name="customer_email" placeholder="Email" class="email-address-label email-text-field" style="margin-top:10px;"/>
-</form>
-<br/>
-<a href="javascript:void();" class="yes_send_me_my_free_sample_btn free_popup_page_r8_c3" onclick="document.getElementById('foxyshop_product_form_208').submit();"></a>
+
+</form><br/>
+<a href="javascript:void();" class="yes_send_me_my_free_sample_btn free_popup_page_r8_c3" onclick="document.getElementById('foxyshop_product_form_598').submit();"></a>
 <br/><a href="/home-page-free-sample/?nosample=1" class="free-sample">I already believe it works. Just let me SHOP for a solution to my pollution.
 </div>
 </body>
