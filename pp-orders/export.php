@@ -61,6 +61,11 @@ if ($query_date == "today") {
 	$start_date = date("Y-m-d", strtotime("-".$daysago." days"));
 	$end_date = date("Y-m-d", strtotime("-".$daysago." days"));
 
+//Just Yesterday - second one for testing and getting around caching problems with wpengine
+} elseif ($query_date == "another") {
+	$start_date = date("Y-m-d", strtotime("-1 day"));
+	$end_date = date("Y-m-d", strtotime("-1 day"));
+
 //Just Yesterday
 } else {
 	$query_date = 'yesterday';
@@ -200,7 +205,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 
 		//Setup Product
 		$arr_products[] = array(
-			"code" => (string)$transaction_detail->product_code,
+			"code" => strtoupper((string)$transaction_detail->product_code),
 			"quantity" => (int)$transaction_detail->product_quantity,
 			"price" => (double)$transaction_detail->product_price + $price_mod,
 		);
@@ -224,7 +229,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 		$product_count = 0;
 		for ($i = 5; $i < count($arr_products); $i++) {
 			$product_count++;
-			$current_product = $arr_products[$i - 1];
+			$current_product = $arr_products[$i];
 			$new_col['continued'] = "Y";
 			$new_col["product0" . $product_count] = $current_product['code'];
 			$new_col["quantity0" . $product_count] = $current_product['quantity'];
@@ -338,6 +343,27 @@ if ($pagination_end < $filtered_total && $counter <= 5) {
 	//echo "<pre>" . print_r($info, 1) . "</pre>";
 	//echo "<pre>" . print_r($xml->statistics, 1) . "</pre>";
 
+}else if (!isset($_GET['neal-debug'])) {
+	$email_body = "The sales import file summary for " . date("m/d/Y", strtotime("-1 day")) . ".\n\n"."Emails sent:".ceil($pagination_end/300)."\n"."Total Orders Sent:".$pagination_end;
+
+	$mail = new PHPMailer();
+
+	$mail->isHTML(false);
+	$mail->CharSet = "UTF-8";
+	$mail->SetFrom($to_email, "Order Management");
+	$mail->AddAddress($to_email);
+	if (is_array($cc_email)) {
+		foreach ($cc_email as $cc) {
+			$mail->AddCC($cc);
+		}
+	}
+	$mail->Subject = "Summary for " . date("m/d/Y", strtotime("-1 day")) . " - Emails sent:".ceil($pagination_end/300)." - Total Orders Sent:".$pagination_end;
+	$mail->Body = $email_body;
+	if (!$mail->Send()) {
+		echo "Email Not Sent\n";
+	} else {
+		echo "Summary Email (".$shipping_region.") Sent (1-" . $pagination_end . ")\n";
+	}
 }
 
 
