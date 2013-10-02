@@ -46,6 +46,12 @@ if (isset($_GET['daysago'])) {
 	$daysago = $_GET['daysago'];
 }
 
+//Get import_to_MOM flag
+$import_to_MOM = false;
+if (isset($_GET['import_to_MOM'])) {
+	$import_to_MOM = $_GET['import_to_MOM'];
+}
+
 //Today **just for testing
 if ($query_date == "today") {
 	$start_date = date("Y-m-d");
@@ -85,7 +91,6 @@ require "functions.php";
 $foxydata = array(
 	"api_action" => "transaction_list",
 	"is_test_filter" => 0,
-//	"id_filter" => "XX",
 	"transaction_date_filter_begin" => $start_date,
 	"transaction_date_filter_end" => $end_date,
 	"pagination_start" => $pagination_start,
@@ -203,11 +208,10 @@ foreach ($xml->transactions->transaction as $transaction) {
 			$price_mod = (double)$transaction_detail_option->price_mod;
 		}
 
-		//Setup Product
 		$arr_products[] = array(
 			"code" => strtoupper((string)$transaction_detail->product_code),
 			"quantity" => (int)$transaction_detail->product_quantity,
-			"price" => (double)$transaction_detail->product_price + $price_mod,
+			"price" => "price" => (double)$transaction_detail->product_price + $price_mod,
 		);
 	}
 
@@ -275,7 +279,7 @@ if (isset($_GET['neal-debug'])) {
 
 
 //Make subject and file name the same
-$subject = "Sales Data ($shipping_region) For " . date("m-d-Y", strtotime("-$daysago day")) . " (" . $pagination_start . "-" . $pagination_end . ")";
+$subject = ($import_to_MOM==true ? "IMPORT" : "TEST")." Data ($shipping_region) For " . date("m-d-Y", strtotime("-$daysago day")) . " (" . $pagination_start . "-" . $pagination_end . ")";
 
 
 //Setup File
@@ -329,7 +333,7 @@ $counter = 1;
 
 //Keep Going if Paging Isn't Done
 if ($pagination_end < $filtered_total && $counter <= 5) {
-	$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . "?q=".$query_date."&shipping_region=".$shipping_region."&daysago=".$daysago."&pagination_start=" . ($pagination_end + 1);
+	$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . "?import_to_MOM=".$import_to_MOM."&q=".$query_date."&shipping_region=".$shipping_region."&daysago=".$daysago."&pagination_start=" . ($pagination_end + 1);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
