@@ -80,6 +80,7 @@ require "functions.php";
 $foxydata = array(
 	"api_action" => "transaction_list",
 	"is_test_filter" => 0,
+//	"id_filter" => "XX",
 	"transaction_date_filter_begin" => $start_date,
 	"transaction_date_filter_end" => $end_date,
 	"pagination_start" => $pagination_start,
@@ -190,10 +191,18 @@ foreach ($xml->transactions->transaction as $transaction) {
 	//Products
 	$arr_products = array();
 	foreach ($transaction->transaction_details->transaction_detail as $transaction_detail) {
+
+		//Get The Price Mod
+		$price_mod = 0;
+		foreach($transaction_detail->transaction_detail_options->transaction_detail_option as $transaction_detail_option) {
+			$price_mod = (double)$transaction_detail_option->price_mod;
+		}
+
+		//Setup Product
 		$arr_products[] = array(
 			"code" => (string)$transaction_detail->product_code,
 			"quantity" => (int)$transaction_detail->product_quantity,
-			"price" => $transaction_detail->product_price,
+			"price" => (double)$transaction_detail->product_price + $price_mod,
 		);
 	}
 
