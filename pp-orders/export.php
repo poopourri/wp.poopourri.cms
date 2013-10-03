@@ -211,7 +211,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 		$arr_products[] = array(
 			"code" => strtoupper((string)$transaction_detail->product_code),
 			"quantity" => (int)$transaction_detail->product_quantity,
-			"price" => "price" => (double)$transaction_detail->product_price + $price_mod,
+			"price" => ((double)$transaction_detail->product_price + (double)$price_mod),
 		);
 	}
 
@@ -277,10 +277,13 @@ if (isset($_GET['neal-debug'])) {
 	die;
 }
 
-
 //Make subject and file name the same
-$subject = ($import_to_MOM==true ? "IMPORT" : "TEST")." Data ($shipping_region) For " . date("m-d-Y", strtotime("-$daysago day")) . " (" . $pagination_start . "-" . $pagination_end . ")";
-
+if($import_to_MOM==true){
+	$subject = 'IMPORT';
+}else{
+	$subject = 'TEST';
+}
+$subject = $subject." Data ($shipping_region) For " . date("m-d-Y", strtotime("-$daysago day")) . " (" . $pagination_start . "-" . $pagination_end . ")";
 
 //Setup File
 $localpath = dirname(__FILE__) . "/tempfiles/";
