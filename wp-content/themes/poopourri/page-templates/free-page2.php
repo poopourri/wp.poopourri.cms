@@ -138,7 +138,7 @@ border-radius:5px;
 box-shadow:inset 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-.yes_send_me_my_free_sample_btn{ background:url("http://www2.poopourri.com/wp-content/uploads/2013/09/yes_send_me_my_free_sample_btn.png") top left no-repeat; display:inline-block; margin-top:10px; }
+.yes_send_me_my_free_sample_btn{ background:url("/wp-content/themes/poopourri/images/stoppoostink-btn.png") top left no-repeat; display:inline-block; margin-top:10px; }
 .free_popup_page_r8_c3{ width:650px; height:74px; background-position:-10px -10px; }
 .free_popup_page_r8_c3:hover{ width:650px; height:74px; background-position:-10px -94px; }
 

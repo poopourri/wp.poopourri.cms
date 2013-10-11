@@ -66,6 +66,11 @@ var google_remarketing_only = false;
 </div>
 </noscript>
 
+<!-- Add Roll Code -->
+<script type="text/javascript">
+adroll_conversion_value_in_dollars = my_order_total;
+</script>
+
 {% endif %}
 
 
@@ -116,10 +121,35 @@ body {
 
 <?php get_header("foxycartoptimizely"); ?>
 
-
-
+<style>
+#fc_receipt_general_container{display:none;}
+#fc_receipt_container{background-image:none;margin-top:-50px;padding:0px;}
+#fc_checkout_cart{margin-top:0px;}
+</style>
+<h1>Your order has been placed successfully! Order details below...</h1>
 ^^cart^^
 ^^receipt^^
 
+<script>
+function changeAddress(){
+	var querystr = '?';
+	querystr = querystr + 'foxycart_transaction_id='+encodeURIComponent($('#fc_receipt_order_list .fc_order_id span[class="fc_text"]').text());
+	querystr = querystr + '&fc_shipping_first_name='+encodeURIComponent($('.fc_shipping_first_name span[class="fc_text"]').text());
+	querystr = querystr + '&fc_shipping_last_name='+encodeURIComponent($('.fc_shipping_last_name span[class="fc_text"]').text());
+	querystr = querystr + '&fc_shipping_address1='+encodeURIComponent($('.fc_shipping_address1 span[class="fc_text"]').text());
+	querystr = querystr + '&fc_shipping_address2='+encodeURIComponent($('.fc_shipping_address2 span[class="fc_text"]').text());
+	querystr = querystr + '&fc_shipping_city='+encodeURIComponent($('.fc_shipping_city span[class="fc_text"]').text());
+	querystr = querystr + '&fc_shipping_state='+encodeURIComponent($('.fc_shipping_state span[class="fc_text"]').text());
+	querystr = querystr + '&fc_shipping_postal_code='+encodeURIComponent($('.fc_shipping_postal_code span[class="fc_text"]').text());
+	querystr = querystr + '&fc_shipping_country='+encodeURIComponent($('.fc_shipping_country span[class="fc_text"]').text());
+	document.location.href = 'http://' + fc_json.page_referrer.split('/')[2] + '/customer-service/update-shipping-address/' + querystr;
+}
+
+$(function(){
+	var shipping_header = 'Crap! Wrong address. <a href="javascript:void(0);" onclick="changeAddress();" style="color:red;text-decoration:underline;">Click here to change shipping address.</a>';
+	$('#fc_receipt_shipping span[class="fc_clear"]').css({height:'auto',overflow:'none'});
+	$('#fc_receipt_shipping span[class="fc_clear"]').html(shipping_header);
+});
+</script>
 
 <?php get_footer("foxycart"); ?>

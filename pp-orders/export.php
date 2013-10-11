@@ -15,15 +15,15 @@ $entries_per_page = 300;
 
 //Email Settings
 //$to_email = "david@sparkweb.net"; //testing
-//$to_email = "nealsharmon@gmail.com"; //testing
-$to_email = "janette@poopourri.net";
+$to_email = "nealsharmon@gmail.com"; //testing
+//$to_email = "janette@poopourri.net";
 $cc_email = array(
 	//"todd@poopourri.net",
 	//"nealsharmon@gmail.com",
 	//"bentoncrane@gmail.com",
 	//"hector@poopourri.net",
 	//"janette@poopourri.net",
-	"rod@poopourri.net"
+	//"rod@poopourri.net"
 );
 
 
@@ -72,6 +72,11 @@ if ($query_date == "today") {
 	$start_date = date("Y-m-d", strtotime("-1 day"));
 	$end_date = date("Y-m-d", strtotime("-1 day"));
 
+//Today
+} elseif ($query_date == "today") {
+	$start_date = date("Y-m-d");
+	$end_date = date("Y-m-d");
+
 //Just Yesterday
 } else {
 	$query_date = 'yesterday';
@@ -86,6 +91,7 @@ require "class.phpmailer.php";
 require "countries.php";
 require "fields.php";
 require "functions.php";
+require "db.php";
 
 //Setup Args
 $foxydata = array(
@@ -143,6 +149,10 @@ foreach ($xml->transactions->transaction as $transaction) {
 	// as recommended by Dennis from Dydacomp in email from Rod on 9/26/13
 	$cols['useshipamt'] = "Y";
 
+	// Rod asked about this 
+	//$cols['paypalid'] = (string)$transaction->paypal_payer_id;
+
+
 	//Credit Card Type
 	$original_card_type = (string)$transaction->cc_type;
 	$cardtype = "VI";
@@ -185,16 +195,33 @@ foreach ($xml->transactions->transaction as $transaction) {
 		$cols['reference'] = trim(substr($processor_response, strpos($processor_response, ":") + 1));
 	}
 
-	//Shipping Address
-	$cols['sfirstname'] = (string)$transaction->shipping_first_name;
-	$cols['slastname'] = (string)$transaction->shipping_last_name;
-	$cols['scompany'] = (string)$transaction->shipping_company;
-	$cols['saddress1'] = (string)$transaction->shipping_address1;
-	$cols['saddress2'] = (string)$transaction->shipping_address2;
-	$cols['scity'] = (string)$transaction->shipping_city;
-	$cols['sstate'] = (string)$transaction->shipping_state;
-	$cols['szipcode'] = (string)$transaction->shipping_postal_code;
-	$cols['scountry'] = get_country_code((string)$transaction->shipping_country);
+	// do we have an updated shipping address?
+	$sql = 'select * from '.DB_NAME.'.foxycart_mistaken_shipping_addresses where foxycart_transaction_id = '.$cols['internetid'].';';
+	$corrected_address = mysql_fetch_assoc( mysql_query($sql));
+	if($corrected_address != false){
+		//Shipping Address
+		$cols['sfirstname'] = (string)$corrected_address['fc_shipping_first_name'];
+		$cols['slastname'] = (string)$corrected_address['fc_shipping_last_name'];
+		$cols['saddress1'] = (string)$corrected_address['fc_shipping_address1'];
+		$cols['saddress2'] = (string)$corrected_address['fc_shipping_address2'];
+		$cols['scity'] = (string)$corrected_address['fc_shipping_city'];
+		$cols['sstate'] = (string)$corrected_address['fc_shipping_state'];
+		$cols['szipcode'] = (string)$corrected_address['fc_shipping_postal_code'];
+		$cols['scountry'] = get_country_code((string)$corrected_address['fc_shipping_country']);
+	}else{
+		//echo $sql;
+		//Shipping Address
+		$cols['sfirstname'] = (string)$transaction->shipping_first_name;
+		$cols['slastname'] = (string)$transaction->shipping_last_name;
+		$cols['scompany'] = (string)$transaction->shipping_company;
+		$cols['saddress1'] = (string)$transaction->shipping_address1;
+		$cols['saddress2'] = (string)$transaction->shipping_address2;
+		$cols['scity'] = (string)$transaction->shipping_city;
+		$cols['sstate'] = (string)$transaction->shipping_state;
+		$cols['szipcode'] = (string)$transaction->shipping_postal_code;
+		$cols['scountry'] = get_country_code((string)$transaction->shipping_country);
+	}
+
 	$cols['sphone'] = substr((string)$transaction->shipping_phone, 0, 18);
 	$cols['semail'] = substr((string)$transaction->customer_email, 0, 50);
 
@@ -208,10 +235,31 @@ foreach ($xml->transactions->transaction as $transaction) {
 			$price_mod = (double)$transaction_detail_option->price_mod;
 		}
 
+		// we need to get a special price and regular price
+		// for certain products that have discounts
+		$price_adjustments = array(
+			'TRYITFREEPP-5ML' => array('price'=>5,'discount'=>100),
+			'SS-001' => array('price'=>6.95,'discount'=>14.38),
+			'SAN-001' => array('price'=>6.95,'discount'=>14.38)
+		);
+		$exception_codes = array();
+		foreach($price_adjustments as $key=>$value){
+			$exception_codes[] =$key;
+		}
+		$pcode = strtoupper(str_replace(' ','',(string)$transaction_detail->product_code));
+		if(in_array($pcode,$exception_codes) && (((double)$transaction_detail->product_price + (double)$price_mod)!=(double)$price_adjustments[$pcode]['price'])){
+			$thePrice = ((double)$price_adjustments[$pcode]['price'] + (double)$price_mod);
+			$theDiscount = (double)$price_adjustments[$pcode]['discount'];
+		}else{
+			$thePrice = ((double)$transaction_detail->product_price + (double)$price_mod);
+			$theDiscount = '';
+		}
+
 		$arr_products[] = array(
 			"code" => strtoupper((string)$transaction_detail->product_code),
 			"quantity" => (int)$transaction_detail->product_quantity,
-			"price" => ((double)$transaction_detail->product_price + (double)$price_mod),
+			"price" => $thePrice,
+			"discount" => $theDiscount,
 		);
 	}
 
@@ -223,6 +271,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 		$cols["product0" . $product_count] = $val['code'];
 		$cols["quantity0" . $product_count] = $val['quantity'];
 		$cols["price0" . $product_count] = $val['price'];
+		$cols["discount0" . $product_count] = $val['discount'];
 	}
 
 
@@ -238,6 +287,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 			$new_col["product0" . $product_count] = $current_product['code'];
 			$new_col["quantity0" . $product_count] = $current_product['quantity'];
 			$new_col["price0" . $product_count] = $current_product['price'];
+			$new_col["discount0" . $product_count] = $current_product['discount'];
 			if ($product_count == 5) {
 				$product_count = 0;
 				$extra_rows[] = $new_col;
@@ -302,6 +352,9 @@ if (!isset($_GET['neal-debug'])) {
 
 	$mail = new PHPMailer();
 
+	$mail->isHTML(true);
+	$mail->CharSet = "UTF-8";
+
 	//Attachment
 	if (isset($email_attachment)) {
 		if (!is_array($email_attachment)) $email_attachment = array($email_attachment);
@@ -310,8 +363,6 @@ if (!isset($_GET['neal-debug'])) {
 		}
 	}
 
-	$mail->isHTML(true);
-	$mail->CharSet = "UTF-8";
 	$mail->SetFrom($to_email, "Order Management");
 	$mail->AddAddress($to_email);
 	if (is_array($cc_email)) {

@@ -211,7 +211,7 @@ BEGIN checkout
                             </li>
                             <li class="fc_row fc_shipping_country_change">
                                 <label class="fc_pre"></label>
-                                <span id="current_shipping_country">{{ shipping_country_name }}</span> <a href="#" id="change_shipping_country">Change</a>
+                                <span id="current_shipping_country">{{ shipping_country_name }}</span> <a href="#" id="change_shipping_country">Change country</a>
                             </li>
                         </ol>
                         <span class="fc_clear">&nbsp;</span>

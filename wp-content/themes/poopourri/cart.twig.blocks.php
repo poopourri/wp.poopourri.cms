@@ -342,7 +342,7 @@
 {% endif %}
     </table>
 {% if not for_email %}
-<a href="/product-cat/all/"><< Continue shopping</a>
+<a href="/product-cat/all/"><< Continue shopping</a> | <a href="/product-cat/all/#showCart">Edit Cart</a>
 </div>
 {% endif %}
 

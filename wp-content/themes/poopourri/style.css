@@ -3574,7 +3574,7 @@ div#packages .a_package{
     margin-left:22px;
 }
 div#packages img.package_header{width: 320px;height: 95px;}
-div#packages div.inner_package{ height:860px;position:relative;}
+div#packages div.inner_package{ height:800px;position:relative;}
 div#packages a.order_now_link{
 color: #0088B0;
 font-weight: bold;
