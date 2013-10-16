@@ -15,15 +15,15 @@ $entries_per_page = 300;
 
 //Email Settings
 //$to_email = "david@sparkweb.net"; //testing
-$to_email = "nealsharmon@gmail.com"; //testing
-//$to_email = "janette@poopourri.net";
+//$to_email = "nealsharmon@gmail.com"; //testing
+$to_email = "janette@poopourri.net";
 $cc_email = array(
 	//"todd@poopourri.net",
 	//"nealsharmon@gmail.com",
 	//"bentoncrane@gmail.com",
 	//"hector@poopourri.net",
 	//"janette@poopourri.net",
-	//"rod@poopourri.net"
+	"rod@poopourri.net"
 );
 
 
@@ -96,6 +96,7 @@ require "db.php";
 //Setup Args
 $foxydata = array(
 	"api_action" => "transaction_list",
+	"hide_transaction_filter" => "",
 	"is_test_filter" => 0,
 	"transaction_date_filter_begin" => $start_date,
 	"transaction_date_filter_end" => $end_date,
@@ -151,6 +152,9 @@ foreach ($xml->transactions->transaction as $transaction) {
 
 	// Rod asked about this 
 	//$cols['paypalid'] = (string)$transaction->paypal_payer_id;
+
+	// Rod requested this for Jill
+	$cols['ordnote1'] = (double)$transaction->tax_total;
 
 
 	//Credit Card Type
@@ -237,28 +241,27 @@ foreach ($xml->transactions->transaction as $transaction) {
 
 		// we need to get a special price and regular price
 		// for certain products that have discounts
-		$price_adjustments = array(
-			'TRYITFREEPP-5ML' => array('price'=>5,'discount'=>100),
-			'SS-001' => array('price'=>6.95,'discount'=>14.38),
-			'SAN-001' => array('price'=>6.95,'discount'=>14.38)
-		);
-		$exception_codes = array();
-		foreach($price_adjustments as $key=>$value){
-			$exception_codes[] =$key;
-		}
-		$pcode = strtoupper(str_replace(' ','',(string)$transaction_detail->product_code));
-		if(in_array($pcode,$exception_codes) && (((double)$transaction_detail->product_price + (double)$price_mod)!=(double)$price_adjustments[$pcode]['price'])){
-			$thePrice = ((double)$price_adjustments[$pcode]['price'] + (double)$price_mod);
-			$theDiscount = (double)$price_adjustments[$pcode]['discount'];
+		//$price_adjustments = array(
+		//	'TRYITFREEPP-5ML' => array('price'=>5,'discount'=>100)
+			//'SS-001' => array('price'=>6.95,'discount'=>14.38),
+			//'SAN-001' => array('price'=>6.95,'discount'=>14.38)
+		//);
+		//$exception_codes = array();
+		//foreach($price_adjustments as $key=>$value){
+		//	$exception_codes[] =$key;
+		//}
+		$pcode = trim(strtoupper(str_replace(' ','',(string)$transaction_detail->product_code)));
+		//if(in_array($pcode,$exception_codes)){
+		if($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML'){
+			$theDiscount = 100;
 		}else{
-			$thePrice = ((double)$transaction_detail->product_price + (double)$price_mod);
 			$theDiscount = '';
 		}
 
 		$arr_products[] = array(
 			"code" => strtoupper((string)$transaction_detail->product_code),
 			"quantity" => (int)$transaction_detail->product_quantity,
-			"price" => $thePrice,
+			"price" => ((double)$transaction_detail->product_price + (double)$price_mod),
 			"discount" => $theDiscount,
 		);
 	}
