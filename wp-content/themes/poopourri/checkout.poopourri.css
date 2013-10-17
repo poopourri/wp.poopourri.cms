@@ -165,3 +165,4 @@ label.fc_shipping_methods {
 #fc_payment_list .fc_error {
 	margin-left: 0;
 }
+#fc_error_container{background:red !important;}

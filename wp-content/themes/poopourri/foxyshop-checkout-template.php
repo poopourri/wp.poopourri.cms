@@ -222,7 +222,7 @@ function save_optimizely_data(data){
 }
 
 $(function(){
-	optimizely_variation_id = '3367111111111111111113';
+	optimizely_variation_id = '340560033';
 	if(typeof($.cookie('optimizelyBuckets'))!='undefined' && $.cookie('optimizelyBuckets').indexOf(optimizely_variation_id)>-1 || location.hash.indexOf('showVariation')>-1){
 		$('#fc_checkout_cart').css({width:'960px'});
 		$('#cart_container_checkout').css({width:'600px'});
@@ -262,5 +262,94 @@ $(function(){
 	<?php echo do_shortcode('[showproduct name="santa-poo-1oz-bottle"]'); ?>
 	<?php echo do_shortcode('[showproduct name="stocking-stuffer-4bottle-pack"]'); ?>
 </div>
+
+<script type="text/javascript">
+function verify_address(address_type) {
+ 
+	//Setup Vars
+	var smarty_html_key = "5248874863931958361";
+ 
+	var address = $("#" + address_type + "_address1").val();
+	var city = $("#" + address_type + "_city").val();
+	var state = $("#" + address_type + "_state").val();
+	var postal_code = $("#" + address_type + "_postal_code").val();
+	var country = $("#" + address_type + "_country").val();
+ 
+	//Not US, Skip
+	if ($("#" + address_type + "_country").val() != "US") return;
+ 
+	//Not Enough Vals, Skip
+	if (!address || !city || !state) return;
+ 
+	var url = "https://api.smartystreets.com/street-address?street=";
+	url += encodeURIComponent(address);
+	if ($("#" + address_type + "_address1").val()) url += encodeURIComponent(" " + $("#" + address_type + "_address2").val());
+	url += "&city=" + encodeURIComponent(city);
+	url += "&state=" + encodeURIComponent(state);
+	url += "&zipcode=" + encodeURIComponent(postal_code);
+	url += "&candidates=3&auth-token=" + smarty_html_key + "&callback=?";
+	jQuery.getJSON(url, function(response) {
+		$("#" + address_type + "_address_select").html("");
+		if (response.length == 0) {
+			$("#" + address_type + "_address_warning").show();
+			return false;
+		}
+		if (response.length == 1) {
+			var a = response[0];
+			var address1 = a.delivery_line_1;
+			var address2 = a.delivery_line_2;
+			var city = a.components.city_name;
+			var state = a.components.state_abbreviation;
+			var postal_code = a.components.zipcode;
+			if (a.components.plus4_code) postal_code += "-" + a.components.plus4_code;
+ 
+			$("#" + address_type + "_address1").val(address1);
+			$("#" + address_type + "_address2").val(address2);
+			$("#" + address_type + "_city").val(city);
+			$("#" + address_type + "_state").val(state);
+			$("#" + address_type + "_postal_code").val(postal_code);
+ 
+		} else if (response.length > 1) {
+			var str = "<p>Your Address Had a Few Options:</p>";
+			for (i = 0; i < response.length; i++) {
+				var a = response[i];
+				var address1 = a.delivery_line_1;
+				var address2 = a.delivery_line_2 ? a.delivery_line_2 : '';
+				var city = a.components.city_name;
+				var state = a.components.state_abbreviation;
+				var postal_code = a.components.zipcode;
+				if (a.components.plus4_code) postal_code += "-" + a.components.plus4_code;
+				str += '<p><a href="#" class="set_verified_address" data-address_type="' + address_type + '" data-address1="' + address1 + '" data-address2="' + address2 + '" data-city="' + city + '" data-state="' + state + '" data-postal_code="' + postal_code + '">';
+				str += address1 + "<br>";
+				if (address2) str += address1 + "<br>";
+				str += a.last_line;
+				str += "</a></p>";
+			}
+			$("#" + address_type + "_address_select").html(str).show();
+ 
+		}
+		$("#" + address_type + "_address_warning").hide();
+		return true;
+	});
+}
+ 
+jQuery(document).ready(function($){
+	$("#shipping_address1, #shipping_address2, #shipping_city, #shipping_state, #shipping_state, #shipping_postal_code, #shipping_country").change(function() {
+		verify_address("shipping");
+	});
+	$(document).on("click", ".set_verified_address", function() {
+		var address_type = $(this).attr("data-address_type");
+		$("#" + address_type + "_address1").val($(this).attr("data-address1"));
+		$("#" + address_type + "_address2").val($(this).attr("data-address2"));
+		$("#" + address_type + "_city").val($(this).attr("data-city"));
+		$("#" + address_type + "_state").val($(this).attr("data-state"));
+		$("#" + address_type + "_postal_code").val($(this).attr("data-postal_code"));
+		$("#" + address_type + "_address_select").html("").hide();
+		return false;
+	});
+	$("#fc_customer_billing_list").append('<li id="customer_address_select" style="display: none;"></li><li id="customer_address_warning" style="display: none; color: #990000; font-weight: bold;">You may want to check this address as it appears it might have a problem.</li>');
+	$("#fc_address_shipping_list").append('<li id="shipping_address_select" style="display: none;"></li><li id="shipping_address_warning" style="display: none; color: #990000; font-weight: bold;">You may want to check this address as it appears it might have a problem.</li>');
+});
+</script>
 
 <?php get_footer("foxycart"); ?>
