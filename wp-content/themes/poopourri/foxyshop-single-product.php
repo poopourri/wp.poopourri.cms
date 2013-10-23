@@ -9,6 +9,9 @@ This will allow you to upgrade FoxyShop without breaking your customizations. Mo
 
 <?php foxyshop_include('header'); ?>
 <div id="foxyshop_container"><div id="adding_package" style="width:900px;">
+<div style="position:absolute;right:0px;width:350px;background:green;color:white;padding:20px;box-shadow: 1px 2px 4px;"><b>BIG POO NEWS</b><br>Our new YouTube video has constipated our shipping system. <b>In one week traffic on our website increased over 13,000%</b>  Holy crap, right! We are working day and night, but please give us up to 2 weeks to get your PooPourri shipment out the door. <b>Make sure to order now to get in line!</b><br><br>
+Thanks, <br>
+The Poo Crew</div>
 <h2 style="background:url(/wp-content/themes/poopourri/images/your_package_header.png); width:224px; height:22px; margin:0px; margin-top:50px;"><span class="screen-reader-text">Your Package</span></h2>
 <?php
 while (have_posts()) : the_post();
@@ -110,7 +113,7 @@ endwhile;
 <script><!--
 
 function toggleCart(indexLoc,pid){
-	var price = parseInt($('input[id$=":price_'+pid+'"]').val());
+	var price = parseFloat($('input[id$=":price_'+pid+'"]').val());
 	if($('#addon_'+indexLoc).is(':checked')){
 		$('#addon_'+indexLoc).click();
 		$('#remove_btn_'+indexLoc).hide();
@@ -126,7 +129,7 @@ function toggleCart(indexLoc,pid){
 
 	if(current_total < free_shipping_total_required){
 		var remaining = free_shipping_total_required - current_total;
-		$('.free_shipping_notice').html('FREE FAST shipping to USA on any order $49+ ($<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> left)');
+		$('.free_shipping_notice').html('FREE shipping to USA on any order $'+(free_shipping_total_required + 1)+'+ ($<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> left)');
 	}else{
 		$('.free_shipping_notice').html('You qualify for FREE shipping to the USA!');
 	}	

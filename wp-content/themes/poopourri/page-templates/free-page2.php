@@ -150,6 +150,7 @@ box-shadow:inset 1px 1px 3px rgba(0,0,0,0.5);
 <span class="proof-pooping">It really works. The proof is in the pooping!</span><br/> 
 <img src="http://www.poopourri.com/wp-content/uploads/2013/09/it_works_seal.png"/>
 <img src="http://www.poopourri.com/wp-content/uploads/2013/09/tester_productshot.png" style="margin-left:20px;"/><br/>
+<small style="color:grey;">($5 value! Limit of 5 samples per person - just pay small s&h charge for every sample included in your order)</small>
 <form action="https://secure.poopourri.com/cart" target="_top" method="post" accept-charset="utf-8" class="foxyshop_product" id="foxyshop_product_form_608" rel="608">
 <input type="hidden" name="price||c3ecd1d7e0185ac71ea12c1ad40b7d581d9e351e327f7423bf6e416cebd7c8f3" id="fs_price_608" value="5.00">
 <input type="hidden" name="x:originalprice" value="5.00" id="originalprice_608">
@@ -165,10 +166,10 @@ box-shadow:inset 1px 1px 3px rgba(0,0,0,0.5);
 <input type="hidden" name="weight||3fc67072c2254ee5ad70f5cfd9382c6fa42d94f46c130aa6aadc3c5c5a36ff98" id="fs_weight_608" value="0.125">
 <input type="hidden" name="cart" id="fs_cart_608" value="checkout">
 <input type="hidden" name="coupon" id="fs_coupon_608" value="FreeSample">
-<input type="text" name="customer_email" placeholder="Email" class="email-address-label email-text-field" style="margin-top:10px;"/>
+<input type="text" name="customer_email" placeholder="Email" class="email-address-label email-text-field" style="margin-top:0px;width:600px;"/>
 </form><br/>
 <a href="javascript:void();" class="yes_send_me_my_free_sample_btn free_popup_page_r8_c3" onclick="document.getElementById('foxyshop_product_form_608').submit();"></a>
-<br/><a href="/t/free/?nosample=1" target="_top" class="free-sample">I already believe it works. Just let me SHOP for a solution to my pollution.
+<br/><a href="/t/free/?nosample=1" target="_top" class="free-sample">I already believe it works. Just let me SHOP for a solution to my pollution.</a>
 </div>
 </body>
 </html>

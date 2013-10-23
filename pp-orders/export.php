@@ -15,7 +15,7 @@ $entries_per_page = 300;
 
 //Email Settings
 //$to_email = "david@sparkweb.net"; //testing
-//$to_email = "nealsharmon@gmail.com"; //testing
+$dev_email = "nealsharmon@gmail.com"; //testing
 $to_email = "janette@poopourri.net";
 $cc_email = array(
 	//"todd@poopourri.net",
@@ -138,7 +138,14 @@ foreach ($xml->transactions->transaction as $transaction) {
 	//Basics
 	$cols['source_key'] = "HARMON";
 	$cols['sales_id'] = "HAR";
+	// default shipping method
 	$cols['shipvia'] = "PM";
+	// weight in lbs will overwrite PM 
+	// per email from Rod
+	// For domestic orders, if total order weight is <= 0.8125 lbs then SHIPVIA is ‘FC’ else ‘PM’.
+ 	// For international orders, if total order weight is <= 4 lbs then SHIPVIA is ‘FCI’ else ‘PMI’.
+	$total_order_weight = 0;
+
 	$cols['paymethod'] = "CC";
 	$cols['continued'] = "";
 	$cols['useshipamt'] = "Y";
@@ -155,20 +162,6 @@ foreach ($xml->transactions->transaction as $transaction) {
 
 	// Rod requested this for Jill
 	$cols['ordnote1'] = (double)$transaction->tax_total;
-
-	// Coupon code processing request
-	if(count($transaction->discounts->discount)>0){
-		foreach ($transaction->discounts->discount as $discount) {
-			$current_discount_type = $discount->coupon_discount_type;
-			$current_discount_amount = $discount->amount;
-			$cols['promo_code'] = $discount->code;
-		}
-	}else{
-		$current_discount_type = '';
-		$current_discount_amount = '';
-		$cols['promo_code'] = '';
-	}
-	$cols['ordertype'] = $cols['promo_code'];
 
 
 	//Credit Card Type
@@ -244,7 +237,6 @@ foreach ($xml->transactions->transaction as $transaction) {
 	$cols['semail'] = substr((string)$transaction->customer_email, 0, 50);
 
 	//Products
-	$found_freebie = false;
 	$arr_products = array();
 	foreach ($transaction->transaction_details->transaction_detail as $transaction_detail) {
 
@@ -269,12 +261,12 @@ foreach ($xml->transactions->transaction as $transaction) {
 		//if(in_array($pcode,$exception_codes)){
 		if($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML'){
 			$theDiscount = 100;
-			$found_freebie = true;
-		}else if($current_discount_type=='price_percentage'){
-			$theDiscount = abs($current_discount_amount);
 		}else{
 			$theDiscount = '';
 		}
+
+		// keep track of the weight for shipping
+		$total_order_weight = $total_order_weight + ((float)$transaction_detail->product_weight * (int)$transaction_detail->product_quantity);
 
 		$arr_products[] = array(
 			"code" => strtoupper((string)$transaction_detail->product_code),
@@ -284,13 +276,22 @@ foreach ($xml->transactions->transaction as $transaction) {
 		);
 	}
 
-	// this is a hack for promotions suggested by Rod for MOM on email to nealsharmon@gmail.com on 10/16/2013
-	if(abs($current_discount_amount)>0 && $found_freebie!=true){
-		$arr_products[] = array(
-			"code" => 'PROMO-'.strtoupper($cols['promo_code']),
-			"quantity" => 1,
-			"price" => $current_discount_amount
-		);
+	// SHIPPING METHOD
+	$cols['shipvia'] = "PM";
+	// weight in lbs will overwrite PM 
+	// per email from Rod
+	// For domestic orders, if total order weight is <= 0.8125 lbs then SHIPVIA is ‘FC’ else ‘PM’.
+ 	// For international orders, if total order weight is <= 4 lbs then SHIPVIA is ‘FCI’ else ‘PMI’.
+	if(get_country_code((string)$transaction->shipping_country)=="001"){
+		if($total_order_weight <= 0.8125){
+			$cols['shipvia'] = "FC";
+		}
+	}else{
+		if($total_order_weight <= 4){
+			$cols['shipvia'] = "FCI";
+		}else{
+			$cols['shipvia'] = "PMI";
+		}
 	}
 
 	//Assign Products
@@ -394,11 +395,15 @@ if (!isset($_GET['neal-debug'])) {
 	}
 
 	$mail->SetFrom($to_email, "Order Management");
-	$mail->AddAddress($to_email);
-	if (is_array($cc_email)) {
-		foreach ($cc_email as $cc) {
-			$mail->AddCC($cc);
+	if($import_to_MOM==true){
+		$mail->AddAddress($to_email);
+		if (is_array($cc_email)) {
+			foreach ($cc_email as $cc) {
+				$mail->AddCC($cc);
+			}
 		}
+	}else{
+		$mail->AddAddress($dev_email);
 	}
 	$mail->Subject = $subject;
 	$mail->Body = $email_body;
@@ -439,11 +444,15 @@ if ($pagination_end < $filtered_total && $counter <= 5) {
 	$mail->isHTML(false);
 	$mail->CharSet = "UTF-8";
 	$mail->SetFrom($to_email, "Order Management");
-	$mail->AddAddress($to_email);
-	if (is_array($cc_email)) {
-		foreach ($cc_email as $cc) {
-			$mail->AddCC($cc);
+	if($import_to_MOM==true){
+		$mail->AddAddress($to_email);
+		if (is_array($cc_email)) {
+			foreach ($cc_email as $cc) {
+				$mail->AddCC($cc);
+			}
 		}
+	}else{
+		$mail->AddAddress($dev_email);
 	}
 	$mail->Subject = "Summary for " . date("m/d/Y", strtotime("-1 day")) . " - Emails sent:".ceil($pagination_end/300)." - Total Orders Sent:".$pagination_end;
 	$mail->Body = $email_body;

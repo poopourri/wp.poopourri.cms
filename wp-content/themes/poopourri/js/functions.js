@@ -4,7 +4,7 @@
  * Provides helper functions to enhance the theme experience.
  */
 
-var free_shipping_total_required = 49;
+var free_shipping_total_required = 50;
 
 ( function( $ ) {
 	var body    = $( 'body' ),
@@ -126,8 +126,8 @@ var free_shipping_total_required = 49;
 		var current_total_price = cart_price + package_price_on_page;
 		$('#total_order_on_page').text(current_total_price);
 		if(current_total_price < free_shipping_total_required){
-			var remaining = free_shipping_total_required - current_total_price;
-			$('.free_shipping_notice').html('FREE FAST shipping to USA on any order $49+ ($<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> left)');
+			var remaining = free_shipping_total_required - Math.round(current_total_price);
+			$('.free_shipping_notice').html('FREE shipping to USA on any order $'+free_shipping_total_required+'+ ($<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> left)');
 		}else{
 			$('.free_shipping_notice').html('You qualify for FREE shipping to the USA!');
 		}
