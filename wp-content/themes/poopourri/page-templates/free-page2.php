@@ -150,7 +150,7 @@ box-shadow:inset 1px 1px 3px rgba(0,0,0,0.5);
 <span class="proof-pooping">It really works. The proof is in the pooping!</span><br/> 
 <img src="http://www.poopourri.com/wp-content/uploads/2013/09/it_works_seal.png"/>
 <img src="http://www.poopourri.com/wp-content/uploads/2013/09/tester_productshot.png" style="margin-left:20px;"/><br/>
-<small style="color:grey;">($5 value! Limit of 5 samples per person - just pay small s&h charge for every sample included in your order)</small>
+<small style="color:grey;">($5 value! Limit of 1 sample per person - just pay small s&h charge the sample included in your order)</small>
 <form action="https://secure.poopourri.com/cart" target="_top" method="post" accept-charset="utf-8" class="foxyshop_product" id="foxyshop_product_form_608" rel="608">
 <input type="hidden" name="price||c3ecd1d7e0185ac71ea12c1ad40b7d581d9e351e327f7423bf6e416cebd7c8f3" id="fs_price_608" value="5.00">
 <input type="hidden" name="x:originalprice" value="5.00" id="originalprice_608">

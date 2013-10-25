@@ -223,6 +223,8 @@ function save_optimizely_data(data){
 
 $(function(){
 	optimizely_variation_id = '340560033';
+	optimizely_suzy_variation_id = '351450504';
+	optimizely_phone_variation_id = '376831033';
 	if(typeof($.cookie('optimizelyBuckets'))!='undefined' && $.cookie('optimizelyBuckets').indexOf(optimizely_variation_id)>-1 || location.hash.indexOf('showVariation')>-1){
 		$('#fc_checkout_cart').css({width:'960px'});
 		$('#cart_container_checkout').css({width:'600px'});
@@ -251,6 +253,10 @@ $(function(){
 		upsell_html = upsell_html + '</div>';
 		$('#your_cart_header').after(upsell_html);
 		//$('#fc_cart_container_inner').html(upsell_html + $('#fc_cart_container_inner').html());
+	}
+	if(typeof($.cookie('optimizelyBuckets'))!='undefined' && $.cookie('optimizelyBuckets').indexOf(optimizely_phone_variation_id)>-1 || location.hash.indexOf('showPhoneVariation')>-1){
+		$('.fc_shipping_phone label.fc_pre').text('Phone*');
+		FC.checkout.overload('updateShipping',null,function(){ if($('#shipping_phone').val()==''){$("label.fc_error[for='shipping_phone']").show();} });
 	}
 	save_optimizely_data($.cookie('optimizelyBuckets'));
 });
@@ -307,6 +313,7 @@ function verify_address(address_type) {
 			$("#" + address_type + "_address2").val(address2);
 			$("#" + address_type + "_city").val(city);
 			$("#" + address_type + "_state").val(state);
+			$("#" + address_type + "_state_name").val(state);
 			$("#" + address_type + "_postal_code").val(postal_code);
  
 		} else if (response.length > 1) {
@@ -334,15 +341,17 @@ function verify_address(address_type) {
 }
  
 jQuery(document).ready(function($){
-	$("#shipping_address1, #shipping_address2, #shipping_city, #shipping_state, #shipping_state, #shipping_postal_code, #shipping_country").change(function() {
-		verify_address("shipping");
-	});
+	FC.checkout.overload('updateShipping',function(){verify_address("shipping");},null);
+	//$("#shipping_address1, #shipping_address2, #shipping_city, #shipping_state, #shipping_state, #shipping_postal_code, #shipping_country").change(function() {
+	//	verify_address("shipping");
+	//});
 	$(document).on("click", ".set_verified_address", function() {
 		var address_type = $(this).attr("data-address_type");
 		$("#" + address_type + "_address1").val($(this).attr("data-address1"));
 		$("#" + address_type + "_address2").val($(this).attr("data-address2"));
 		$("#" + address_type + "_city").val($(this).attr("data-city"));
 		$("#" + address_type + "_state").val($(this).attr("data-state"));
+		$("#" + address_type + "_state_name").val($(this).attr("data-state"));
 		$("#" + address_type + "_postal_code").val($(this).attr("data-postal_code"));
 		$("#" + address_type + "_address_select").html("").hide();
 		return false;

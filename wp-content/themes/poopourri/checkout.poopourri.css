@@ -77,7 +77,7 @@ input.fc_text_long {
 }
 .fc_error {
 	display: block;
-	color: #fff;
+	color: red;
 	width: 100%;
 	text-align: left;
 	clear: both;
@@ -166,3 +166,4 @@ label.fc_shipping_methods {
 	margin-left: 0;
 }
 #fc_error_container{background:red !important;}
+#fc_error_container .fc_error{color:#fff !important;}

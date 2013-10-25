@@ -19,7 +19,7 @@ $dev_email = "nealsharmon@gmail.com"; //testing
 $to_email = "janette@poopourri.net";
 $cc_email = array(
 	//"todd@poopourri.net",
-	//"nealsharmon@gmail.com",
+	"nealsharmon@gmail.com",
 	//"bentoncrane@gmail.com",
 	//"hector@poopourri.net",
 	//"janette@poopourri.net",
@@ -163,6 +163,20 @@ foreach ($xml->transactions->transaction as $transaction) {
 	// Rod requested this for Jill
 	$cols['ordnote1'] = (double)$transaction->tax_total;
 
+        // Coupon code processing request
+        if(count($transaction->discounts->discount)>0){
+                foreach ($transaction->discounts->discount as $discount) {
+                        $current_discount_type = $discount->coupon_discount_type;
+                        $current_discount_amount = $discount->amount;
+                        $cols['promo_code'] = $discount->code;
+                }
+        }else{
+                $current_discount_type = '';
+                $current_discount_amount = '';
+                $cols['promo_code'] = '';
+        }
+        $cols['ordertype'] = $cols['promo_code'];
+
 
 	//Credit Card Type
 	$original_card_type = (string)$transaction->cc_type;
@@ -238,6 +252,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 
 	//Products
 	$arr_products = array();
+	$found_freebie = false;
 	foreach ($transaction->transaction_details->transaction_detail as $transaction_detail) {
 
 		//Get The Price Mod
@@ -261,6 +276,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 		//if(in_array($pcode,$exception_codes)){
 		if($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML'){
 			$theDiscount = 100;
+			$found_freebie = true;
 		}else{
 			$theDiscount = '';
 		}
@@ -293,6 +309,15 @@ foreach ($xml->transactions->transaction as $transaction) {
 			$cols['shipvia'] = "PMI";
 		}
 	}
+
+        // this is a hack for promotions suggested by Rod for MOM on email to nealsharmon@gmail.com on 10/16/2013
+        if(abs($current_discount_amount)>0 && $found_freebie!=true){
+                $arr_products[] = array(
+                        "code" => 'PROMO-'.strtoupper($cols['promo_code']),
+                        "quantity" => 1,
+                        "price" => $current_discount_amount
+                );
+        }
 
 	//Assign Products
 	$product_count = 0;
