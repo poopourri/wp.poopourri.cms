@@ -282,6 +282,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 			$found_freebie = true;
 			$cols['promo_code'] = '';
 			$cols['promocred'] = '';
+			$cols['ordertype'] = '';
 		}else{
 			$theDiscount = '';
 		}
