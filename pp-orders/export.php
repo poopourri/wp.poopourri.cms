@@ -175,7 +175,10 @@ foreach ($xml->transactions->transaction as $transaction) {
                 $current_discount_amount = '';
                 $cols['promo_code'] = '';
         }
-        $cols['ordertype'] = $cols['promo_code'];
+       $cols['ordertype'] = $cols['promo_code'];
+	if($current_discount_amount!=''){
+		$cols['promocred'] = (double)$current_discount_amount * -1;
+	}
 
 
 	//Credit Card Type
@@ -277,6 +280,8 @@ foreach ($xml->transactions->transaction as $transaction) {
 		if($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML'){
 			$theDiscount = 100;
 			$found_freebie = true;
+			$cols['promo_code'] = '';
+			$cols['promocred'] = '';
 		}else{
 			$theDiscount = '';
 		}
@@ -312,11 +317,12 @@ foreach ($xml->transactions->transaction as $transaction) {
 
         // this is a hack for promotions suggested by Rod for MOM on email to nealsharmon@gmail.com on 10/16/2013
         if(abs($current_discount_amount)>0 && $found_freebie!=true){
-                $arr_products[] = array(
-                        "code" => 'PROMO-'.strtoupper($cols['promo_code']),
-                        "quantity" => 1,
-                        "price" => $current_discount_amount
-                );
+                //$arr_products[] = array(
+                //        "code" => 'PROMO-'.strtoupper($cols['promo_code']),
+                //        "quantity" => 1,
+                //        "price" => $current_discount_amount
+                //);
+
         }
 
 	//Assign Products
