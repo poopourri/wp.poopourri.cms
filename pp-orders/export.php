@@ -175,7 +175,7 @@ foreach ($xml->transactions->transaction as $transaction) {
                 $current_discount_amount = '';
                 $cols['promo_code'] = '';
         }
-       $cols['ordertype'] = $cols['promo_code'];
+       //$cols['ordertype'] = $cols['promo_code'];
 	if($current_discount_amount!=''){
 		$cols['promocred'] = (double)$current_discount_amount * -1;
 	}
@@ -256,6 +256,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 	//Products
 	$arr_products = array();
 	$found_freebie = false;
+	$total_order_weight = 0;
 	foreach ($transaction->transaction_details->transaction_detail as $transaction_detail) {
 
 		//Get The Price Mod
@@ -277,12 +278,17 @@ foreach ($xml->transactions->transaction as $transaction) {
 		//}
 		$pcode = trim(strtoupper(str_replace(' ','',(string)$transaction_detail->product_code)));
 		//if(in_array($pcode,$exception_codes)){
-		if($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML'){
+		if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML') && $found_freebie==false && (int)$transaction_detail->product_quantity==1){
 			$theDiscount = 100;
 			$found_freebie = true;
 			$cols['promo_code'] = '';
 			$cols['promocred'] = '';
 			$cols['ordertype'] = '';
+		}else if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML') && $found_freebie==true){
+			$cols['promo_code'] = '';
+			$cols['promocred'] = '';
+			$cols['ordertype'] = '';
+			$theDiscount = '';
 		}else{
 			$theDiscount = '';
 		}
