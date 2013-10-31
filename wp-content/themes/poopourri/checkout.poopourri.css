@@ -165,5 +165,6 @@ label.fc_shipping_methods {
 #fc_payment_list .fc_error {
 	margin-left: 0;
 }
-#fc_error_container{background:red !important;}
+#fc_error_container{background:red !important;color: white !important;}
 #fc_error_container .fc_error{color:#fff !important;}
+#fc_complete_order_processing{width:375px;}
