@@ -1031,7 +1031,7 @@ a.cart-link:hover {
 .poopourri_logo_btn{ width: 320px; height: 93px; background-position:-10px -10px; }
 .poopourri_logo_btn:hover{ background-position:-10px -113px; }
 
-.shop_header_btn{ background:url("images/shop_header_btn.png") top left no-repeat; }
+.shop_header_btn{ background:url("/wp-content/uploads/2013/11/shop_other_scents_btn.png") top left no-repeat; }
 .shop_header_btn{ width:214px; height:99px; background-position:-10px -10px; }
 .shop_header_btn:hover{ width:214px; height:99px; background-position:-10px -119px; }
 .shop_header_btn:active{ width:214px; height:99px; background-position:-10px -228px; }
