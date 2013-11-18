@@ -85,9 +85,9 @@ if (!$product['hide_product']) {
 	//echo '<div class="clr"></div>';
 
 	//Check Inventory Levels and Display Status (last variable allows ordering of out of stock items)
-	foxyshop_inventory_management("There are only %c item%s left in stock.", "<div style='position:relative;'><img src='http://www.poopourri.com/wp-content/uploads/2013/09/sold_out_stamp.png' style='width:165px;153px;position:absolute;right:130px;top:-75px;' title='Sold Out'/></div>", false);
+	foxyshop_inventory_management("There are only %c item%s left in stock.", "<style>#add_to_cart_".$product['id']."{display:none;}</style><div style='position:relative;'><img src='/wp-content/themes/poopourri/images/outofstock_btn_1.png' style='width:144px;height:49px;position:absolute;right:145px;top:-15px;' title='Sold Out'/></div>", false);
 
-	echo '<a href="javascript:void(0)" class="add_to_cart_btn" onclick="$(\'#productsubmit'.$product['id'].'\').click();"><span class="screen-reader-text">Add to Cart</span></a>';
+	echo '<a href="javascript:void(0)" class="add_to_cart_btn" id="add_to_cart_'.$product['id'].'" onclick="$(\'#productsubmit'.$product['id'].'\').click();"><span class="screen-reader-text">Add to Cart</span></a>';
 
 
 	//Custom Code Can Go Here

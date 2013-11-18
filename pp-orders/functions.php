@@ -28,19 +28,19 @@ function get_country_code($code) {
 
 	$full_country_name = "";
 	foreach ($full_country_names as $key => $val) {
-		if ($key == $code) {
+		if (strtolower(trim($key)) == strtolower(trim($code))) {
 			$full_country_name = $val;
 		}
 	}
 	if (!$full_country_name) {
-		return "000";
+		return "001";
 	}
 
 	foreach ($countries as $key => $val) {
-		if ($val == $full_country_name) {
+		if (strtolower(trim($val)) == strtolower(trim($full_country_name))) {
 			return $key;
 		}
 	}
-	return "000";
+	return "001";
 
 }

@@ -127,7 +127,7 @@ var free_shipping_total_required = 50;
 		$('#total_order_on_page').text(current_total_price);
 		if(current_total_price < free_shipping_total_required){
 			var remaining = free_shipping_total_required - Math.round(current_total_price);
-			$('.free_shipping_notice').html('FREE shipping to USA on any order $'+free_shipping_total_required+'+ ($<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> left)');
+			$('.free_shipping_notice').html('FREE shipping to USA on any order $'+free_shipping_total_required+'+ (only $<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> away from free shipping)');
 		}else{
 			$('.free_shipping_notice').html('You qualify for FREE shipping to the USA!');
 		}

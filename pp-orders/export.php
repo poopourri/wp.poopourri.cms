@@ -168,7 +168,7 @@ foreach ($xml->transactions->transaction as $transaction) {
                 foreach ($transaction->discounts->discount as $discount) {
                         $current_discount_type = $discount->coupon_discount_type;
                         $current_discount_amount = $discount->amount;
-                        $cols['promo_code'] = $discount->code;
+                        $cols['promo_code'] = strtoupper($discount->code);
                 }
         }else{
                 $current_discount_type = '';
@@ -206,7 +206,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 	$cols['city'] = (string)$transaction->customer_city;
 	$cols['state'] = (((string)$transaction->shipping_postal_code!=(string)$transaction->customer_postal_code) ? getStateCode((string)$transaction->customer_state,(string)$transaction->customer_country) : (string)$transaction->shipping_state);
 	$cols['zipcode'] = (string)$transaction->customer_postal_code;
-	if ((string)$transaction->customer_country != "US") {
+	if ((string)$transaction->customer_country != "US" && (string)$transaction->customer_country != "United States") {
 		$cols['cforeign'] = "Y";
 	}
 	$cols['country'] = get_country_code((string)$transaction->customer_country);
@@ -257,6 +257,15 @@ foreach ($xml->transactions->transaction as $transaction) {
 	$arr_products = array();
 	$found_freebie = false;
 	$total_order_weight = 0;
+	$number_freebies = 0;
+	foreach ($transaction->transaction_details->transaction_detail as $transaction_detail) {
+		$pcode = trim(strtoupper(str_replace(' ','',(string)$transaction_detail->product_code)));
+		//if(in_array($pcode,$exception_codes)){
+		if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML')){
+			$number_freebies = $number_freebies + (int)$transaction_detail->product_quantity;
+		}	
+	}
+
 	foreach ($transaction->transaction_details->transaction_detail as $transaction_detail) {
 
 		//Get The Price Mod
@@ -277,14 +286,15 @@ foreach ($xml->transactions->transaction as $transaction) {
 		//	$exception_codes[] =$key;
 		//}
 		$pcode = trim(strtoupper(str_replace(' ','',(string)$transaction_detail->product_code)));
+
 		//if(in_array($pcode,$exception_codes)){
-		if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML') && $found_freebie==false && (int)$transaction_detail->product_quantity==1){
+		if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML') && $number_freebies == 1){
 			$theDiscount = 100;
 			$found_freebie = true;
 			$cols['promo_code'] = '';
 			$cols['promocred'] = '';
 			$cols['ordertype'] = '';
-		}else if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML') && $found_freebie==true){
+		}else if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML') && $number_freebies > 1){
 			$cols['promo_code'] = '';
 			$cols['promocred'] = '';
 			$cols['ordertype'] = '';
@@ -296,8 +306,23 @@ foreach ($xml->transactions->transaction as $transaction) {
 		// keep track of the weight for shipping
 		$total_order_weight = $total_order_weight + ((float)$transaction_detail->product_weight * (int)$transaction_detail->product_quantity);
 
+
+$sku_map = array(
+	'RF'=>'RF-002-BLK',
+	'RF-002-S'=>'RF-002-BLK',
+        'RF-004-S'=>'RF-004-BLK',
+        'TRAP-002'=>'TRAP-002-BLK',
+        'TRAP-004'=>'TRAP-004-BLK'
+);
+		// Rod made this request to change the skus after they changed them
+		if(isset($sku_map[strtoupper((string)$transaction_detail->product_code)])){
+			$pcode = $sku_map[strtoupper((string)$transaction_detail->product_code)];
+		}else{
+			$pcode = strtoupper((string)$transaction_detail->product_code);
+		}
+
 		$arr_products[] = array(
-			"code" => strtoupper((string)$transaction_detail->product_code),
+			"code" => $pcode,
 			"quantity" => (int)$transaction_detail->product_quantity,
 			"price" => ((double)$transaction_detail->product_price + (double)$price_mod),
 			"discount" => $theDiscount,

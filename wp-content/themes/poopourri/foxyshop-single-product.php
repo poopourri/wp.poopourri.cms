@@ -9,9 +9,6 @@ This will allow you to upgrade FoxyShop without breaking your customizations. Mo
 
 <?php foxyshop_include('header'); ?>
 <div id="foxyshop_container"><div id="adding_package" style="width:900px;">
-<div style="position:absolute;right:0px;width:350px;background:green;color:white;padding:20px;box-shadow: 1px 2px 4px;"><b>BIG POO NEWS</b><br>Our new YouTube video has constipated our shipping system. <b>In one week traffic on our website increased over 13,000%</b>  Holy crap, right! We are working day and night, but please give us up to 2 weeks to get your PooPourri shipment out the door. <b>Make sure to order now to get in line!</b><br><br>
-Thanks, <br>
-The Poo Crew</div>
 <h2 style="background:url(/wp-content/themes/poopourri/images/your_package_header.png); width:224px; height:22px; margin:0px; margin-top:50px;"><span class="screen-reader-text">Your Package</span></h2>
 <?php
 while (have_posts()) : the_post();
@@ -129,7 +126,7 @@ function toggleCart(indexLoc,pid){
 
 	if(current_total < free_shipping_total_required){
 		var remaining = free_shipping_total_required - current_total;
-		$('.free_shipping_notice').html('FREE shipping to USA on any order $'+(free_shipping_total_required + 1)+'+ ($<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> left)');
+		$('.free_shipping_notice').html('FREE shipping to USA on any order $'+(free_shipping_total_required + 1)+'+ (only $<span class="free_shipping_remaining">'+Math.round(remaining)+'</span> away from free shipping)');
 	}else{
 		$('.free_shipping_notice').html('You qualify for FREE shipping to the USA!');
 	}	
@@ -238,6 +235,129 @@ Loading...
 				});
 			});
 	</script>
+
+<script>
+
+(function (factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as anonymous module.
+		define(['jquery'], factory);
+	} else {
+		// Browser globals.
+		factory(jQuery);
+	}
+}(function ($) {
+
+	var pluses = /\+/g;
+
+	function encode(s) {
+		return config.raw ? s : encodeURIComponent(s);
+	}
+
+	function decode(s) {
+		return config.raw ? s : decodeURIComponent(s);
+	}
+
+	function stringifyCookieValue(value) {
+		return encode(config.json ? JSON.stringify(value) : String(value));
+	}
+
+	function parseCookieValue(s) {
+		if (s.indexOf('"') === 0) {
+			// This is a quoted cookie as according to RFC2068, unescape...
+			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+		}
+
+		try {
+			// Replace server-side written pluses with spaces.
+			// If we can't decode the cookie, ignore it, it's unusable.
+			s = decodeURIComponent(s.replace(pluses, ' '));
+		} catch(e) {
+			return;
+		}
+
+		try {
+			// If we can't parse the cookie, ignore it, it's unusable.
+			return config.json ? JSON.parse(s) : s;
+		} catch(e) {}
+	}
+
+	function read(s, converter) {
+		var value = config.raw ? s : parseCookieValue(s);
+		return $.isFunction(converter) ? converter(value) : value;
+	}
+
+	var config = $.cookie = function (key, value, options) {
+
+		// Write
+		if (value !== undefined && !$.isFunction(value)) {
+			options = $.extend({}, config.defaults, options);
+
+			if (typeof options.expires === 'number') {
+				var days = options.expires, t = options.expires = new Date();
+				t.setDate(t.getDate() + days);
+			}
+
+			return (document.cookie = [
+				encode(key), '=', stringifyCookieValue(value),
+				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+				options.path    ? '; path=' + options.path : '',
+				options.domain  ? '; domain=' + options.domain : '',
+				options.secure  ? '; secure' : ''
+			].join(''));
+		}
+
+		// Read
+
+		var result = key ? undefined : {};
+
+		// To prevent the for loop in the first place assign an empty array
+		// in case there are no cookies at all. Also prevents odd result when
+		// calling $.cookie().
+		var cookies = document.cookie ? document.cookie.split('; ') : [];
+
+		for (var i = 0, l = cookies.length; i < l; i++) {
+			var parts = cookies[i].split('=');
+			var name = decode(parts.shift());
+			var cookie = parts.join('=');
+
+			if (key && key === name) {
+				// If second argument (value) is a function it's a converter...
+				result = read(cookie, value);
+				break;
+			}
+
+			// Prevent storing a cookie that we couldn't decode.
+			if (!key && (cookie = read(cookie)) !== undefined) {
+				result[name] = cookie;
+			}
+		}
+
+		return result;
+	};
+
+	config.defaults = {};
+
+	$.removeCookie = function (key, options) {
+		if ($.cookie(key) !== undefined) {
+			// Must not alter options, thus extending a fresh object...
+			$.cookie(key, '', $.extend({}, options, { expires: -1 }));
+			return true;
+		}
+		return false;
+	};
+
+}));
+
+$(function(){
+	optimizely_suzy_variation_id = '351450504';
+	if(typeof($.cookie('optimizelyBuckets'))!='undefined' && $.cookie('optimizelyBuckets').indexOf(optimizely_suzy_variation_id)>-1 || location.hash.indexOf('showSuzyVariation')>-1){
+		$('.free_shipping_notice').css({visibility:'hidden'});
+	}
+});
+
+</script>
+
 
 	<div class="clr"></div>
 </div></div>

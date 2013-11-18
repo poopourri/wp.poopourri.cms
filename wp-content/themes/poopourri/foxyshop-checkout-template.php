@@ -221,6 +221,10 @@ function save_optimizely_data(data){
 	}
 }
 
+function hide_free_shipping(){
+	FC.customLiveShipping.remove("free");
+}	
+
 $(function(){
 	optimizely_variation_id = '340560033';
 	optimizely_suzy_variation_id = '351450504';
@@ -254,9 +258,15 @@ $(function(){
 		$('#your_cart_header').after(upsell_html);
 		//$('#fc_cart_container_inner').html(upsell_html + $('#fc_cart_container_inner').html());
 	}
+	if(typeof($.cookie('optimizelyBuckets'))!='undefined' && $.cookie('optimizelyBuckets').indexOf(optimizely_suzy_variation_id)>-1 || location.hash.indexOf('showSuzyVariation')>-1){
+		setInterval(function(){hide_free_shipping();},500);
+	}
 	if(typeof($.cookie('optimizelyBuckets'))!='undefined' && $.cookie('optimizelyBuckets').indexOf(optimizely_phone_variation_id)>-1 || location.hash.indexOf('showPhoneVariation')>-1){
 		$('.fc_shipping_phone label.fc_pre').text('Phone*');
 		FC.checkout.overload('updateShipping',null,function(){ if($('#shipping_phone').val()==''){$("label.fc_error[for='shipping_phone']").show();} });
+	}
+	if(fc_json.total_item_price<=50){
+		setInterval(function(){hide_free_shipping();},500);
 	}
 	save_optimizely_data($.cookie('optimizelyBuckets'));
 });
@@ -268,6 +278,7 @@ $(function(){
 	<?php echo do_shortcode('[showproduct name="santa-poo-1oz-bottle"]'); ?>
 	<?php echo do_shortcode('[showproduct name="stocking-stuffer-4bottle-pack"]'); ?>
 </div>
+
 
 <script type="text/javascript">
 function verify_address(address_type) {
