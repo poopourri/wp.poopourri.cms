@@ -288,7 +288,7 @@ foreach ($xml->transactions->transaction as $transaction) {
 		$pcode = trim(strtoupper(str_replace(' ','',(string)$transaction_detail->product_code)));
 
 		//if(in_array($pcode,$exception_codes)){
-		if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML') && $number_freebies == 1){
+		if(($pcode == 'TRYITFREEPP-5ML' or $pcode == 'PP-TSTR-5ML') && $number_freebies == 1 && strtolower($cols['promo_code']) == 'freesample'){
 			$theDiscount = 100;
 			$found_freebie = true;
 			$cols['promo_code'] = '';
